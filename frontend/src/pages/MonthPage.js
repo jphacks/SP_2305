@@ -1,7 +1,7 @@
 import '../App.css';
 import { getMonth } from '../util';
 import { CalendarHeader } from '../components/CalenderHeader';
-// import { Sidebar } from "../components/Sidebar";
+import { Sidebar } from "../components/Sidebar";
 import { Month } from "../components/Month";
 import { useState, useEffect, useContext } from "react";
 import GlobalContext from '../context/GlobalContext';
@@ -19,7 +19,7 @@ function MonthPage() {
     <>
     {showModalTabs && <ModalTabs />}
       <div className='flex'>
-        {/* <Sidebar /> */}
+        <Sidebar />
         <div className='flex-1 h-screen flex flex-col'>
           <CalendarHeader />
           <Month month={currentMonth} />
