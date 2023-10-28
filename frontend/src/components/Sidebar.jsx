@@ -9,7 +9,6 @@ import { MiniCalendarHeader } from "./MiniCalenderHeader";
 import { TodayTask } from "./TodayTask";
 
 
-
 export const Sidebar = () => {
   const [currentMonth, setCurrentMonth] = useState(getMonth());
   const { miniMonthIndex, monthIndex, setMiniDaySelected, daySelected } = useContext(GlobalContext);
