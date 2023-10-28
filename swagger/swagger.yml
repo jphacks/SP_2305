@@ -352,6 +352,10 @@ components:
           type: boolean
         color:
           type: string
+        repeat:
+          type: number
+        progress:
+          type: number
     Schedule:
       type: object
       properties:

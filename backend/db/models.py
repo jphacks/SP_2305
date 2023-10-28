@@ -26,6 +26,7 @@ class DBTask(Base):
     actualTime = Column(INTEGER, nullable=False)
     description = Column(VARCHAR, nullable=False)
     done = Column(BOOLEAN, nullable=False)
+    color = Column(VARCHAR, nullable=False)
     createdAt = Column(TIMESTAMP, nullable=False, server_default=text(
         'CURRENT_TIMESTAMP'))
     updatedAt = Column(TIMESTAMP, nullable=False, server_default=text(
@@ -43,6 +44,7 @@ class DBTask(Base):
         self.actualTime = task.actual_time
         self.description = task.description
         self.done = task.done
+        self.color = task.color
     def to_task(self):
         task = Task()
         task.user_id = self.userId 
@@ -55,6 +57,7 @@ class DBTask(Base):
         task.est = self.est
         task.actual_time = self.actualTime
         task.description = self.description 
+        task.color = self.color
         return task
     
     
@@ -69,7 +72,7 @@ class DBSchedule(Base):
     end = Column(TIMESTAMP, nullable=False, server_default=text(
         'CURRENT_TIMESTAMP'))
     description = Column(VARCHAR, nullable=False)
-
+    color = Column(VARCHAR, nullable=False)
     createdAt = Column(TIMESTAMP, nullable=False, server_default=text(
         'CURRENT_TIMESTAMP'))
     updatedAt = Column(TIMESTAMP, nullable=False, server_default=text(
@@ -82,6 +85,7 @@ class DBSchedule(Base):
         self.start = schedule.start
         self.end = schedule.end
         self.description = schedule.description
+        self.color = schedule.color
 
     def to_schedule(self):
         schedule = Schedule()
@@ -91,6 +95,7 @@ class DBSchedule(Base):
         schedule.start =self.start
         schedule.end =self.end
         schedule.description =self.description
+        schedule.color = self.color
         return schedule
 class DBUser(Base):
     __tablename__ = 'users'

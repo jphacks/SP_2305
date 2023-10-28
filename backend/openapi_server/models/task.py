@@ -15,7 +15,7 @@ class Task(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, uuid=None, user_id=None, title=None, type=None, start=None, end=None, deadline=None, est=None, actual_time=None, description=None, done=None):  # noqa: E501
+    def __init__(self, uuid=None, user_id=None, title=None, type=None, start=None, end=None, deadline=None, est=None, actual_time=None, description=None, done=None, color=None, repeat=None, progress=None):  # noqa: E501
         """Task - a model defined in OpenAPI
 
         :param uuid: The uuid of this Task.  # noqa: E501
@@ -40,6 +40,12 @@ class Task(Model):
         :type description: str
         :param done: The done of this Task.  # noqa: E501
         :type done: bool
+        :param color: The color of this Task.  # noqa: E501
+        :type color: str
+        :param repeat: The repeat of this Task.  # noqa: E501
+        :type repeat: float
+        :param progress: The progress of this Task.  # noqa: E501
+        :type progress: float
         """
         self.openapi_types = {
             'uuid': str,
@@ -52,7 +58,10 @@ class Task(Model):
             'est': float,
             'actual_time': float,
             'description': str,
-            'done': bool
+            'done': bool,
+            'color': str,
+            'repeat': float,
+            'progress': float
         }
 
         self.attribute_map = {
@@ -66,7 +75,10 @@ class Task(Model):
             'est': 'est',
             'actual_time': 'actualTime',
             'description': 'description',
-            'done': 'done'
+            'done': 'done',
+            'color': 'color',
+            'repeat': 'repeat',
+            'progress': 'progress'
         }
 
         self._uuid = uuid
@@ -80,6 +92,9 @@ class Task(Model):
         self._actual_time = actual_time
         self._description = description
         self._done = done
+        self._color = color
+        self._repeat = repeat
+        self._progress = progress
 
     @classmethod
     def from_dict(cls, dikt) -> 'Task':
@@ -328,3 +343,66 @@ class Task(Model):
         """
 
         self._done = done
+
+    @property
+    def color(self):
+        """Gets the color of this Task.
+
+
+        :return: The color of this Task.
+        :rtype: str
+        """
+        return self._color
+
+    @color.setter
+    def color(self, color):
+        """Sets the color of this Task.
+
+
+        :param color: The color of this Task.
+        :type color: str
+        """
+
+        self._color = color
+
+    @property
+    def repeat(self):
+        """Gets the repeat of this Task.
+
+
+        :return: The repeat of this Task.
+        :rtype: float
+        """
+        return self._repeat
+
+    @repeat.setter
+    def repeat(self, repeat):
+        """Sets the repeat of this Task.
+
+
+        :param repeat: The repeat of this Task.
+        :type repeat: float
+        """
+
+        self._repeat = repeat
+
+    @property
+    def progress(self):
+        """Gets the progress of this Task.
+
+
+        :return: The progress of this Task.
+        :rtype: float
+        """
+        return self._progress
+
+    @progress.setter
+    def progress(self, progress):
+        """Sets the progress of this Task.
+
+
+        :param progress: The progress of this Task.
+        :type progress: float
+        """
+
+        self._progress = progress
