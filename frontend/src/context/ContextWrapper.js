@@ -1,7 +1,6 @@
 import React, { useReducer, useState, useEffect } from "react";
 import GlobalContext from "./GlobalContext";
 import dayjs from "dayjs";
-import { getMonth } from '../util';
 
 const saveEventsReducer = (state, { type, payload }) => {
   switch (type) {
@@ -45,6 +44,7 @@ const initTasks = () => {
 
 const ContextWrapper = (props) => {
   const [monthIndex, setMonthIndex] = useState(dayjs().month());
+  const [weekStartDay, setWeekStartDay] = useState(dayjs());
   const [miniMonthIndex, setMiniMonthIndex] = useState(dayjs().month());
   const [daySelected, setDaySelected] = useState(dayjs());
   const [miniDaySelected, setMiniDaySelected] = useState(dayjs());
@@ -104,6 +104,8 @@ const ContextWrapper = (props) => {
       value={{
         monthIndex,
         setMonthIndex,
+        weekStartDay,
+        setWeekStartDay,
         daySelected,
         setDaySelected,
         miniMonthIndex, 
