@@ -18,16 +18,14 @@ const Register = () => {
             id: id,
             password: password,
         };
-        const newToken = await apiClient.user.$post({ body: userData }).catch(() => {
-            throw new Error('Invalid credential')
-            })
-        .catch(() => {
-        throw new Error('Invalid credential')
-        }).then((a)=>{
+        const newToken = await apiClient.user.$post({ body: userData })
+        .then((a)=>{
             console.log("Login");
             navigate({
                 pathname: '/login',
             });
+        }).catch(() => {
+        throw new Error('Invalid credential')
         })
     };
 

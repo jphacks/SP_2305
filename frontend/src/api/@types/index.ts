@@ -12,11 +12,13 @@ export type Task = {
   start?: string | undefined
   end?: string | undefined
   deadline?: string | undefined
-  est?: string | undefined
+  est?: number | undefined
   actualTime?: number | undefined
   description?: string | undefined
   done?: boolean | undefined
   color?: string | undefined
+  repeat?: number | undefined
+  progress?: number | undefined
 }
 
 export type Schedule = {

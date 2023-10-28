@@ -1,6 +1,6 @@
 /* eslint-disable */
 export type Methods = {
-  /** Get JWT Token */
+  /** authUser */
   post: {
     status: 200
     /** successful operation */

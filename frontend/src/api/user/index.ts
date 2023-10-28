@@ -1,13 +1,10 @@
 /* eslint-disable */
-import type * as Types from '../@types'
-
 export type Methods = {
   /** Register new user */
   post: {
-    reqHeaders?: Types.BearerToken | undefined
     status: 200
     /** successful operation */
-    resBody: Types.User[]
+    resBody: string
 
     reqBody: {
       nickname?: string | undefined
