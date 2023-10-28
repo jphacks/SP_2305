@@ -1,0 +1,485 @@
+openapi: 3.0.3
+info:
+  contact:
+    email: admin@example.com
+  description: ==(*^^*)==
+  license:
+    name: JPHacks 2023 SP2305 License
+    url: http://localhost/licenses
+  termsOfService: http://localhost/terms/
+  title: JPHacks 2023 SP2305
+  version: 1.0.0
+externalDocs:
+  description: Find out more about Kattakke
+  url: http://localhost/
+servers:
+- url: http://localhost/api/v0
+tags:
+- description: User API
+  name: User
+- description: Schedule API
+  name: Schedule
+- description: Task API
+  name: Task
+paths:
+  /schedule:
+    post:
+      description: create new schedule
+      operationId: new_scheudle
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Schedule'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Schedule'
+          description: successful operation
+      summary: create new schedule
+      tags:
+      - Schedule
+      x-openapi-router-controller: openapi_server.controllers.schedule_controller
+  /schedule/{scheduleId}:
+    get:
+      description: get users schedules
+      operationId: get_schedule
+      parameters:
+      - description: ID of user
+        explode: false
+        in: path
+        name: scheduleId
+        required: true
+        schema:
+          format: UUID
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Schedule'
+                type: array
+          description: successful operation
+      summary: get user schedules
+      tags:
+      - Schedule
+      x-openapi-router-controller: openapi_server.controllers.schedule_controller
+    patch:
+      description: get users schedules
+      operationId: patch_schedule
+      parameters:
+      - description: ID of user
+        explode: false
+        in: path
+        name: scheduleId
+        required: true
+        schema:
+          format: UUID
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Schedule'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Schedule'
+                type: array
+          description: successful operation
+      summary: get user schedules
+      tags:
+      - Schedule
+      x-openapi-router-controller: openapi_server.controllers.schedule_controller
+  /task:
+    post:
+      description: create new task
+      operationId: new_task
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Task'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+          description: successful operation
+      summary: create new task
+      tags:
+      - Task
+      x-openapi-router-controller: openapi_server.controllers.task_controller
+  /task/{taskId}:
+    get:
+      description: get specific task
+      operationId: get_task
+      parameters:
+      - description: ID of Task
+        explode: false
+        in: path
+        name: taskId
+        required: true
+        schema:
+          format: UUID
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+          description: successful operation
+      summary: get specific task
+      tags:
+      - Task
+      x-openapi-router-controller: openapi_server.controllers.task_controller
+    patch:
+      description: get specific task
+      operationId: patch_task
+      parameters:
+      - description: ID of Task
+        explode: false
+        in: path
+        name: taskId
+        required: true
+        schema:
+          format: UUID
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Task'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+          description: successful operation
+      summary: get specific task
+      tags:
+      - Task
+      x-openapi-router-controller: openapi_server.controllers.task_controller
+  /user:
+    post:
+      description: Register new user
+      operationId: new_user
+      parameters:
+      - description: bearer token
+        explode: false
+        in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/newUser_request'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/User'
+                type: array
+          description: successful operation
+      summary: Register new user
+      tags:
+      - User
+      x-openapi-router-controller: openapi_server.controllers.user_controller
+  /user/{userId}/schedules:
+    get:
+      description: get users schedules
+      operationId: get_user_schedules
+      parameters:
+      - description: ID of user
+        explode: false
+        in: path
+        name: userId
+        required: true
+        schema:
+          format: UUID
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Schedule'
+                type: array
+          description: successful operation
+      summary: get user schedules
+      tags:
+      - User
+      x-openapi-router-controller: openapi_server.controllers.user_controller
+  /user/{userId}/tasks:
+    get:
+      description: get users tasks
+      operationId: get_user_tasks
+      parameters:
+      - description: ID of user
+        explode: false
+        in: path
+        name: userId
+        required: true
+        schema:
+          format: UUID
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Task'
+                type: array
+          description: successful operation
+      summary: get user tasks
+      tags:
+      - User
+      x-openapi-router-controller: openapi_server.controllers.user_controller
+  /user{userId}/todo:
+    get:
+      description: get specific user's todo
+      operationId: get_user_todo
+      parameters:
+      - description: ID of user
+        explode: false
+        in: path
+        name: userId
+        required: true
+        schema:
+          format: UUID
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Todo'
+                type: array
+          description: successful operation
+      summary: get user's todo
+      tags:
+      - User
+      x-openapi-router-controller: openapi_server.controllers.user_controller
+components:
+  parameters:
+    bearerToken:
+      description: bearer token
+      explode: false
+      in: header
+      name: Authorization
+      required: true
+      schema:
+        type: string
+      style: simple
+  schemas:
+    Task:
+      example:
+        actualTime: 0.8008281904610115
+        est: 2000-01-23T04:56:07.000+00:00
+        start: 2000-01-23T04:56:07.000+00:00
+        description: description
+        end: 2000-01-23T04:56:07.000+00:00
+        title: title
+        type: startend
+        deadline: 2000-01-23T04:56:07.000+00:00
+        uuid: uuid
+        userId: userId
+        done: true
+      properties:
+        uuid:
+          format: UUID
+          title: uuid
+          type: string
+        userId:
+          format: UUID
+          title: userId
+          type: string
+        title:
+          title: title
+          type: string
+        type:
+          enum:
+          - startend
+          - deadline
+          title: type
+          type: string
+        start:
+          format: date-time
+          title: start
+          type: string
+        end:
+          format: date-time
+          title: end
+          type: string
+        deadline:
+          format: date-time
+          title: deadline
+          type: string
+        est:
+          format: date-time
+          title: est
+          type: string
+        actualTime:
+          title: actualTime
+          type: number
+        description:
+          title: description
+          type: string
+        done:
+          title: done
+          type: boolean
+      title: Task
+      type: object
+    Schedule:
+      example:
+        start: 2000-01-23T04:56:07.000+00:00
+        description: description
+        end: 2000-01-23T04:56:07.000+00:00
+        title: title
+        uuid: uuid
+        userId: userId
+      properties:
+        uuid:
+          format: UUID
+          title: uuid
+          type: string
+        userId:
+          format: UUID
+          title: userId
+          type: string
+        title:
+          title: title
+          type: string
+        start:
+          format: date-time
+          title: start
+          type: string
+        end:
+          format: date-time
+          title: end
+          type: string
+        description:
+          title: description
+          type: string
+      title: Schedule
+      type: object
+    User:
+      example:
+        nickname: nickname
+        id: id
+        uuid: uuid
+      properties:
+        uuid:
+          format: UUID
+          title: uuid
+          type: string
+        id:
+          title: id
+          type: string
+        nickname:
+          title: nickname
+          type: string
+      title: User
+      type: object
+    Todo:
+      description: Today's todo
+      example:
+        schedules:
+        - start: 2000-01-23T04:56:07.000+00:00
+          description: description
+          end: 2000-01-23T04:56:07.000+00:00
+          title: title
+          uuid: uuid
+          userId: userId
+        - start: 2000-01-23T04:56:07.000+00:00
+          description: description
+          end: 2000-01-23T04:56:07.000+00:00
+          title: title
+          uuid: uuid
+          userId: userId
+        uuid: uuid
+        tasks:
+        - actualTime: 0.8008281904610115
+          est: 2000-01-23T04:56:07.000+00:00
+          start: 2000-01-23T04:56:07.000+00:00
+          description: description
+          end: 2000-01-23T04:56:07.000+00:00
+          title: title
+          type: startend
+          deadline: 2000-01-23T04:56:07.000+00:00
+          uuid: uuid
+          userId: userId
+          done: true
+        - actualTime: 0.8008281904610115
+          est: 2000-01-23T04:56:07.000+00:00
+          start: 2000-01-23T04:56:07.000+00:00
+          description: description
+          end: 2000-01-23T04:56:07.000+00:00
+          title: title
+          type: startend
+          deadline: 2000-01-23T04:56:07.000+00:00
+          uuid: uuid
+          userId: userId
+          done: true
+      properties:
+        uuid:
+          format: UUID
+          title: uuid
+          type: string
+        tasks:
+          items:
+            $ref: '#/components/schemas/Task'
+          title: tasks
+          type: array
+        schedules:
+          items:
+            $ref: '#/components/schemas/Schedule'
+          title: schedules
+          type: array
+      title: Todo
+      type: object
+    newUser_request:
+      properties:
+        nickname:
+          title: nickname
+          type: string
+        id:
+          title: id
+          type: string
+        password:
+          title: password
+          type: string
+      title: newUser_request
+      type: object
+  securitySchemes:
+    bearerAuth:
+      bearerFormat: JWT
+      scheme: bearer
+      type: http
+      x-bearerInfoFunc: openapi_server.controllers.security_controller_.info_from_bearerAuth

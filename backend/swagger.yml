@@ -1,0 +1,368 @@
+openapi: 3.0.3
+info:
+  title: JPHacks 2023 SP2305
+  description: |-
+    ==(*^^*)==
+  termsOfService: http://localhost/terms/
+  contact:
+    email: admin@example.com
+  license:
+    name: JPHacks 2023 SP2305 License
+    url: http://localhost/licenses
+  version: 1.0.0
+externalDocs:
+  description: Find out more about Kattakke
+  url: http://localhost/
+servers:
+  - url: http://localhost/api/v0
+tags:
+  - name: User
+    description: User API
+  - name: Schedule
+    description: Schedule API
+  - name: Task
+    description: Task API
+paths:
+  /user:
+    post:
+      tags:
+        - User
+      summary: Register new user
+      description: Register new user
+      operationId: newUser
+      parameters:
+        - $ref: '#/components/parameters/bearerToken'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nickname:
+                  type: string
+                id:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+
+  /user/{userId}/schedules:
+    get:
+      tags:
+        - User
+      summary: get user schedules
+      description: get users schedules
+      operationId: getUserSchedules
+      parameters:
+        - name: userId
+          in: path
+          description: ID of user
+          required: true
+          schema:
+            type: string
+            format: UUID
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Schedule'
+
+
+  /user/{userId}/tasks:
+    get:
+      tags:
+        - User
+      summary: get user tasks
+      description: get users tasks
+      operationId: getUserTasks
+      parameters:
+        - name: userId
+          in: path
+          description: ID of user
+          required: true
+          schema:
+            type: string
+            format: UUID
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Task'
+  /user{userId}/todo:
+    get:
+      tags:
+        - User
+      summary: get user's todo
+      description: get specific user's todo
+      operationId: getUserTodo
+      parameters:
+        - name: userId
+          in: path
+          description: ID of user
+          required: true
+          schema:
+            type: string
+            format: UUID
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Todo'
+  /task:
+    post:
+      tags:
+        - Task
+      summary: create new task
+      description: create new task
+      operationId: newTask
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Task'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+  /task/{taskId}:
+    get:
+      tags:
+        - Task
+      summary: get specific task
+      description: get specific task
+      operationId: getTask
+      parameters:
+        - name: taskId
+          in: path
+          description: ID of Task
+          required: true
+          schema:
+            type: string
+            format: UUID
+      
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+    patch:
+      tags:
+        - Task
+      summary: get specific task
+      description: get specific task
+      operationId: patchTask
+      parameters:
+        - name: taskId
+          in: path
+          description: ID of Task
+          required: true
+          schema:
+            type: string
+            format: UUID
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Task'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+  /schedule:
+    post:
+      tags:
+        - Schedule
+      summary: create new schedule
+      description: create new schedule
+      operationId: newScheudle
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Schedule'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Schedule'
+  /schedule/{scheduleId}:
+    patch:
+      tags:
+        - Schedule
+      summary: get user schedules
+      description: get users schedules
+      operationId: patchSchedule
+      parameters:
+        - name: scheduleId
+          in: path
+          description: ID of user
+          required: true
+          schema:
+            type: string
+            format: UUID
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Schedule'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Schedule'
+    get:
+      tags:
+        - Schedule
+      summary: get user schedules
+      description: get users schedules
+      operationId: getSchedule
+      parameters:
+        - name: scheduleId
+          in: path
+          description: ID of user
+          required: true
+          schema:
+            type: string
+            format: UUID
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Schedule'
+
+        
+components:
+  schemas:
+    Task:
+      type: object
+      properties:
+        uuid:
+          type: string
+          format: UUID
+        userId:
+          type: string
+          format: UUID
+        title:
+          type: string
+        type:
+          type: string
+          enum: [startend, deadline]
+        start:
+          type: string
+          format: date-time
+        end:
+          type: string
+          format: date-time
+        deadline:
+          type: string
+          format: date-time
+        est:
+          type: string
+          format: date-time
+        actualTime:
+          type: number
+        description:
+          type: string
+        done:
+          type: boolean
+
+    Schedule:
+      type: object
+      properties:
+        uuid:
+          type: string
+          format: UUID
+        userId:
+          type: string
+          format: UUID
+        title:
+          type: string
+        start:
+          type: string
+          format: date-time
+        end:
+          type: string
+          format: date-time
+        description:
+          type: string
+
+    User:
+      type: object
+      properties:
+        uuid:
+          type: string
+          format: UUID
+        id:
+          type: string
+        nickname:
+          type: string
+        
+    Todo:
+      type: object
+      description: Today's todo
+      properties:
+        uuid:
+          type: string
+          format: UUID
+        tasks:
+          type: array
+          items:
+            $ref: '#/components/schemas/Task'
+        schedules:
+          type: array
+          items:
+            $ref: '#/components/schemas/Schedule'
+        
+
+  parameters:
+    bearerToken:
+      name: Authorization
+      in: header
+      description: bearer token
+      required: true
+      schema:
+        type: string
+
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
