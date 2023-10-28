@@ -1,13 +1,13 @@
 // AfterTask.js
-import React from "react";
+import React, { useContext } from 'react';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import PropTypes from 'prop-types';
-import { Select, Switch, FormControl, FormLabel } from "@chakra-ui/react";
+import GlobalContext from "../context/GlobalContext";
 
 
-const AfterTask = ({ taskActualTime, taskDone, taskProgress,
-  setTaskActualTime, setTaskDone, setTaskProgress }) => {
+const AfterTask = () => {
+    const {taskActualTime, setTaskActualTime } = useContext(GlobalContext);
   return (
     <div>
       <input
