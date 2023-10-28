@@ -8,6 +8,12 @@ export const TimeTable = (props) => {
   const [dayTasks, setDayTasks] = useState([]);
   const { setDaySelected, savedEvents, setSelectedEvent, savedTasks, setSelectedTask, setShowModalTabs, setActiveTab } = useContext(GlobalContext);
 
+  const getCurrentDayClass = () => {
+    return day.format("DD-MM-YY") === dayjs().format("DD-MM-YY")
+      ? "bg-blue-600 text-white rounded-full w-7"
+      : "";
+  };
+
   // 登録データを日付が一致する日に表示
   useEffect(() => {
     const events = savedEvents.filter((evt) => {
@@ -48,7 +54,9 @@ export const TimeTable = (props) => {
     {rowId === 0 && (
       <header className="flex flex-col items-center">
         <p className="text-sm mt-1">{day.format("ddd")}</p>
-        <p className="text-sm p-1 my-1 text-center">{day.format("DD")}</p>
+        <p className={`text-sm p-1 my-1 text-center" ${getCurrentDayClass()}`}>
+          {day.format("DD")}
+        </p>
       </header>
     )}
     <header className="flex flex-col items-center">

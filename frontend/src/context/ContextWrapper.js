@@ -106,6 +106,7 @@ const ContextWrapper = (props) => {
 
   useEffect(() => {
       setMonthIndex(miniMonthIndex);
+      setWeekStartDay(miniDaySelected);
       setDaySelected(miniDaySelected);
   }, [miniDaySelected]);
 

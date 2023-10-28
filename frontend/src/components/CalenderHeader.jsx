@@ -7,16 +7,19 @@ import { AddIcon } from "@chakra-ui/icons";
 import { Link } from 'react-router-dom';
 
 export const CalendarHeader = () => {
-  const { monthIndex, setMonthIndex, setShowModalTabs } = useContext(GlobalContext);
+  const { monthIndex, setMonthIndex, setShowModalTabs, weekStartDay, setWeekStartDay } = useContext(GlobalContext);
   const handlePrevMonth = () => {
     setMonthIndex(monthIndex - 1);
+    setWeekStartDay(weekStartDay.subtract(7, 'd'));
   };
   const handelNextMonth = () => {
     setMonthIndex(monthIndex + 1);
+    setWeekStartDay(weekStartDay.add(7, 'd'));
   };
   const handleReset = () => {
     // 現在の月を取得
     setMonthIndex(dayjs().month());
+    setWeekStartDay(dayjs());
   };
   return (
     <header className="px-4 py-2 flex items-center">
