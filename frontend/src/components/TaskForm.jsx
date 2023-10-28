@@ -6,8 +6,8 @@ import PropTypes from 'prop-types';
 import { Select, Switch, FormControl, FormLabel } from "@chakra-ui/react";
 
 
-const TaskForm = ({ taskTitle, taskType, taskStartTime, taskEndTime, taskDeadline, taskEstNumber, taskEstUnit,taskDescription, taskColor, taskRepeat,
-  setTaskTitle, setTaskType, setTaskStartTime, setTaskEndTime, setTaskDeadline, setTaskEstNumber, setTaskEstUnit, setTaskDescription, setTaskColor, setTaskRepeat }) => {
+const TaskForm = ({ taskTitle, taskType, taskStartTime, taskEndTime, taskDeadline, taskEstNumber, taskEstUnit,  forNumber, frequencyUnit, taskDescription, taskColor, taskRepeat,
+  setTaskTitle, setTaskType, setTaskStartTime, setTaskEndTime, setTaskDeadline, setTaskEstNumber, setTaskEstUnit, setForNumber, setFrequencyUnit, setTaskDescription, setTaskColor, setTaskRepeat }) => {
 
   // カラースタイルの選択肢
   const colorOptions = [
@@ -22,6 +22,12 @@ const TaskForm = ({ taskTitle, taskType, taskStartTime, taskEndTime, taskDeadlin
   const unitOptions = [
     { label: "分", value: "minute" },
     { label: "日", value: "day" },
+  ]
+
+  const frequencyUnitOptions = [
+    { label: "週間", value: "week" },
+    { label: "ヶ月", value: "month" },
+    { label: "年", value: "year" }
   ]
 
   return (
@@ -47,7 +53,7 @@ const TaskForm = ({ taskTitle, taskType, taskStartTime, taskEndTime, taskDeadlin
             setTaskType(taskType === "deadLineFalse" ? "deadLineTrue" : "deadLineFalse")
           }
         />
-        
+
         {taskType === "deadLineTrue"
           ? (
             <>
@@ -63,7 +69,33 @@ const TaskForm = ({ taskTitle, taskType, taskStartTime, taskEndTime, taskDeadlin
                 id="taskDeadline"
               />
             </>
-          ) : ""}
+          ) : (
+            <>
+              <Select
+                value={forNumber}
+                onChange={(e) => setForNumber(e.target.value)}
+                placeholder="1"
+              >
+                {numberOptions.map((option) => (
+                  <option key={option} value={option}>
+                    {option}
+                  </option>
+                ))}
+              </Select>
+              <p>回 / 1</p>
+              <Select
+                value={frequencyUnit}
+                onChange={(e) => setFrequencyUnit(e.target.value)}
+                placeholder="週間"
+              >
+                {frequencyUnitOptions.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </Select>
+            </>
+          )}
       </FormControl>
       タスク量
       <Select
@@ -88,19 +120,23 @@ const TaskForm = ({ taskTitle, taskType, taskStartTime, taskEndTime, taskDeadlin
           </option>
         ))}
       </Select>
-      ×
-      <Select
-        value={taskRepeat}
-        onChange={(e) => setTaskRepeat(e.target.value)}
-        placeholder="1"
-      >
-        {numberOptions.map((option) => (
-          <option key={option} value={option}>
-            {option}
-          </option>
-        ))}
-      </Select>
-      回
+      {taskType === "deadLineTrue" && (
+        <>
+          <p>×</p>
+          <Select
+            value={taskRepeat}
+            onChange={(e) => setTaskRepeat(e.target.value)}
+            placeholder="1"
+          >
+            {numberOptions.map((option) => (
+              <option key={option} value={option}>
+                {option}
+              </option>
+            ))}
+          </Select>
+          <p>回</p>
+        </>
+      )}
       <br></br>
       <label htmlFor="taskDescription">備考欄</label>
       <textarea

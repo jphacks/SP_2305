@@ -60,6 +60,14 @@ export const ModalTabs = () => {
     selectedTask ? selectedTask.taskEst : "60"
   );
 
+  const [forNumber, setForNumber] = useState(
+    selectedTask ? selectedTask.forNumber : "1"
+  );
+
+  const [frequencyUnit, setFrequencyUnit] = useState(
+    selectedTask ? selectedTask.frequencyUnitr : "week"
+  );
+
   useEffect(() => {
     if (taskEstUnit === "minute") {
       setTaskEst(taskEstNumber);
@@ -123,6 +131,8 @@ export const ModalTabs = () => {
       taskEstNumber: taskEstNumber,
       taskEstUnit: taskEstUnit,
       taskEst: taskEst,
+      forNumber: forNumber,
+      frequencyUnit: frequencyUnit,
       repeat: taskRepeat,
       description: eventDescription,
       color: taskColor
@@ -232,6 +242,8 @@ export const ModalTabs = () => {
             taskDeadline={taskDeadline}
             taskEstNumber={taskEstNumber}
             taskEstUnit={taskEstUnit}
+            forNumber={forNumber}
+            frequencyUnit={frequencyUnit}
             taskDescription={taskDescription}
             taskColor={taskColor}
             taskRepeat={taskRepeat}
@@ -243,6 +255,8 @@ export const ModalTabs = () => {
             setTaskDeadline={setTaskDeadline}
             setTaskEstNumber={setTaskEstNumber}
             setTaskEstUnit={setTaskEstUnit}
+            setForNumber={setForNumber}
+            setFrequencyUnit={setFrequencyUnit}
             setTaskDescription={setTaskDescription}
             setTaskColor={setTaskColor}
             setTaskRepeat={setTaskRepeat}
