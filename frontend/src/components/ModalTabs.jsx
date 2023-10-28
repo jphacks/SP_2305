@@ -12,7 +12,7 @@ export const ModalTabs = () => {
     selectedTask ? selectedTask.title : "");
 
   const [eventTitle, setEventTitle] = useState(
-    selectedEvent ? selectedEvent.title : "");
+    selectedEvent ? selectedEvent.eventTitle : "");
 
   const [eventStartTime, setEventStartTime] = useState(
     selectedEvent ? new Date(selectedEvent.eventStartTime) : daySelected.toDate()
@@ -134,16 +134,16 @@ export const ModalTabs = () => {
         {activeTab === "event" ? (
           <EventForm
             daySelected={daySelected}
-            title={eventTitle}
-            startTime={eventStartTime}
-            endTime={eventEndTime}
-            description={eventDescription}
-            color={eventColor}
-            setTitle={setEventTitle}
-            setStartTime={setEventStartTime}
-            setEndTime={setEventEndTime}
-            setDescription={setEventDescription}
-            setColor={setEventColor}
+            eventTitle={eventTitle}
+            eventStartTime={eventStartTime}
+            eventEndTime={eventEndTime}
+            eventDescription={eventDescription}
+            eventColor={eventColor}
+            setEventTitle={setEventTitle}
+            setEventStartTime={setEventStartTime}
+            setEventEndTime={setEventEndTime}
+            setEventDescription={setEventDescription}
+            setEventColor={setEventColor}
           />
         ) : (
           <TaskForm

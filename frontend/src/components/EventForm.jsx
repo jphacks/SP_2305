@@ -4,23 +4,23 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import PropTypes from 'prop-types';
 
-const EventForm = ({ title, startTime, endTime, description, color, setTitle, setStartTime, setEndTime, setDescription, setColor }) => {
+const EventForm = ({ eventTitle, eventStartTime, eventEndTime, eventDescription, eventColor, setEventTitle, setEventStartTime, setEventEndTime, setEventDescription, setEventColor }) => {
   return (
     <div>
       <input
         type="text"
-        name="title"
+        name="eventTitle"
         placeholder="Add title"
-        value={title}
+        value={eventTitle}
         required
         className="pt-3 border-0 text-gray-600 text-xl font-semibold pb-2 w-full border-b-2 border-gray-200 focus:outline-none focus:ring-0 focus:border-blue-500"
-        onChange={(e) => setTitle(e.target.value)}
+        onChange={(e) => setEventTitle(e.target.value)}
       />
       <label>
         Start<br></br>
         <DatePicker
-          selected={startTime}
-          onChange={(date) => setStartTime(date)}
+          selected={eventStartTime}
+          onChange={(date) => setEventStartTime(date)}
           showTimeSelect
           timeFormat="HH:mm"
           dateFormat="MMMM d, h:mm aa"
@@ -30,8 +30,8 @@ const EventForm = ({ title, startTime, endTime, description, color, setTitle, se
       <label>
         End<br></br>
         <DatePicker
-          selected={endTime}
-          onChange={(date) => setEndTime(date)}
+          selected={eventEndTime}
+          onChange={(date) => setEventEndTime(date)}
           showTimeSelect
           timeFormat="HH:mm"
           dateFormat="MMMM d, h:mm aa"
@@ -39,22 +39,22 @@ const EventForm = ({ title, startTime, endTime, description, color, setTitle, se
       </label>
       <input
         type="text"
-        name="description"
+        name="eventDescription"
         placeholder="Add description"
-        value={description}
+        value={eventDescription}
         required
         className="pt-3 border-0 text-gray-600 text-xl font-semibold pb-2 w-full border-b-2 border-gray-200 focus:outline-none focus:ring-0 focus:border-blue-500"
-        onChange={(e) => setDescription(e.target.value)}
+        onChange={(e) => setEventDescription(e.target.value)}
       />
       {/* ここ数色から選べるように変更したい */}
       <input
         type="text"
-        name="color"
+        name="eventColor"
         placeholder="Select color"
-        value={color}
+        value={eventColor}
         required
         className="pt-3 border-0 text-gray-600 text-xl font-semibold pb-2 w-full border-b-2 border-gray-200 focus:outline-none focus:ring-0 focus:border-blue-500"
-        onChange={(e) => setColor(e.target.value)}
+        onChange={(e) => setEventColor(e.target.value)}
       />
     </div>
   );
@@ -62,16 +62,16 @@ const EventForm = ({ title, startTime, endTime, description, color, setTitle, se
 
 
 EventForm.propTypes = {
-  title: PropTypes.string.isRequired,
-  startTime: PropTypes.string.isRequired,
-  endTime: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  color: PropTypes.string.isRequired,
-  setTitle: PropTypes.func.isRequired,
-  setStartTime: PropTypes.func.isRequired,
-  setEndTime: PropTypes.func.isRequired,
-  setDescription: PropTypes.func.isRequired,
-  setColor: PropTypes.func.isRequired,
+  eventTitle: PropTypes.string.isRequired,
+  eventStartTime: PropTypes.string.isRequired,
+  eventEndTime: PropTypes.string.isRequired,
+  eventDescription: PropTypes.string.isRequired,
+  eventColor: PropTypes.string.isRequired,
+  setEventTitle: PropTypes.func.isRequired,
+  setEventStartTime: PropTypes.func.isRequired,
+  setEventEndTime: PropTypes.func.isRequired,
+  setEventDescription: PropTypes.func.isRequired,
+  setEventColor: PropTypes.func.isRequired,
 };
 
 export default EventForm;
