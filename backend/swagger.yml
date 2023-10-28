@@ -343,8 +343,7 @@ components:
           type: string
           format: date-time
         est:
-          type: string
-          format: date-time
+          type: number
         actualTime:
           type: number
         description:

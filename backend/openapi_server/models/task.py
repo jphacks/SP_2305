@@ -33,7 +33,7 @@ class Task(Model):
         :param deadline: The deadline of this Task.  # noqa: E501
         :type deadline: datetime
         :param est: The est of this Task.  # noqa: E501
-        :type est: datetime
+        :type est: float
         :param actual_time: The actual_time of this Task.  # noqa: E501
         :type actual_time: float
         :param description: The description of this Task.  # noqa: E501
@@ -49,7 +49,7 @@ class Task(Model):
             'start': datetime,
             'end': datetime,
             'deadline': datetime,
-            'est': datetime,
+            'est': float,
             'actual_time': float,
             'description': str,
             'done': bool
@@ -251,7 +251,7 @@ class Task(Model):
 
 
         :return: The est of this Task.
-        :rtype: datetime
+        :rtype: float
         """
         return self._est
 
@@ -261,7 +261,7 @@ class Task(Model):
 
 
         :param est: The est of this Task.
-        :type est: datetime
+        :type est: float
         """
 
         self._est = est
