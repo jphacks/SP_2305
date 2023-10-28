@@ -12,12 +12,20 @@ import { TodayTask } from "./TodayTask";
 
 export const Sidebar = () => {
   const [currentMonth, setCurrentMonth] = useState(getMonth());
-  const { miniMonthIndex } = useContext(GlobalContext);
+  const { miniMonthIndex, monthIndex, setMiniDaySelected, daySelected } = useContext(GlobalContext);
   const today = dayjs();
 
   useEffect(() => {
     setCurrentMonth(getMonth(miniMonthIndex));
   }, [miniMonthIndex]);
+
+  useEffect(() => {
+    setCurrentMonth(getMonth(monthIndex));
+  }, [monthIndex]);
+
+  useEffect(() => {
+    setMiniDaySelected (daySelected);
+  }, [daySelected]);
 
   return (
     <div className="px-4 py-2 items-center">
