@@ -5,6 +5,8 @@ import EventForm from "./EventForm";
 import TaskForm from "./TaskForm";
 import AfterTask from "./AfterTask";
 
+
+
 export const ModalTabs = () => {
   const { daySelected, dispatchCalEvent, dispatchCalTask, selectedEvent, selectedTask, setShowModalTabs, activeTab, setActiveTab } =
     useContext(GlobalContext);
