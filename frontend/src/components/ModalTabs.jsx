@@ -8,9 +8,6 @@ export const ModalTabs = () => {
   const { daySelected, dispatchCalEvent, dispatchCalTask, selectedEvent, selectedTask, setShowModalTabs, activeTab, setActiveTab } =
     useContext(GlobalContext);
 
-  const [taskTitle, setTaskTitle] = useState(
-    selectedTask ? selectedTask.title : "");
-
   const [eventTitle, setEventTitle] = useState(
     selectedEvent ? selectedEvent.eventTitle : "");
 
@@ -27,6 +24,42 @@ export const ModalTabs = () => {
 
   const [eventColor, setEventColor] = useState(
     selectedEvent ? selectedEvent.eventColor : "");
+
+  const [taskTitle, setTaskTitle] = useState(
+    selectedTask ? selectedTask.taskTitle : "");
+
+  const [taskType, setTaskType] = useState(
+    selectedTask ? selectedTask.taskType : "");
+
+  const [taskStartTime, setTaskStartTime] = useState(
+    selectedTask ? new Date(selectedTask.taskStartTime) : daySelected.toDate()
+  );
+
+  const [taskEndTime, setTaskEndTime] = useState(
+    selectedTask ? new Date(selectedTask.taskEndTime) : daySelected.toDate()
+  );
+
+  const [taskDeadline, setTaskDeadline] = useState(
+    selectedTask ? new Date(selectedTask.taskDeadline) : daySelected.toDate()
+  );
+
+  const [taskEst, setTaskEst] = useState(
+    selectedTask ? new Date(selectedTask.taskEst) : daySelected.toDate()
+  );
+
+  const [taskDescription, setTaskDescription] = useState(
+    selectedTask ? new Date(selectedTask.taskDescription) : daySelected.toDate()
+  );
+
+  const [taskColor, setTaskColor] = useState(
+    selectedTask ? new Date(selectedTask.taskColor) : daySelected.toDate()
+  );
+
+  const [taskRepeat, setTaskRepeat] = useState(
+    selectedTask ? new Date(selectedTask.taskRepeat) : daySelected.toDate()
+  );
+
+
 
 
 
@@ -50,6 +83,8 @@ export const ModalTabs = () => {
       title: taskTitle,
       day: daySelected.valueOf(),
       id: selectedTask ? selectedTask.id : Date.now(),
+      startTime: taskStartTime,
+      endTime: taskEndTime,
     };
     if (selectedTask) {
       dispatchCalTask({ type: "update", payload: calendarTask });
@@ -147,8 +182,26 @@ export const ModalTabs = () => {
           />
         ) : (
           <TaskForm
-            title={taskTitle}
-            setTitle={setTaskTitle}
+            taskTitle={taskTitle}
+            taskType={taskType}
+            taskStartTime={taskStartTime}
+            taskEndTime={taskEndTime}
+            taskDeadline={taskDeadline}
+            taskEst={taskEst}
+            taskDescription={taskDescription}
+            taskColor={taskColor}
+            taskRepeat={taskRepeat}
+
+            setTaskTitle={setTaskTitle}
+            setTaskType={setTaskType}
+            setTaskStartTime={setTaskStartTime}
+            setTaskEndTime={setTaskEndTime}
+            setTaskDeadline={setTaskDeadline}
+            setTaskEst={setTaskEst}
+            setTaskDescription={setTaskDescription}
+            setTaskColor={setTaskColor}
+            setTaskRepeat={setTaskRepeat}
+
             daySelected={daySelected}
           />
         )}

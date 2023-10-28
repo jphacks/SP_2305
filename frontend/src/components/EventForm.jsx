@@ -67,6 +67,7 @@ EventForm.propTypes = {
   eventEndTime: PropTypes.string.isRequired,
   eventDescription: PropTypes.string.isRequired,
   eventColor: PropTypes.string.isRequired,
+
   setEventTitle: PropTypes.func.isRequired,
   setEventStartTime: PropTypes.func.isRequired,
   setEventEndTime: PropTypes.func.isRequired,
