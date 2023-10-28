@@ -1,5 +1,7 @@
 // TaskForm.js
 import React from "react";
+import PropTypes from 'prop-types';
+
 
 const TaskForm = ({ title, setTitle, daySelected }) => {
   return (

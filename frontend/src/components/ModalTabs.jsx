@@ -8,17 +8,26 @@ export const ModalTabs = () => {
   const { daySelected, dispatchCalEvent, dispatchCalTask, selectedEvent, selectedTask, setShowModalTabs, activeTab, setActiveTab } =
     useContext(GlobalContext);
 
-  const [taskTitle, setTaskTitle] = useState(selectedTask ? selectedTask.title : "");
+  const [taskTitle, setTaskTitle] = useState(
+    selectedTask ? selectedTask.title : "");
 
-  const [eventTitle, setEventTitle] = useState(selectedEvent ? selectedEvent.title : "");
+  const [eventTitle, setEventTitle] = useState(
+    selectedEvent ? selectedEvent.title : "");
 
-  const [startTime, setStartTime] = useState(
-    selectedEvent ? new Date(selectedEvent.startTime) : daySelected.toDate()
+  const [eventStartTime, setEventStartTime] = useState(
+    selectedEvent ? new Date(selectedEvent.eventStartTime) : daySelected.toDate()
   );
 
-  const [endTime, setEndTime] = useState(
-    selectedEvent ? new Date(selectedEvent.endTime) : daySelected.toDate()
+  const [eventEndTime, setEventEndTime] = useState(
+    selectedEvent ? new Date(selectedEvent.eventEndTime) : daySelected.toDate()
   );
+
+  const [eventDescription, setEventDescription] = useState(
+    selectedEvent ? selectedEvent.eventDescription : "");
+
+  const [eventColor, setEventColor] = useState(
+    selectedEvent ? selectedEvent.eventColor : "");
+
 
 
   const handleSubmit = (e) => {
@@ -27,8 +36,8 @@ export const ModalTabs = () => {
       title: eventTitle,
       day: daySelected.valueOf(),
       id: selectedEvent ? selectedEvent.id : Date.now(),
-      startTime: startTime,
-      endTime: endTime,
+      startTime: eventStartTime,
+      endTime: eventEndTime,
     };
     if (selectedEvent) {
       dispatchCalEvent({ type: "update", payload: calendarEvent });
@@ -126,11 +135,15 @@ export const ModalTabs = () => {
           <EventForm
             daySelected={daySelected}
             title={eventTitle}
-            startTime={startTime}
-            endTime={endTime}
+            startTime={eventStartTime}
+            endTime={eventEndTime}
+            description={eventDescription}
+            color={eventColor}
             setTitle={setEventTitle}
-            setStartTime={setStartTime}
-            setEndTime={setEndTime}
+            setStartTime={setEventStartTime}
+            setEndTime={setEventEndTime}
+            setDescription={setEventDescription}
+            setColor={setEventColor}
           />
         ) : (
           <TaskForm

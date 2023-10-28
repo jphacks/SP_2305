@@ -8,8 +8,8 @@ function App() {
   return (
     <>
       <Routes>
-        {/* <Route path="/" element={<MonthPage />} /> */}
-        <Route path="/" element={<WeekPage />} />
+        <Route path="/" element={<MonthPage />} />
+        {/* <Route path="/" element={<WeekPage />} /> */}
       </Routes>
     </>
   );
