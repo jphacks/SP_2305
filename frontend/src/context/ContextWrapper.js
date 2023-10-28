@@ -45,7 +45,7 @@ const initTasks = () => {
 
 
 const ContextWrapper = (props) => {
-  const [loginToken, setLoginToken] = useState('');
+  const [loginToken, setLoginToken] = useState();
   const [monthIndex, setMonthIndex] = useState(dayjs().month());
   const [miniMonthIndex, setMiniMonthIndex] = useState(dayjs().month());
   const [daySelected, setDaySelected] = useState(dayjs());
@@ -69,7 +69,8 @@ const ContextWrapper = (props) => {
   useEffect(() => {
     // 以下構文でlocalStorageに保存
     // localStorage.setItem('key', 'value')
-    localStorage.setItem("loginToken", JSON.stringify(loginToken));
+    if(loginToken)
+      localStorage.setItem("loginToken", JSON.stringify(loginToken));
   }, [loginToken]);
 
   useEffect(() => {

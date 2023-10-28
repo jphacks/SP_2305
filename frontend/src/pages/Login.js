@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
 // import { createUserWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 // import { auth, firebaseError } from "../Firebase";
-import GlobalContext from "../context/GlobalContext";
+import GlobalContext from "./../context/GlobalContext";
 import { Navigate, Link, useHistory } from "react-router-dom";
-import { apiClient } from "../util/apiClient";
+import { apiClient } from "./../utils/apiClient"
 const Login = () => {
     const { loginToken, setLoginToken} = useContext(GlobalContext);
     const [email, setEmail] = useState("");
@@ -12,17 +12,17 @@ const Login = () => {
     // const history = useHistory();
 
     const handleSubmit = async (e) => {
+        e.preventDefault();
         const userData = {
             id: email,
             password: password,
         };
-
         // ユーザー情報をローカルストレージに保存
         const newToken = await apiClient.auth.$post({ body: userData })
         .catch(() => {
         throw new Error('Invalid credential')
         })
-        console.log(newToken)
+        
         setLoginToken(newToken)
     };
 
@@ -36,32 +36,7 @@ const Login = () => {
         });
     }, []);
 
-    // const [user_state, setUser] = useState(null);
-
-    // useEffect(() => {
-    //     onAuthStateChanged(auth, (currentUser) => {
-    //         setUser(currentUser);
-    //     });
-    // }, []);
-
-
-    // if (user_state !== null) {
-    //     localStorage.setItem('token', user_state.accessToken);
-    //     localStorage.setItem('refresh_token', user_state.refreshToken);
-    //     const time = Date()
-    //     console.log(time)
-    //     localStorage.setItem('refrech_at', time)
-    //     let tkn = localStorage.getItem('token');
-    //     console.log(tkn);
-    // }
-
     return (
-        // <>
-        //     {/* ログインしている場合マイページにリダイレクト */}
-        //     {user_state ? (
-        //         <Navigate to={`/`} />
-        //     ) : (
-        //         <>
                     <div className="flex justify-center items-center h-screen bg-gray-200">
                         <div className="relative flex flex-col justify-center items-center w-4/12 min-w-[500px] min-h-[500px] rounded-xl bg-white bg-clip-border text-gray-700 shadow-md shadow-gray-500/20">
                             <h4 className="block font-sans text-2xl font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">
@@ -113,9 +88,6 @@ const Login = () => {
                             </form>
                         </div>
                     </div>
-        //         </>
-        //     )}
-        // </>
     );
 };
 

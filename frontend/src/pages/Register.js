@@ -1,24 +1,34 @@
 import React, { useState, useEffect } from "react";
 // import { createUserWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 // import { auth, firebaseError } from "../Firebase";
-import { Navigate, Link } from "react-router-dom";
-import apiClient from "../util/apiClient"
+import { Navigate, Link, useNavigate } from "react-router-dom";
+import { apiClient } from "./../utils/apiClient"
+
 const Register = () => {
+    const navigate = useNavigate();
     const [nickname, setNickname] = useState("");
     const [id, setId] = useState("");
     const [password, setPassword] = useState("");
 
-    // const history = useHistory();
 
     const handleSubmit = async (e) => {
+        e.preventDefault();
         const userData = {
             nickname: nickname,
             id: id,
             password: password,
         };
-
-        // ユーザー情報をローカルストレージに保存
-        localStorage.setItem('userData', JSON.stringify(userData));
+        const newToken = await apiClient.user.$post({ body: userData }).catch(() => {
+            throw new Error('Invalid credential')
+            })
+        .catch(() => {
+        throw new Error('Invalid credential')
+        }).then((a)=>{
+            console.log("Login");
+            navigate({
+                pathname: '/login',
+            });
+        })
     };
 
     useEffect(() => {
@@ -31,27 +41,7 @@ const Register = () => {
         });
     }, []);
 
-    // const [user_state, setUser] = useState(null);
-
-    // useEffect(() => {
-    //     onAuthStateChanged(auth, (currentUser) => {
-    //         setUser(currentUser);
-    //     });
-    // }, []);
-
-    // if (user_state !== null) {
-    //     localStorage.setItem('token', user_state.accessToken);
-    //     localStorage.setItem('refresh_token', user_state.refreshToken);
-    //     let tkn = localStorage.getItem('token');
-    //     console.log(tkn);
-    // }
-
     return (
-        // <>
-        //     {user_state ? (
-        //         <Navigate to={`/`} />
-        //     ) : (
-        //         <>
                     <div className="flex justify-center items-center h-screen bg-gray-200">
                         <div className="relative flex flex-col justify-center items-center w-4/12 min-w-[500px] min-h-[500px] rounded-xl bg-white bg-clip-border text-gray-700 shadow-md shadow-gray-500/20">
                             <h4 className="block font-sans text-2xl font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">
@@ -96,7 +86,7 @@ const Register = () => {
                                 <div className="flex justify-center items-center">
                                     <button
                                         className="mt-6 block w-10/12 select-none rounded-lg bg-blue-500 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-blue-500/20 transition-all hover:shadow-lg hover:shadow-blue-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-                                        type="submit"
+                                        type="submit" onClick={handleSubmit}
                                         data-ripple-light="true"
                                     >
                                         新規登録
@@ -114,9 +104,6 @@ const Register = () => {
                             </form>
                         </div>
                     </div>
-        //         </>
-        //     )}
-        // </>
     );
 };
 
