@@ -29,7 +29,7 @@ export const Sidebar = () => {
         Today
       </p>
       <div className="px-4 py-2 flex items-center">
-        <h1 className="ml-4 text-xl text-gray-500 font-bold">
+        <h1 className="w-118 h-48 ml-4 text-xl text-gray-500 font-bold">
           {dayjs().format("MM/DD")}
         </h1>
         <div className="px-4 py-2 items-center">

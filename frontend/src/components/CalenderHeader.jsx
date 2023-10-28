@@ -32,34 +32,51 @@ export const CalendarHeader = () => {
   };
 
   return (
-    <header className="px-4 py-2 flex items-center">
-      <h1 className="mr-10 text-xl text-gray-500 fond-bold">Calendar</h1>
-      <button onClick={handleReset} className="border rounded py-2 px-4 mr-5">
+    <header className="w-900 h-87 px-4 py-2 flex items-center">
+      <div className="w-201 h-87 flex items-center">
+        <h1 className="ml-4 text-7xl text-gray-500 font-bold">
+          {dayjs(new Date(dayjs().year(), monthIndex)).format("MM")}
+        </h1>
+        <div className='w-98 h-53 flex-col items-center ml-8'>
+          <h2 className="ml-8 text-3xl text-gray-500">
+            {dayjs(new Date(dayjs().year(), monthIndex)).format("YYYY")}
+          </h2>
+          <h2 className="ml-9 text-base text-gray-500">
+            {dayjs(new Date(dayjs().year(), monthIndex)).format("MMMM")}
+          </h2>
+        </div>
+      </div>
+      {/* <h1 className="mr-10 text-xl text-gray-500 fond-bold">Calendar</h1> */}
+      {/* <button onClick={handleReset} className="border rounded py-2 px-4 mr-5">
         Today
-      </button>
-      <button onClick={handlePrevMonth}>
-        <span className="cursor-pointer text-gray-600 mx-2">
-          <MdChevronLeft />
-        </span>
-      </button>
-      <button onClick={handelNextMonth}>
-        <span className="cursor-pointer text-gray-600 mx-2">
-          <MdChevronRight />
-        </span>
-      </button>
-      <h2 className="ml-4 tgixt-xl text-gray-500 font-bold">
+      </button> */}
+      <div className="w-50 h-19 ml-20">
+        <button onClick={handlePrevMonth}>
+          <span className="w-19 h-13 cursor-pointer text-gray-600 mx-2">
+            <MdChevronLeft />
+          </span>
+        </button>
+        <button onClick={handelNextMonth}>
+          <span className="w-19 h-13 cursor-pointer text-gray-600 mx-2">
+            <MdChevronRight />
+          </span>
+        </button>
+      </div>
+      {/* <h2 className="ml-4 tgixt-xl text-gray-500 font-bold">
         {dayjs(new Date(dayjs().year(), monthIndex)).format("MMMM YYYY")}
-      </h2>
-      <Link to="/">
-        <Button {...monthButtonStyle}>
-          Month
-        </Button>
-      </Link>
-      <Link to="/week">
-        <Button {...weekButtonStyle}>
-          Week
-        </Button>
-      </Link>
+      </h2> */}
+      <div className="w-91 h-39 ml-20">
+        <Link to="/">
+          <Button {...monthButtonStyle}>
+            Month
+          </Button>
+        </Link>
+        <Link to="/week">
+          <Button className="ml-10" {...weekButtonStyle}>
+            Week
+          </Button>
+        </Link>
+      </div>
       <ButtonGroup
         size='sm'
         isAttached
