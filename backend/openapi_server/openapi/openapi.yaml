@@ -401,17 +401,20 @@ components:
   schemas:
     Task:
       example:
-        actualTime: 6.027456183070403
+        color: color
         est: 0.8008281904610115
         start: 2000-01-23T04:56:07.000+00:00
         description: description
-        end: 2000-01-23T04:56:07.000+00:00
         title: title
         type: startend
-        deadline: 2000-01-23T04:56:07.000+00:00
         uuid: uuid
         userId: userId
         done: true
+        actualTime: 6.027456183070403
+        repeat: 1.4658129805029452
+        progress: 5.962133916683182
+        end: 2000-01-23T04:56:07.000+00:00
+        deadline: 2000-01-23T04:56:07.000+00:00
       properties:
         uuid:
           format: UUID
@@ -454,10 +457,20 @@ components:
         done:
           title: done
           type: boolean
+        color:
+          title: color
+          type: string
+        repeat:
+          title: repeat
+          type: number
+        progress:
+          title: progress
+          type: number
       title: Task
       type: object
     Schedule:
       example:
+        color: color
         start: 2000-01-23T04:56:07.000+00:00
         description: description
         end: 2000-01-23T04:56:07.000+00:00
@@ -487,6 +500,9 @@ components:
         description:
           title: description
           type: string
+        color:
+          title: color
+          type: string
       title: Schedule
       type: object
     User:
@@ -503,13 +519,15 @@ components:
       description: Today's todo
       example:
         schedules:
-        - start: 2000-01-23T04:56:07.000+00:00
+        - color: color
+          start: 2000-01-23T04:56:07.000+00:00
           description: description
           end: 2000-01-23T04:56:07.000+00:00
           title: title
           uuid: uuid
           userId: userId
-        - start: 2000-01-23T04:56:07.000+00:00
+        - color: color
+          start: 2000-01-23T04:56:07.000+00:00
           description: description
           end: 2000-01-23T04:56:07.000+00:00
           title: title
@@ -517,28 +535,34 @@ components:
           userId: userId
         uuid: uuid
         tasks:
-        - actualTime: 6.027456183070403
+        - color: color
           est: 0.8008281904610115
           start: 2000-01-23T04:56:07.000+00:00
           description: description
-          end: 2000-01-23T04:56:07.000+00:00
           title: title
           type: startend
-          deadline: 2000-01-23T04:56:07.000+00:00
           uuid: uuid
           userId: userId
           done: true
-        - actualTime: 6.027456183070403
+          actualTime: 6.027456183070403
+          repeat: 1.4658129805029452
+          progress: 5.962133916683182
+          end: 2000-01-23T04:56:07.000+00:00
+          deadline: 2000-01-23T04:56:07.000+00:00
+        - color: color
           est: 0.8008281904610115
           start: 2000-01-23T04:56:07.000+00:00
           description: description
-          end: 2000-01-23T04:56:07.000+00:00
           title: title
           type: startend
-          deadline: 2000-01-23T04:56:07.000+00:00
           uuid: uuid
           userId: userId
           done: true
+          actualTime: 6.027456183070403
+          repeat: 1.4658129805029452
+          progress: 5.962133916683182
+          end: 2000-01-23T04:56:07.000+00:00
+          deadline: 2000-01-23T04:56:07.000+00:00
       properties:
         uuid:
           format: UUID

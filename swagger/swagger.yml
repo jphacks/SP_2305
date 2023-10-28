@@ -350,7 +350,12 @@ components:
           type: string
         done:
           type: boolean
-
+        color:
+          type: string
+        repeat:
+          type: number
+        progress:
+          type: number
     Schedule:
       type: object
       properties:
@@ -370,7 +375,8 @@ components:
           format: date-time
         description:
           type: string
-
+        color:
+          type: string
     User:
       type: object
       properties:
