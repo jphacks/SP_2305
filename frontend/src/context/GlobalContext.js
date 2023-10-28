@@ -7,11 +7,15 @@ const GlobalContext = React.createContext({
   daySelected: null,
   setDaySelected: (day) => { },
   // event関連
+  // showEventModal: false,
+  // setShowEventModal: () => { },
   dispatchCalEvent: ({ type, payload }) => { },
   savedEvents: [],
   selectedEvent: null,
   setSelectedEvent: () => { },
   // task関連
+  // showTaskModal: false,
+  // setShowTaskModal: () => { },
   dispatchCalTask: ({ type, payload }) => { },
   savedTasks: [],
   selectedTask: null,
