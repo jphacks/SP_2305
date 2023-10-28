@@ -25,7 +25,6 @@ const Login = () => {
     // };
 
     const userData = {
-        name: Name,
         email: Email,
         password: Password,
     };
