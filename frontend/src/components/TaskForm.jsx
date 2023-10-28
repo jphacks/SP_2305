@@ -3,102 +3,126 @@ import React from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import PropTypes from 'prop-types';
+import { Select, Switch, FormControl, FormLabel } from "@chakra-ui/react";
 
 
-const TaskForm = ({ taskTitle, taskType, taskStartTime, taskEndTime, taskDeadline, taskEst, taskDescription, taskColor, taskRepeat,
-  setTaskTitle, setTaskType, setTaskStartTime, setTaskEndTime, setTaskDeadline, setTaskEst, setTaskDescription, setTaskColor, setTaskRepeat }) => {
+const TaskForm = ({ taskTitle, taskType, taskStartTime, taskEndTime, taskDeadline, taskEstNumber, taskEstUnit,taskDescription, taskColor, taskRepeat,
+  setTaskTitle, setTaskType, setTaskStartTime, setTaskEndTime, setTaskDeadline, setTaskEstNumber, setTaskEstUnit, setTaskDescription, setTaskColor, setTaskRepeat }) => {
+
+  // カラースタイルの選択肢
+  const colorOptions = [
+    { label: "Red", style: "bg-red-200" },
+    { label: "Blue", style: "bg-blue-200" },
+    { label: "Green", style: "bg-green-200" },
+    // 他の色の選択肢を追加
+  ];
+
+  const numberOptions = Array.from({ length: 60 }, (_, index) => index + 1);
+
+  const unitOptions = [
+    { label: "分", value: "minute" },
+    { label: "日", value: "day" },
+  ]
+
   return (
     <div>
       <input
         type="text"
         name="taskTitle"
-        placeholder="Add title"
+        placeholder="タイトルを入力してください"
         value={taskTitle}
         required
         className="pt-3 border-0 text-gray-600 text-xl font-semibold pb-2 w-full border-b-2 border-gray-200 focus:outline-none focus:ring-0 focus:border-blue-500"
         onChange={(e) => setTaskTitle(e.target.value)}
       />
-      <input
-        type="text"
-        name="taskType"
-        placeholder="Select task type"
-        value={taskType}
-        required
-        className="pt-3 border-0 text-gray-600 text-xl font-semibold pb-2 w-full border-b-2 border-gray-200 focus:outline-none focus:ring-0 focus:border-blue-500"
-        onChange={(e) => setTaskType(e.target.value)}
-      />
-
-      <label>
-        Start<br></br>
-        <DatePicker
-          selected={taskStartTime}
-          onChange={(date) => setTaskStartTime(date)}
-          showTimeSelect
-          timeFormat="HH:mm"
-          dateFormat="MMMM d, h:mm aa"
+      {/* タスクタイプのスイッチボタン */}
+      <FormControl display="flex" alignItems="center">
+        <FormLabel htmlFor="taskType" mb="0">
+          {taskType === "deadLineTrue" ? "締切あり" : "締切なし"}
+        </FormLabel>
+        <Switch
+          id="taskType"
+          isChecked={taskType === "deadLineTrue"} // タスクタイプに応じて条件を設定
+          onChange={() =>
+            setTaskType(taskType === "deadLineFalse" ? "deadLineTrue" : "deadLineFalse")
+          }
         />
-      </label>
-      <br></br>
-      <label>
-        End<br></br>
-        <DatePicker
-          selected={taskEndTime}
-          onChange={(date) => setTaskEndTime(date)}
-          showTimeSelect
-          timeFormat="HH:mm"
-          dateFormat="MMMM d, h:mm aa"
-        />
-      </label>
-      <br></br>
-      <label>
-        Deadline<br></br>
-        <DatePicker
-          selected={taskDeadline}
-          onChange={(date) => setTaskDeadline(date)}
-          showTimeSelect
-          timeFormat="HH:mm"
-          dateFormat="MMMM d, h:mm aa"
-        />
-      </label>
-      <input
-        type="number"
-        name="taskEst"
-        placeholder="task time Estimate"
-        value={taskEst}
-        required
-        className="pt-3 border-0 text-gray-600 text-xl font-semibold pb-2 w-full border-b-2 border-gray-200 focus:outline-none focus:ring-0 focus:border-blue-500"
-        onChange={(e) => setTaskEst(e.target.value)}
-      />
-      <input
-        type="text"
-        name="taskDescription"
-        placeholder="Add description"
-        value={taskDescription}
-        required
-        className="pt-3 border-0 text-gray-600 text-xl font-semibold pb-2 w-full border-b-2 border-gray-200 focus:outline-none focus:ring-0 focus:border-blue-500"
-        onChange={(e) => setTaskDescription(e.target.value)}
-      />
-      <input
-        type="color"
-        name="taskColor"
-        placeholder="Select color"
-        value={taskColor}
-        required
-        className="pt-3 border-0 text-gray-600 text-xl font-semibold pb-2 w-full border-b-2 border-gray-200 focus:outline-none focus:ring-0 focus:border-blue-500"
-        onChange={(e) => setTaskColor(e.target.value)}
-      />
-      <input
-        type="number"
-        name="taskRepeat"
-        placeholder="how many times do the task"
+        
+        {taskType === "deadLineTrue"
+          ? (
+            <>
+              <label htmlFor="taskDeadline">
+                締切
+              </label>
+              <DatePicker
+                selected={taskDeadline}
+                onChange={(date) => setTaskDeadline(date)}
+                showTimeSelect
+                timeFormat="HH:mm"
+                dateFormat="MM/d, hh:mm"
+                id="taskDeadline"
+              />
+            </>
+          ) : ""}
+      </FormControl>
+      タスク量
+      <Select
+        value={taskEstNumber}
+        onChange={(e) => setTaskEstNumber(e.target.value)}
+        placeholder="1"
+      >
+        {numberOptions.map((option) => (
+          <option key={option} value={option}>
+            {option}
+          </option>
+        ))}
+      </Select>
+      <Select
+        value={taskEstUnit}
+        onChange={(e) => setTaskEstUnit(e.target.value)}
+        placeholder="時間"
+      >
+        {unitOptions.map((option) => (
+          <option key={option.value} value={option.value}>
+            {option.label}
+          </option>
+        ))}
+      </Select>
+      ×
+      <Select
         value={taskRepeat}
-        required
-        className="pt-3 border-0 text-gray-600 text-xl font-semibold pb-2 w-full border-b-2 border-gray-200 focus:outline-none focus:ring-0 focus:border-blue-500"
         onChange={(e) => setTaskRepeat(e.target.value)}
+        placeholder="1"
+      >
+        {numberOptions.map((option) => (
+          <option key={option} value={option}>
+            {option}
+          </option>
+        ))}
+      </Select>
+      回
+      <br></br>
+      <label htmlFor="taskDescription">備考欄</label>
+      <textarea
+        type="textarea"
+        name="taskDescription"
+        placeholder="コメントを入力"
+        value={taskDescription}
+        className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6"
+        onChange={(e) => setTaskDescription(e.target.value)}
+        id="taskDescription"
       />
-
-
-      {/* <p>{daySelected.format("dddd, MMMM DD")}</p> */}
+      <Select
+        value={taskColor}
+        onChange={(e) => setTaskColor(e.target.value)}
+        placeholder="ラベルの色を選択してください"
+      >
+        {colorOptions.map((option) => (
+          <option key={option.style} value={option.style}>
+            {option.label}
+          </option>
+        ))}
+      </Select>
     </div>
   );
 };

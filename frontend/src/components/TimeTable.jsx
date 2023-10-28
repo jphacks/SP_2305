@@ -77,7 +77,7 @@ export const TimeTable = (props) => {
                   <div
                     key={idx}
                     onClick={() => setSelectedEvent(evt)}
-                    className="bg-neutral-200 p-1 mr-3 text-gray-600 text-sm rounded mb-1 truncate"
+                    className={`${evt.color} p-1 mr-3 text-gray-600 text-sm rounded mb-1 truncate`}
                   >
                     {evt.title}
                   </div>
@@ -90,7 +90,7 @@ export const TimeTable = (props) => {
                       setShowModalTabs(true);
                       setActiveTab("task");
                     }}
-                    className="bg-neutral-400 p-1 mr-3 text-gray-600 text-sm mb-1 truncate"
+                    className={`${tsk.color} p-1 mr-3 text-gray-600 text-sm mb-1 truncate`}
                   >
                     {tsk.title}
                   </div>
