@@ -12,3 +12,21 @@ export function getMonth(month = dayjs().month()) {
   });
   return daysMatrix;
 }
+
+export function getWeekMatrix(day = dayjs()) {
+  const year = dayjs().year();
+  const month = dayjs().month();
+  let currentTimeCount = -1;
+  let currentDayCount = day.date() - 1;
+  const weekMatrix = new Array(24).fill([]).map(() => {
+    currentTimeCount++;
+    currentDayCount = day.date() - 1;
+    return new Array(7).fill(null).map(() => {
+      currentDayCount++;
+      return dayjs(new Date(year, month, currentDayCount, currentTimeCount));
+    });
+
+  });
+  
+  return weekMatrix;
+}

@@ -23,10 +23,6 @@ export const Sidebar = () => {
     setCurrentMonth(getMonth(monthIndex));
   }, [monthIndex]);
 
-  useEffect(() => {
-    setMiniDaySelected (daySelected);
-  }, [daySelected]);
-
   return (
     <div className="px-4 py-2 items-center">
       <p className="ml-4 text-xl text-gray-500 font-bold">

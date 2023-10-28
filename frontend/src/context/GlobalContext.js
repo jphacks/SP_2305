@@ -1,9 +1,12 @@
 import React from "react";
+import dayjs from "dayjs";
 
 const GlobalContext = React.createContext({
   // calender関連
   monthIndex: 0,
   setMonthIndex: (index) => { },
+  weekStartDay: null,
+  setWeekStartDay: (index) => { },
   daySelected: null,
   setDaySelected: (day) => { },
   miniMonthIndex: 0,
