@@ -1,5 +1,6 @@
 from typing import List
-
+import jwt
+from tools.secret import key
 
 def info_from_bearerAuth(token):
     """
@@ -12,5 +13,5 @@ def info_from_bearerAuth(token):
     :return: Decoded token information or None if token is invalid
     :rtype: dict | None
     """
-    return {'uid': 'user_id'}
-
+    to = jwt.decode(token, key=key(), algorithms=["HS256"])
+    return to

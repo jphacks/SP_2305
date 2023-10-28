@@ -1,3 +1,4 @@
+import os
 import secrets
 
 jkey = ""
@@ -5,7 +6,7 @@ jkey = ""
 def key():
     global jkey
     if jkey == "":
-        jkey = secrets.token_urlsafe(16)
+        jkey = os.getenv('PENGUIN_SECRET', secrets.token_urlsafe(16))
     return jkey
 
 
