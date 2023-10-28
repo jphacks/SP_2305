@@ -53,9 +53,8 @@ export const ModalTabs = () => {
     selectedTask ? selectedTask.taskEstNumber : 1
   );
 
-  const [taskEstUnit, setTaskEstUnit] = useState(
-    selectedTask ? selectedTask.taskEstUnit : "hour"
-  );
+  const [taskEstUnit, setTaskEstUnit] = useState(selectedTask ? selectedTask.taskEstUnit : "hour");
+
 
   const [taskEst, setTaskEst] = useState(
     selectedTask && selectedTask.taskEst ? selectedTask.taskEst : 60
@@ -187,7 +186,7 @@ export const ModalTabs = () => {
           )}
           {selectedTask !== null && activeTab === "task" && (
             <>
-              <button onClick={handleCheckTask(selectedTask)}>
+              <button onClick={() => handleCheckTask(selectedTask)}>
                 <CheckIcon />
               </button>
               <button onClick={handleDeleteTask}>
