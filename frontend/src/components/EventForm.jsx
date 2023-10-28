@@ -48,7 +48,7 @@ const EventForm = ({ eventTitle, eventStartTime, eventEndTime, eventDescription,
       />
       {/* ここ数色から選べるように変更したい */}
       <input
-        type="text"
+        type="color"
         name="eventColor"
         placeholder="Select color"
         value={eventColor}
@@ -61,18 +61,18 @@ const EventForm = ({ eventTitle, eventStartTime, eventEndTime, eventDescription,
 };
 
 
-EventForm.propTypes = {
-  eventTitle: PropTypes.string.isRequired,
-  eventStartTime: PropTypes.string.isRequired,
-  eventEndTime: PropTypes.string.isRequired,
-  eventDescription: PropTypes.string.isRequired,
-  eventColor: PropTypes.string.isRequired,
+// EventForm.propTypes = {
+//   eventTitle: PropTypes.string.isRequired,
+//   eventStartTime: PropTypes.object.isRequired,
+//   eventEndTime: PropTypes.object.isRequired,
+//   eventDescription: PropTypes.string.isRequired,
+//   eventColor: PropTypes.string.isRequired,
 
-  setEventTitle: PropTypes.func.isRequired,
-  setEventStartTime: PropTypes.func.isRequired,
-  setEventEndTime: PropTypes.func.isRequired,
-  setEventDescription: PropTypes.func.isRequired,
-  setEventColor: PropTypes.func.isRequired,
-};
+//   setEventTitle: PropTypes.func.isRequired,
+//   setEventStartTime: PropTypes.func.isRequired,
+//   setEventEndTime: PropTypes.func.isRequired,
+//   setEventDescription: PropTypes.func.isRequired,
+//   setEventColor: PropTypes.func.isRequired,
+// };
 
 export default EventForm;

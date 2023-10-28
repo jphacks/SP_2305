@@ -60,14 +60,14 @@ export const ModalTabs = () => {
     selectedTask ? new Date(selectedTask.taskRepeat) : daySelected.toDate()
   );
 
-  const [taskActualTime, setTaskActualTime] = useState(
-    selectedTask ? selectedTask.taskType : "");
+  // const [taskActualTime, setTaskActualTime] = useState(
+  //   selectedTask ? selectedTask.taskType : "");
 
-  const [taskDone, setTaskDone] = useState(
-    selectedTask ? selectedTask.taskType : "");
+  // const [taskDone, setTaskDone] = useState(
+  //   selectedTask ? selectedTask.taskType : "");
 
-  const [taskProgress, setTaskProgress] = useState(
-    selectedTask ? selectedTask.taskType : "");
+  // const [taskProgress, setTaskProgress] = useState(
+  //   selectedTask ? selectedTask.taskType : "");
 
 
 
@@ -177,7 +177,7 @@ export const ModalTabs = () => {
         </div>
         {activeTab === "event" ? (
           <EventForm
-            daySelected={daySelected}
+            // daySelected={daySelected}
             eventTitle={eventTitle}
             eventStartTime={eventStartTime}
             eventEndTime={eventEndTime}
@@ -211,17 +211,17 @@ export const ModalTabs = () => {
             setTaskColor={setTaskColor}
             setTaskRepeat={setTaskRepeat}
 
-            daySelected={daySelected}
+            // daySelected={daySelected}
           />
         )}
       </div>
-      <div>
+      {/* <div>
         <AfterTask
           taskActualTime={taskActualTime}
           taskDone={taskDone}
           taskProgress={taskProgress}
         />
-      </div>
+      </div> */}
       <footer className="flex justify-end border-t p-3 mt-5">
         <button
           type="button"
