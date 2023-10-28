@@ -44,7 +44,7 @@ def auth_user(auth_user_request=None):  # noqa: E501
     return None, 401
 
 
-def get_user_schedules(authorization, user_id, token_info = None):  # noqa: E501
+def get_user_schedules(authorization = None, user_id = None, token_info = None):  # noqa: E501
     """get user schedules
 
     get users schedules # noqa: E501
@@ -56,10 +56,17 @@ def get_user_schedules(authorization, user_id, token_info = None):  # noqa: E501
 
     :rtype: Union[List[Schedule], Tuple[List[Schedule], int], Tuple[List[Schedule], int, Dict[str, str]]
     """
-    return 'do some magic!'
+    if token_info['permission'] != 'Admin' and user_id != token_info['uuid']:
+        return None, 401
+    session = Session()
+    schedules = session.query(DBSchedule).filter(DBSchedule.userId == user_id)
+    l = []
+    for i in schedules.all():
+        l.append(i.to_schedule())
+    return l
 
 
-def get_user_tasks(authorization, user_id, token_info = None):  # noqa: E501
+def get_user_tasks(authorization = None, user_id = None, token_info = None):  # noqa: E501
     """get user tasks
 
     get users tasks # noqa: E501
@@ -71,10 +78,18 @@ def get_user_tasks(authorization, user_id, token_info = None):  # noqa: E501
 
     :rtype: Union[List[Task], Tuple[List[Task], int], Tuple[List[Task], int, Dict[str, str]]
     """
-    return 'do some magic!'
+    if token_info['permission'] != 'Admin' and user_id != token_info['uuid']:
+        return None, 401
+    session = Session()
+    tasks = session.query(DBTask).filter(DBTask.userId == user_id)
+    l = []
+    for i in tasks.all():
+        l.append(i.to_task())
+    return l
 
 
-def get_user_todo(authorization, user_id, token_info = None):  # noqa: E501
+
+def get_user_todo(authorization = None, user_id = None, token_info = None):  # noqa: E501
     """get user&#39;s todo
 
     get specific user&#39;s todo # noqa: E501
@@ -86,7 +101,8 @@ def get_user_todo(authorization, user_id, token_info = None):  # noqa: E501
 
     :rtype: Union[List[Todo], Tuple[List[Todo], int], Tuple[List[Todo], int, Dict[str, str]]
     """
-    return 'do some magic!'
+    if token_info['permission'] != 'Admin' and user_id != token_info['uuid']:
+        return None, 401
 
 
 def new_user(new_user_request=None):  # noqa: E501
