@@ -2,6 +2,9 @@ from sqlalchemy import *
 from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 from datetime import datetime
+from openapi_server.models.schedule import Schedule  # noqa: E501
+from openapi_server.models.task import Task  # noqa: E501
+
 
 Base = declarative_base()
 global session
@@ -23,13 +26,37 @@ class DBTask(Base):
     actualTime = Column(INTEGER, nullable=False)
     description = Column(VARCHAR, nullable=False)
     done = Column(BOOLEAN, nullable=False)
-
     createdAt = Column(TIMESTAMP, nullable=False, server_default=text(
         'CURRENT_TIMESTAMP'))
     updatedAt = Column(TIMESTAMP, nullable=False, server_default=text(
         'CURRENT_TIMESTAMP'), onupdate=datetime.utcnow)
     def as_dict(self):
        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
+    def from_task(self, task: Task):
+        self.userId = task.user_id
+        self.title = task.title
+        self.type = task.type
+        self.start = task.start
+        self.end = task.end
+        self.deadline = task.deadline
+        self.est = task.est
+        self.actualTime = task.actual_time
+        self.description = task.description
+        self.done = task.done
+    def to_task(self):
+        task = Task()
+        task.user_id = self.userId 
+        task.uuid = self.uuid
+        task.title = self.title 
+        task.type = self.type 
+        task.start = self.start 
+        task.end = self.end 
+        task.deadline = self.deadline
+        task.est = self.est
+        task.actual_time = self.actualTime
+        task.description = self.description 
+        return task
+    
     
 class DBSchedule(Base):
     __tablename__ = 'schedules'

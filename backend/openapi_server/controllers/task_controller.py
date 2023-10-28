@@ -8,7 +8,7 @@ from openapi_server.models.task import Task  # noqa: E501
 from openapi_server import util
 from db.models import *
 
-def get_task(authorization, task_id, token_info = None):  # noqa: E501
+def get_task(authorization = None, task_id = None, token_info = None):  # noqa: E501
     """get specific task
 
     get specific task # noqa: E501
@@ -20,7 +20,16 @@ def get_task(authorization, task_id, token_info = None):  # noqa: E501
 
     :rtype: Union[Task, Tuple[Task, int], Tuple[Task, int, Dict[str, str]]
     """
-    return 'do some magic!'
+    session = Session()
+    
+    if session.query(exists().where(DBTask.uuid == task_id)).scalar() > 0:
+        print("GETTask")
+        dbtask = session.query(DBTask).filter(DBTask.uuid == task_id).first()
+        if token_info['permission'] != 'Admin' and dbtask.userId != token_info['uuid']:
+            return null, 401
+        print(dbtask)
+        return dbtask.to_task()
+    return null, 400
 
 
 def new_task(authorization=None, task=None, token_info = None):  # noqa: E501
@@ -41,17 +50,8 @@ def new_task(authorization=None, task=None, token_info = None):  # noqa: E501
     print(token_info)
     if session.query(exists().where(DBUser.uuid == token_info['uuid'])).scalar() > 0:
         dbtask = DBTask()
-        task.user_id = str(token_info['uuid'])
-        dbtask.userId = task.user_id
-        dbtask.title = task.title
-        dbtask.type = task.type
-        dbtask.start = task.start
-        dbtask.end = task.end
-        dbtask.deadline = task.deadline
-        dbtask.est = task.est
-        dbtask.actualTime = 0
-        dbtask.description = task.description
-        dbtask.done = False
+        task.user_id = token_info['uuid']
+        dbtask.from_task(task)
         session.add(dbtask)
         session.commit()
         task.uuid = dbtask.uuid
@@ -59,7 +59,7 @@ def new_task(authorization=None, task=None, token_info = None):  # noqa: E501
     return None, 401
 
 
-def patch_task(authorization, task_id, task=None, token_info = None):  # noqa: E501
+def patch_task(authorization = None, task_id = None, task=None, token_info = None):  # noqa: E501
     """get specific task
 
     get specific task # noqa: E501
@@ -75,4 +75,13 @@ def patch_task(authorization, task_id, task=None, token_info = None):  # noqa: E
     """
     if connexion.request.is_json:
         task = Task.from_dict(connexion.request.get_json())  # noqa: E501
-    return 'do some magic!'
+    session = Session()
+    if session.query(exists().where(DBTask.uuid == task_id)).scalar() > 0:
+        dbtask = session.query(DBTask).filter(DBTask.uuid == task_id).first()
+        if token_info['permission'] != 'Admin' and dbtask.userId != token_info['uuid']:
+            return null, 401
+        task.uuid = task_id
+        dbtask.from_task(task)
+        session.commit()
+        return dbtask.to_task()
+    return null, 400
