@@ -11,32 +11,13 @@ const AfterTask = ({ taskActualTime, taskDone, taskProgress,
   return (
     <div>
       <input
-        type="time"
+        type="number"
         name="taskActualTime"
         placeholder="所要時間"
         value={taskActualTime}
         required
         className="pt-3 border-0 text-gray-600 text-xl font-semibold pb-2 w-full border-b-2 border-gray-200 focus:outline-none focus:ring-0 focus:border-blue-500"
         onChange={(e) => setTaskActualTime(e.target.value)}
-      />
-      <input
-        type="text"
-        name="taskDone"
-        placeholder="Done or not"
-        value={taskDone}
-        required
-        className="pt-3 border-0 text-gray-600 text-xl font-semibold pb-2 w-full border-b-2 border-gray-200 focus:outline-none focus:ring-0 focus:border-blue-500"
-        onChange={(e) => setTaskDone(e.target.value)}
-      />
-
-      <input
-        type="number"
-        name="taskProgress"
-        placeholder="percentage of your task"
-        value={taskProgress}
-        required
-        className="pt-3 border-0 text-gray-600 text-xl font-semibold pb-2 w-full border-b-2 border-gray-200 focus:outline-none focus:ring-0 focus:border-blue-500"
-        onChange={(e) => setTaskProgress(e.target.value)}
       />
       {/* <p>{daySelected.format("dddd, MMMM DD")}</p> */}
     </div >

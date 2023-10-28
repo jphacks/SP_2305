@@ -63,7 +63,13 @@ const ContextWrapper = (props) => {
     initTasks
   );
 
+  const [taskActualTime, setTaskActualTime] = useState(selectedTask && selectedTask.taskActualTime ? selectedTask.taskActualTime : "60");
+  const [taskDone, setTaskDone] = useState(selectedTask ? selectedTask.taskDone : false);
+  const [taskProgress, setTaskProgress] = useState(selectedTask ? selectedTask.taskProgress : 0);
+
+
   const [showModalTabs, setShowModalTabs] = useState(false);
+  const [ShowAfterTaskModal, setShowAfterTaskModal] = useState(false);
   const [activeTab, setActiveTab] = useState("event");
   
   useEffect(() => {
@@ -99,7 +105,7 @@ const ContextWrapper = (props) => {
   }, [showModalTabs, activeTab]);
 
   useEffect(() => {
-    if (!showModalTabs || activeTab !== "task") {
+    if ((!showModalTabs && !ShowAfterTaskModal) || activeTab !== "task") {
       setSelectedTask(null);
     }
   }, [showModalTabs, activeTab]);
@@ -115,6 +121,11 @@ const ContextWrapper = (props) => {
       setMiniMonthIndex(monthIndex);
   }, [monthIndex]);
 
+  useEffect(() => {
+    selectedTask && setTaskActualTime(selectedTask.taskActualTime);
+    selectedTask && setTaskDone(selectedTask.taskDone);
+    selectedTask && setTaskProgress(selectedTask.taskProgress);
+}, [selectedTask]);
 
   return (
     <GlobalContext.Provider
@@ -139,10 +150,18 @@ const ContextWrapper = (props) => {
         savedTasks,
         showModalTabs,
         setShowModalTabs,
+        ShowAfterTaskModal, 
+        setShowAfterTaskModal,
         activeTab,
         setActiveTab,
         loginToken,
-        setLoginToken
+        setLoginToken,
+        taskActualTime,
+        setTaskActualTime,
+        taskDone,
+        setTaskDone,
+        taskProgress,
+        setTaskProgress
       }}
     >
       {props.children}

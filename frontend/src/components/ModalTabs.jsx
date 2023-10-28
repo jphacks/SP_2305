@@ -10,7 +10,7 @@ import dayjs from "dayjs";
 
 
 export const ModalTabs = () => {
-  const { daySelected, dispatchCalEvent, dispatchCalTask, selectedEvent, selectedTask, setShowModalTabs, activeTab, setActiveTab } =
+  const { daySelected, dispatchCalEvent, dispatchCalTask, selectedEvent, selectedTask, setShowModalTabs, activeTab, setActiveTab, taskActualTime, taskDone, taskProgress, setTaskDone, setTaskProgress, setShowAfterTaskModal } =
     useContext(GlobalContext);
 
   const [eventTitle, setEventTitle] = useState(
@@ -58,11 +58,11 @@ export const ModalTabs = () => {
   );
 
   const [taskEst, setTaskEst] = useState(
-    selectedTask ? selectedTask.taskEst : "60"
+    selectedTask && selectedTask.taskEst ? selectedTask.taskEst : 60
   );
 
   const [forNumber, setForNumber] = useState(
-    selectedTask ? selectedTask.forNumber : "1"
+    selectedTask ? selectedTask.forNumber : 1
   );
 
   const [frequencyUnit, setFrequencyUnit] = useState(
@@ -88,20 +88,6 @@ export const ModalTabs = () => {
   const [taskRepeat, setTaskRepeat] = useState(
     selectedTask ? selectedTask.repeat : daySelected.toDate()
   );
-
-
-
-  // const [taskActualTime, setTaskActualTime] = useState(
-  //   selectedTask ? selectedTask.taskType : "");
-
-  // const [taskDone, setTaskDone] = useState(
-  //   selectedTask ? selectedTask.taskType : "");
-
-  // const [taskProgress, setTaskProgress] = useState(
-  //   selectedTask ? selectedTask.taskType : "");
-
-
-
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -136,7 +122,10 @@ export const ModalTabs = () => {
       frequencyUnit: frequencyUnit,
       repeat: taskRepeat,
       description: eventDescription,
-      color: taskColor
+      color: taskColor,
+      taskActualTime: taskActualTime,
+      taskDone: taskDone,
+      taskProgress: taskProgress,
     };
     if (selectedTask) {
       dispatchCalTask({ type: "update", payload: calendarTask });
@@ -166,6 +155,13 @@ export const ModalTabs = () => {
     setActiveTab(tab);
   };
 
+  const handleCheckTask = (tsk) => {
+    setTaskDone(true);
+    setTaskProgress(tsk.taskProgress + 1);
+    setShowAfterTaskModal(true);
+  };
+
+
   useEffect(() => {
     if (selectedEvent !== null) {
       handleTabChange("event");
@@ -191,7 +187,7 @@ export const ModalTabs = () => {
           )}
           {selectedTask !== null && activeTab === "task" && (
             <>
-              <button onClick={handleDeleteTask}>
+              <button onClick={handleCheckTask(selectedTask)}>
                 <CheckIcon />
               </button>
               <button onClick={handleDeleteTask}>
@@ -272,11 +268,6 @@ export const ModalTabs = () => {
         )}
       </div>
       <div>
-        {/* <AfterTask
-          taskActualTime={taskActualTime}
-          taskDone={taskDone}
-          taskProgress={taskProgress}
-        /> */}
       </div>
       <footer className="flex justify-end border-t p-3 mt-5">
         <button
