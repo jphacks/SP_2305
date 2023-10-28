@@ -3,22 +3,73 @@ import { MdDeleteForever, MdClose } from "react-icons/md";
 import GlobalContext from "../context/GlobalContext";
 import EventForm from "./EventForm";
 import TaskForm from "./TaskForm";
+import AfterTask from "./AfterTask";
+
+
 
 export const ModalTabs = () => {
   const { daySelected, dispatchCalEvent, dispatchCalTask, selectedEvent, selectedTask, setShowModalTabs, activeTab, setActiveTab } =
     useContext(GlobalContext);
 
-  const [taskTitle, setTaskTitle] = useState(selectedTask ? selectedTask.title : "");
+  const [eventTitle, setEventTitle] = useState(
+    selectedEvent ? selectedEvent.eventTitle : "");
 
-  const [eventTitle, setEventTitle] = useState(selectedEvent ? selectedEvent.title : "");
-
-  const [startTime, setStartTime] = useState(
-    selectedEvent ? new Date(selectedEvent.startTime) : daySelected.toDate()
+  const [eventStartTime, setEventStartTime] = useState(
+    selectedEvent ? new Date(selectedEvent.eventStartTime) : daySelected.toDate()
   );
 
-  const [endTime, setEndTime] = useState(
-    selectedEvent ? new Date(selectedEvent.endTime) : daySelected.toDate()
+  const [eventEndTime, setEventEndTime] = useState(
+    selectedEvent ? new Date(selectedEvent.eventEndTime) : daySelected.toDate()
   );
+
+  const [eventDescription, setEventDescription] = useState(
+    selectedEvent ? selectedEvent.eventDescription : "");
+
+  const [eventColor, setEventColor] = useState(
+    selectedEvent ? selectedEvent.eventColor : "");
+
+  const [taskTitle, setTaskTitle] = useState(
+    selectedTask ? selectedTask.taskTitle : "");
+
+  const [taskType, setTaskType] = useState(
+    selectedTask ? selectedTask.taskType : "");
+
+  const [taskStartTime, setTaskStartTime] = useState(
+    selectedTask ? new Date(selectedTask.taskStartTime) : daySelected.toDate()
+  );
+
+  const [taskEndTime, setTaskEndTime] = useState(
+    selectedTask ? new Date(selectedTask.taskEndTime) : daySelected.toDate()
+  );
+
+  const [taskDeadline, setTaskDeadline] = useState(
+    selectedTask ? new Date(selectedTask.taskDeadline) : daySelected.toDate()
+  );
+
+  const [taskEst, setTaskEst] = useState(
+    selectedTask ? new Date(selectedTask.taskEst) : daySelected.toDate()
+  );
+
+  const [taskDescription, setTaskDescription] = useState(
+    selectedTask ? selectedTask.taskType : "");
+
+  const [taskColor, setTaskColor] = useState(
+    selectedTask ? selectedTask.taskType : "");
+
+  const [taskRepeat, setTaskRepeat] = useState(
+    selectedTask ? new Date(selectedTask.taskRepeat) : daySelected.toDate()
+  );
+
+  const [taskActualTime, setTaskActualTime] = useState(
+    selectedTask ? selectedTask.taskType : "");
+
+  const [taskDone, setTaskDone] = useState(
+    selectedTask ? selectedTask.taskType : "");
+
+  const [taskProgress, setTaskProgress] = useState(
+    selectedTask ? selectedTask.taskType : "");
+
+
 
 
   const handleSubmit = (e) => {
@@ -27,8 +78,8 @@ export const ModalTabs = () => {
       title: eventTitle,
       day: daySelected.valueOf(),
       id: selectedEvent ? selectedEvent.id : Date.now(),
-      startTime: startTime,
-      endTime: endTime,
+      startTime: eventStartTime,
+      endTime: eventEndTime,
     };
     if (selectedEvent) {
       dispatchCalEvent({ type: "update", payload: calendarEvent });
@@ -41,6 +92,8 @@ export const ModalTabs = () => {
       title: taskTitle,
       day: daySelected.valueOf(),
       id: selectedTask ? selectedTask.id : Date.now(),
+      startTime: taskStartTime,
+      endTime: taskEndTime,
     };
     if (selectedTask) {
       dispatchCalTask({ type: "update", payload: calendarTask });
@@ -125,20 +178,49 @@ export const ModalTabs = () => {
         {activeTab === "event" ? (
           <EventForm
             daySelected={daySelected}
-            title={eventTitle}
-            startTime={startTime}
-            endTime={endTime}
-            setTitle={setEventTitle}
-            setStartTime={setStartTime}
-            setEndTime={setEndTime}
+            eventTitle={eventTitle}
+            eventStartTime={eventStartTime}
+            eventEndTime={eventEndTime}
+            eventDescription={eventDescription}
+            eventColor={eventColor}
+            setEventTitle={setEventTitle}
+            setEventStartTime={setEventStartTime}
+            setEventEndTime={setEventEndTime}
+            setEventDescription={setEventDescription}
+            setEventColor={setEventColor}
           />
         ) : (
           <TaskForm
-            title={taskTitle}
-            setTitle={setTaskTitle}
+            taskTitle={taskTitle}
+            taskType={taskType}
+            taskStartTime={taskStartTime}
+            taskEndTime={taskEndTime}
+            taskDeadline={taskDeadline}
+            taskEst={taskEst}
+            taskDescription={taskDescription}
+            taskColor={taskColor}
+            taskRepeat={taskRepeat}
+
+            setTaskTitle={setTaskTitle}
+            setTaskType={setTaskType}
+            setTaskStartTime={setTaskStartTime}
+            setTaskEndTime={setTaskEndTime}
+            setTaskDeadline={setTaskDeadline}
+            setTaskEst={setTaskEst}
+            setTaskDescription={setTaskDescription}
+            setTaskColor={setTaskColor}
+            setTaskRepeat={setTaskRepeat}
+
             daySelected={daySelected}
           />
         )}
+      </div>
+      <div>
+        <AfterTask
+          taskActualTime={taskActualTime}
+          taskDone={taskDone}
+          taskProgress={taskProgress}
+        />
       </div>
       <footer className="flex justify-end border-t p-3 mt-5">
         <button

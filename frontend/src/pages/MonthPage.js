@@ -17,7 +17,7 @@ function MonthPage() {
 
   return (
     <>
-    {showModalTabs && <ModalTabs />}
+      {showModalTabs && <ModalTabs />}
       <div className='flex'>
         <Sidebar />
         <div className='flex-1 h-screen flex flex-col'>
