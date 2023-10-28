@@ -71,14 +71,18 @@ def search_insert_datetime(_schelist, _task):
 
 che = 0
 # _schelistはソート済み、時間が重複しないのが前提
+# 5sルール
 def search_fastest(_schelist, _tasklist):
     global che
     _tasklist_copy = _tasklist.copy()
     _tasklist_copy.sort(reverse=True, key=lambda x: x["need_time"])
     _tasklist_copy.sort(key=lambda x: x["must_end"])
     fastest_schelist = []
-    for tasklist in itertools.permutations(_tasklist_copy):
+    timekeeper_start = time.time()
+    for i, tasklist in enumerate(itertools.permutations(_tasklist_copy)):
         che += 1
+        if i%1000 == 0 and 5.0 < time.time() - timekeeper_start:
+            break
         challenger_schelist = _schelist.copy()
         uninsertable = False
         for task in tasklist:
@@ -95,6 +99,7 @@ def search_fastest(_schelist, _tasklist):
         ):
             fastest_schelist = challenger_schelist
     return fastest_schelist
+
 
 if __name__ == "__main__":
     scheli = [
