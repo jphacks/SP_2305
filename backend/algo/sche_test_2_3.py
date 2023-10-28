@@ -17,13 +17,17 @@ def task2sche(_task, _start):
         "fromtask": True
     }
 
+#def overlap_judge(_start1, _end1, _start2, _end2):
+#    # Trueなら被り
+#    half_len1 = (_end1 - _start1)*0.5
+#    half_len2 = (_end2 - _start2)*0.5
+#    mid1 = _start1 + half_len1
+#    mid2 = _start2 + half_len2
+#    return abs(mid2 - mid1) < (half_len1 + half_len2)
+
 def overlap_judge(_start1, _end1, _start2, _end2):
-    # Trueなら被り
-    half_len1 = (_end1 - _start1)*0.5
-    half_len2 = (_end2 - _start2)*0.5
-    mid1 = _start1 + half_len1
-    mid2 = _start2 + half_len2
-    return abs(mid2 - mid1) < (half_len1 + half_len2)
+    #return (not (_end1 <= _start2) or (_end2 <= _start1))
+    return (_start2 < _end1) and (_start1 < _end2)
 
 def search_insert_datetime(_schelist, _task):
     # schelistのend、taskのcan_startをそれぞれtaskの開始時間にセットしたとき
@@ -48,7 +52,6 @@ def search_insert_datetime(_schelist, _task):
         for check_sche in _schelist[schelist_search_start_idx+i+1:]:
             overlap = overlap_judge(sche["end"], sche["end"] + _task["need_time"], check_sche["start"], check_sche["end"])
             break
-
         if overlap:
             continue
         start_candidate = sche["end"]
@@ -58,8 +61,6 @@ def search_insert_datetime(_schelist, _task):
     # 被るならstart_candidateを結果にする
     for check_sche in _schelist:
         # check_scheが被るか
-        if (check_sche["end"] <= _task["can_start"]) or (_task["can_start"] + _task["need_time"] <= check_sche["start"]):
-            continue
         overlap = overlap_judge(_task["can_start"], _task["can_start"] + _task["need_time"], check_sche["start"], check_sche["end"])
         if overlap:
             return start_candidate
