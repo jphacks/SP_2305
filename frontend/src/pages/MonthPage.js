@@ -6,7 +6,6 @@ import { Month } from "../components/Month";
 import { useState, useEffect, useContext } from "react";
 import GlobalContext from '../context/GlobalContext';
 import { ModalTabs } from '../components/ModalTabs';
-import { ChakraProvider } from '@chakra-ui/react'
 
 function MonthPage() {
   const [currentMonth, setCurrentMonth] = useState(getMonth());
@@ -17,7 +16,7 @@ function MonthPage() {
   }, [monthIndex]);
 
   return (
-    <ChakraProvider>
+    <>
     {showModalTabs && <ModalTabs />}
       <div className='flex'>
         <Sidebar />
@@ -26,7 +25,7 @@ function MonthPage() {
           <Month month={currentMonth} />
         </div>
       </div>
-    </ChakraProvider >
+    </ >
   );
 }
 

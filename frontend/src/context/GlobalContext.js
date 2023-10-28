@@ -6,6 +6,10 @@ const GlobalContext = React.createContext({
   setMonthIndex: (index) => { },
   daySelected: null,
   setDaySelected: (day) => { },
+  miniMonthIndex: 0,
+  setMiniMonthIndex: (index) => { },
+  miniDaySelected: null,
+  setMiniDaySelected: (day) => { },
   // event関連
   dispatchCalEvent: ({ type, payload }) => { },
   savedEvents: [],
