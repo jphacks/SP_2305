@@ -30,8 +30,32 @@ paths:
       summary: Register new user
       description: Register new user
       operationId: newUser
-      parameters:
-        - $ref: '#/components/parameters/bearerToken'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nickname:
+                  type: string
+                id:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            text/plain:
+              schema:
+                type: string
+  /auth:
+    post:
+      tags:
+        - User
+      summary: authUser
+      description: authUser
+      operationId: authUser
       requestBody:
         content:
           application/json:
@@ -58,7 +82,10 @@ paths:
       summary: get user schedules
       description: get users schedules
       operationId: getUserSchedules
+      security:
+        - bearerAuth: []
       parameters:
+        - $ref: '#/components/parameters/bearerToken'
         - name: userId
           in: path
           description: ID of user
@@ -84,7 +111,10 @@ paths:
       summary: get user tasks
       description: get users tasks
       operationId: getUserTasks
+      security:
+        - bearerAuth: []
       parameters:
+        - $ref: '#/components/parameters/bearerToken'
         - name: userId
           in: path
           description: ID of user
@@ -108,7 +138,10 @@ paths:
       summary: get user's todo
       description: get specific user's todo
       operationId: getUserTodo
+      security:
+        - bearerAuth: []
       parameters:
+        - $ref: '#/components/parameters/bearerToken'
         - name: userId
           in: path
           description: ID of user
@@ -132,6 +165,10 @@ paths:
       summary: create new task
       description: create new task
       operationId: newTask
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/bearerToken'
       requestBody:
         content:
           application/json:
@@ -151,7 +188,10 @@ paths:
       summary: get specific task
       description: get specific task
       operationId: getTask
+      security:
+        - bearerAuth: []
       parameters:
+        - $ref: '#/components/parameters/bearerToken'
         - name: taskId
           in: path
           description: ID of Task
@@ -173,7 +213,10 @@ paths:
       summary: get specific task
       description: get specific task
       operationId: patchTask
+      security:
+        - bearerAuth: []
       parameters:
+        - $ref: '#/components/parameters/bearerToken'
         - name: taskId
           in: path
           description: ID of Task
@@ -200,6 +243,10 @@ paths:
       summary: create new schedule
       description: create new schedule
       operationId: newScheudle
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/bearerToken'
       requestBody:
         content:
           application/json:
@@ -219,7 +266,10 @@ paths:
       summary: get user schedules
       description: get users schedules
       operationId: patchSchedule
+      security:
+        - bearerAuth: []
       parameters:
+        - $ref: '#/components/parameters/bearerToken'
         - name: scheduleId
           in: path
           description: ID of user
@@ -247,7 +297,10 @@ paths:
       summary: get user schedules
       description: get users schedules
       operationId: getSchedule
+      security:
+        - bearerAuth: []
       parameters:
+        - $ref: '#/components/parameters/bearerToken'
         - name: scheduleId
           in: path
           description: ID of user

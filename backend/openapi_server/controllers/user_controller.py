@@ -11,11 +11,28 @@ from openapi_server.models.todo import Todo  # noqa: E501
 from openapi_server import util
 
 
-def get_user_schedules(user_id):  # noqa: E501
+def auth_user(new_user_request=None):  # noqa: E501
+    """authUser
+
+    authUser # noqa: E501
+
+    :param new_user_request: 
+    :type new_user_request: dict | bytes
+
+    :rtype: Union[str, Tuple[str, int], Tuple[str, int, Dict[str, str]]
+    """
+    if connexion.request.is_json:
+        new_user_request = NewUserRequest.from_dict(connexion.request.get_json())  # noqa: E501
+    return 'do some magic!'
+
+
+def get_user_schedules(authorization, user_id):  # noqa: E501
     """get user schedules
 
     get users schedules # noqa: E501
 
+    :param authorization: bearer token
+    :type authorization: str
     :param user_id: ID of user
     :type user_id: str
 
@@ -24,11 +41,13 @@ def get_user_schedules(user_id):  # noqa: E501
     return 'do some magic!'
 
 
-def get_user_tasks(user_id):  # noqa: E501
+def get_user_tasks(authorization, user_id):  # noqa: E501
     """get user tasks
 
     get users tasks # noqa: E501
 
+    :param authorization: bearer token
+    :type authorization: str
     :param user_id: ID of user
     :type user_id: str
 
@@ -37,11 +56,13 @@ def get_user_tasks(user_id):  # noqa: E501
     return 'do some magic!'
 
 
-def get_user_todo(user_id):  # noqa: E501
+def get_user_todo(authorization, user_id):  # noqa: E501
     """get user&#39;s todo
 
     get specific user&#39;s todo # noqa: E501
 
+    :param authorization: bearer token
+    :type authorization: str
     :param user_id: ID of user
     :type user_id: str
 
@@ -50,13 +71,11 @@ def get_user_todo(user_id):  # noqa: E501
     return 'do some magic!'
 
 
-def new_user(authorization, new_user_request=None):  # noqa: E501
+def new_user(new_user_request=None):  # noqa: E501
     """Register new user
 
     Register new user # noqa: E501
 
-    :param authorization: bearer token
-    :type authorization: str
     :param new_user_request: 
     :type new_user_request: dict | bytes
 

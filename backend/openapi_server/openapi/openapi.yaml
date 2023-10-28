@@ -22,10 +22,39 @@ tags:
 - description: Task API
   name: Task
 paths:
+  /auth:
+    post:
+      description: authUser
+      operationId: auth_user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/newUser_request'
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                type: string
+          description: successful operation
+      summary: authUser
+      tags:
+      - User
+      x-openapi-router-controller: openapi_server.controllers.user_controller
   /schedule:
     post:
       description: create new schedule
       operationId: new_scheudle
+      parameters:
+      - description: bearer token
+        explode: false
+        in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        style: simple
       requestBody:
         content:
           application/json:
@@ -38,6 +67,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/Schedule'
           description: successful operation
+      security:
+      - bearerAuth: []
       summary: create new schedule
       tags:
       - Schedule
@@ -47,6 +78,14 @@ paths:
       description: get users schedules
       operationId: get_schedule
       parameters:
+      - description: bearer token
+        explode: false
+        in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        style: simple
       - description: ID of user
         explode: false
         in: path
@@ -65,6 +104,8 @@ paths:
                   $ref: '#/components/schemas/Schedule'
                 type: array
           description: successful operation
+      security:
+      - bearerAuth: []
       summary: get user schedules
       tags:
       - Schedule
@@ -73,6 +114,14 @@ paths:
       description: get users schedules
       operationId: patch_schedule
       parameters:
+      - description: bearer token
+        explode: false
+        in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        style: simple
       - description: ID of user
         explode: false
         in: path
@@ -96,6 +145,8 @@ paths:
                   $ref: '#/components/schemas/Schedule'
                 type: array
           description: successful operation
+      security:
+      - bearerAuth: []
       summary: get user schedules
       tags:
       - Schedule
@@ -104,80 +155,6 @@ paths:
     post:
       description: create new task
       operationId: new_task
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Task'
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Task'
-          description: successful operation
-      summary: create new task
-      tags:
-      - Task
-      x-openapi-router-controller: openapi_server.controllers.task_controller
-  /task/{taskId}:
-    get:
-      description: get specific task
-      operationId: get_task
-      parameters:
-      - description: ID of Task
-        explode: false
-        in: path
-        name: taskId
-        required: true
-        schema:
-          format: UUID
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Task'
-          description: successful operation
-      summary: get specific task
-      tags:
-      - Task
-      x-openapi-router-controller: openapi_server.controllers.task_controller
-    patch:
-      description: get specific task
-      operationId: patch_task
-      parameters:
-      - description: ID of Task
-        explode: false
-        in: path
-        name: taskId
-        required: true
-        schema:
-          format: UUID
-          type: string
-        style: simple
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Task'
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Task'
-          description: successful operation
-      summary: get specific task
-      tags:
-      - Task
-      x-openapi-router-controller: openapi_server.controllers.task_controller
-  /user:
-    post:
-      description: Register new user
-      operationId: new_user
       parameters:
       - description: bearer token
         explode: false
@@ -187,6 +164,102 @@ paths:
         schema:
           type: string
         style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Task'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+          description: successful operation
+      security:
+      - bearerAuth: []
+      summary: create new task
+      tags:
+      - Task
+      x-openapi-router-controller: openapi_server.controllers.task_controller
+  /task/{taskId}:
+    get:
+      description: get specific task
+      operationId: get_task
+      parameters:
+      - description: bearer token
+        explode: false
+        in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: ID of Task
+        explode: false
+        in: path
+        name: taskId
+        required: true
+        schema:
+          format: UUID
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+          description: successful operation
+      security:
+      - bearerAuth: []
+      summary: get specific task
+      tags:
+      - Task
+      x-openapi-router-controller: openapi_server.controllers.task_controller
+    patch:
+      description: get specific task
+      operationId: patch_task
+      parameters:
+      - description: bearer token
+        explode: false
+        in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: ID of Task
+        explode: false
+        in: path
+        name: taskId
+        required: true
+        schema:
+          format: UUID
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Task'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+          description: successful operation
+      security:
+      - bearerAuth: []
+      summary: get specific task
+      tags:
+      - Task
+      x-openapi-router-controller: openapi_server.controllers.task_controller
+  /user:
+    post:
+      description: Register new user
+      operationId: new_user
       requestBody:
         content:
           application/json:
@@ -208,6 +281,14 @@ paths:
       description: get users schedules
       operationId: get_user_schedules
       parameters:
+      - description: bearer token
+        explode: false
+        in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        style: simple
       - description: ID of user
         explode: false
         in: path
@@ -226,6 +307,8 @@ paths:
                   $ref: '#/components/schemas/Schedule'
                 type: array
           description: successful operation
+      security:
+      - bearerAuth: []
       summary: get user schedules
       tags:
       - User
@@ -235,6 +318,14 @@ paths:
       description: get users tasks
       operationId: get_user_tasks
       parameters:
+      - description: bearer token
+        explode: false
+        in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        style: simple
       - description: ID of user
         explode: false
         in: path
@@ -253,6 +344,8 @@ paths:
                   $ref: '#/components/schemas/Task'
                 type: array
           description: successful operation
+      security:
+      - bearerAuth: []
       summary: get user tasks
       tags:
       - User
@@ -262,6 +355,14 @@ paths:
       description: get specific user's todo
       operationId: get_user_todo
       parameters:
+      - description: bearer token
+        explode: false
+        in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        style: simple
       - description: ID of user
         explode: false
         in: path
@@ -280,6 +381,8 @@ paths:
                   $ref: '#/components/schemas/Todo'
                 type: array
           description: successful operation
+      security:
+      - bearerAuth: []
       summary: get user's todo
       tags:
       - User
