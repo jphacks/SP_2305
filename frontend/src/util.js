@@ -14,11 +14,11 @@ export function getMonth(month = dayjs().month()) {
 }
 
 export function getWeekMatrix(day = dayjs()) {
-  const year = dayjs().year();
-  const month = dayjs().month();
-  let currentTimeCount = -1;
-  let currentDayCount = day.date() - 1;
-  const weekMatrix = new Array(24).fill([]).map(() => {
+  const year = day.year();
+  const month = day.month();
+  let currentTimeCount = - 2;
+  let currentDayCount = day.date() - 2;
+  const weekMatrix = new Array(25).fill([]).map(() => {
     currentTimeCount++;
     currentDayCount = day.date() - 2;
     return new Array(8).fill(null).map(() => {

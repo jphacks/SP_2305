@@ -5,7 +5,7 @@ export const Week = (props) => {
   const { week } = props;
 
   return (
-    <div className='flex-1 grid grid-cols-8 grid-rows-24'>
+    <div className='flex-1 grid grid-cols-8 grid-rows-25'>
       {week.map((hour, i) => (
         <React.Fragment key={i}>
           {hour.map((day, idx) => (

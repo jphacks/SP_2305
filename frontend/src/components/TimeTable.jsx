@@ -9,7 +9,7 @@ export const TimeTable = (props) => {
   const { setDaySelected, savedEvents, setSelectedEvent, savedTasks, setSelectedTask, setShowModalTabs, setActiveTab } = useContext(GlobalContext);
 
   const getCurrentDayClass = () => {
-    return day.format("DD-MM-YY") === dayjs().format("DD-MM-YY")
+    return day.add(1, 'd').format("DD-MM-YY") === dayjs().format("DD-MM-YY")
       ? "bg-blue-600 text-white rounded-full w-7"
       : "";
   };
@@ -41,55 +41,67 @@ export const TimeTable = (props) => {
   return (
     <div className="border border-gray-200 flex flex-col">
       {columnId === 0 ? (
-  <>
-    <header className="flex flex-col items-center">
-      <p className="text-sm p-1 my-1 text-center">
-        {day.format("HH:00")}
-      </p>
-    </header>
-    <div className="flex-1 cursor-pointer"></div>
-  </>
-) : (
-  <>
-    {rowId === 0 && (
-      <header className="flex flex-col items-center">
-        <p className="text-sm mt-1">{day.format("ddd")}</p>
-        <p className={`text-sm p-1 my-1 text-center" ${getCurrentDayClass()}`}>
-          {day.format("DD")}
-        </p>
-      </header>
-    )}
-    <header className="flex flex-col items-center">
-    </header>
-    <div className="flex-1 cursor-pointer" onClick={() => {
-      setDaySelected(day);
-      setShowModalTabs(true);
-    }}>
-      {dayEvents.map((evt, idx) => (
-        <div
-          key={idx}
-          onClick={() => setSelectedEvent(evt)}
-          className="bg-neutral-200 p-1 mr-3 text-gray-600 text-sm rounded mb-1 truncate"
-        >
-          {evt.title}
-        </div>
-      ))}
-      {dayTasks.map((tsk, idx) => (
-        <div
-          key={idx}
-          onClick={() => {
-            setSelectedTask(tsk);
-            setShowModalTabs(true);
-            setActiveTab("task");
-          }}
-          className="bg-neutral-400 p-1 mr-3 text-gray-600 text-sm mb-1 truncate"
-        >
-          {tsk.title}
-        </div>
-      ))}
-    </div>
-  </>
-)}
+        <>
+          {rowId === 0 ? (
+            <></>
+          ) : (
+            <>
+              <header className="flex flex-col items-center">
+                <p className="text-sm p-1 my-1 text-center">
+                  {day.format("HH:00")}
+                </p>
+              </header>
+              <div className="flex-1 cursor-pointer"></div>
+            </>
+          )}
+        </>
+
+      ) : (
+        <>
+          {rowId === 0 ? (
+            <header className="flex flex-col items-center">
+              <p className="text-sm mt-1">{day.add(1, 'd').format("ddd")}</p>
+              <p className={`text-sm p-1 my-1 text-center" ${getCurrentDayClass()}`}>
+                {day.add(1, 'd').format("DD")}
+              </p>
+            </header>
+          ) : (
+            <>
+              <header className="flex flex-col items-center">
+              </header>
+              <div className="flex-1 cursor-pointer" onClick={() => {
+                setDaySelected(day);
+                setShowModalTabs(true);
+              }}>
+                {dayEvents.map((evt, idx) => (
+                  <div
+                    key={idx}
+                    onClick={() => setSelectedEvent(evt)}
+                    className="bg-neutral-200 p-1 mr-3 text-gray-600 text-sm rounded mb-1 truncate"
+                  >
+                    {evt.title}
+                  </div>
+                ))}
+                {dayTasks.map((tsk, idx) => (
+                  <div
+                    key={idx}
+                    onClick={() => {
+                      setSelectedTask(tsk);
+                      setShowModalTabs(true);
+                      setActiveTab("task");
+                    }}
+                    className="bg-neutral-400 p-1 mr-3 text-gray-600 text-sm mb-1 truncate"
+                  >
+                    {tsk.title}
+                  </div>
+                ))}
+              </div>
+            </>
+
+          )}
+
+        </>
+      )}
 
     </div>
   );
