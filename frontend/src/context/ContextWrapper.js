@@ -89,13 +89,16 @@ const ContextWrapper = (props) => {
   }, [showModalTabs, activeTab]);
 
   useEffect(() => {
-    if (miniDaySelected !== null) {
+      setMonthIndex(miniMonthIndex);
       setDaySelected(miniDaySelected);
-      setMonthIndex(miniDaySelected.month());
-    }
   }, [miniDaySelected]);
 
-  
+  useEffect(() => {
+      setMiniDaySelected(daySelected);
+      setMiniMonthIndex(monthIndex);
+  }, [monthIndex]);
+
+
   return (
     <GlobalContext.Provider
       value={{
