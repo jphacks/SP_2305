@@ -10,7 +10,7 @@ const AfterTask = ({ taskActualTime, taskDone, taskProgress,
   return (
     <div>
       <input
-        type="number"
+        type="time"
         name="taskActualTime"
         placeholder="How long did it take?"
         value={taskActualTime}
@@ -42,14 +42,14 @@ const AfterTask = ({ taskActualTime, taskDone, taskProgress,
   );
 };
 
-AfterTask.propTypes = {
-  taskActualTime: PropTypes.number.isRequired,
-  taskDone: PropTypes.bool.isRequired,
-  taskProgress: PropTypes.number.isRequired,
+// AfterTask.propTypes = {
+//   taskActualTime: PropTypes.number.isRequired,
+//   taskDone: PropTypes.bool.isRequired,
+//   taskProgress: PropTypes.number.isRequired,
 
-  setTaskActualTime: PropTypes.func.isRequired,
-  setTaskDone: PropTypes.func.isRequired,
-  setTaskProgress: PropTypes.func.isRequired,
-}
+//   setTaskActualTime: PropTypes.func.isRequired,
+//   setTaskDone: PropTypes.func.isRequired,
+//   setTaskProgress: PropTypes.func.isRequired,
+// }
 
 export default AfterTask;

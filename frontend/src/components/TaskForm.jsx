@@ -79,7 +79,7 @@ const TaskForm = ({ taskTitle, taskType, taskStartTime, taskEndTime, taskDeadlin
         onChange={(e) => setTaskDescription(e.target.value)}
       />
       <input
-        type="text"
+        type="color"
         name="taskColor"
         placeholder="Select color"
         value={taskColor}
@@ -103,26 +103,26 @@ const TaskForm = ({ taskTitle, taskType, taskStartTime, taskEndTime, taskDeadlin
   );
 };
 
-TaskForm.propTypes = {
-  taskTitle: PropTypes.string.isRequired,
-  taskType: PropTypes.string.isRequired,
-  taskStartTime: PropTypes.string.isRequired,
-  taskEndTime: PropTypes.string.isRequired,
-  taskDeadline: PropTypes.string.isRequired,
-  taskEst: PropTypes.number.isRequired,
-  taskDescription: PropTypes.string.isRequired,
-  taskColor: PropTypes.string.isRequired,
-  taskRepeat: PropTypes.number.isRequired,
+// TaskForm.propTypes = {
+//   taskTitle: PropTypes.string.isRequired,
+//   taskType: PropTypes.string.isRequired,
+//   taskStartTime: PropTypes.object.isRequired,
+//   taskEndTime: PropTypes.object.isRequired,
+//   taskDeadline: PropTypes.object.isRequired,
+//   taskEst: PropTypes.number.isRequired,
+//   taskDescription: PropTypes.string.isRequired,
+//   taskColor: PropTypes.string.isRequired,
+//   taskRepeat: PropTypes.number.isRequired,
 
-  setTaskTitle: PropTypes.func.isRequired,
-  setTaskType: PropTypes.func.isRequired,
-  setTaskStartTime: PropTypes.func.isRequired,
-  setTaskEndTime: PropTypes.func.isRequired,
-  setTaskDeadline: PropTypes.func.isRequired,
-  setTaskEst: PropTypes.func.isRequired,
-  setTaskDescription: PropTypes.func.isRequired,
-  setTaskColor: PropTypes.func.isRequired,
-  setTaskRepeat: PropTypes.func.isRequired,
-}
+//   setTaskTitle: PropTypes.func.isRequired,
+//   setTaskType: PropTypes.func.isRequired,
+//   setTaskStartTime: PropTypes.func.isRequired,
+//   setTaskEndTime: PropTypes.func.isRequired,
+//   setTaskDeadline: PropTypes.func.isRequired,
+//   setTaskEst: PropTypes.func.isRequired,
+//   setTaskDescription: PropTypes.func.isRequired,
+//   setTaskColor: PropTypes.func.isRequired,
+//   setTaskRepeat: PropTypes.func.isRequired,
+// }
 
 export default TaskForm;
