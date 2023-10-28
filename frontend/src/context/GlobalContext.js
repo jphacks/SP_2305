@@ -24,6 +24,8 @@ const GlobalContext = React.createContext({
   setSelectedTask: () => { },
   ShowModalTabs: false,
   setShowModalTabs: () => { },
+  ShowAfterTaskModal: false,
+  setShowAfterTaskModal: () => { },
   activeTab: "event",
   setActiveTab: () => { },
   loginToken: "",

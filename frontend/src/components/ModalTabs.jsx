@@ -1,5 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import { MdDeleteForever, MdClose } from "react-icons/md";
+import { CheckIcon } from '@chakra-ui/icons'
 import GlobalContext from "../context/GlobalContext";
 import EventForm from "./EventForm";
 import TaskForm from "./TaskForm";
@@ -76,7 +77,7 @@ export const ModalTabs = () => {
     } else if (taskEstUnit === "day") {
       setTaskEst(taskEstNumber * 3600);
     }
-  }, [taskEstNumber,taskEstUnit]);
+  }, [taskEstNumber, taskEstUnit]);
 
   const [taskDescription, setTaskDescription] = useState(
     selectedTask ? selectedTask.taskType : "");
@@ -179,7 +180,7 @@ export const ModalTabs = () => {
 
   return (
 
-    
+
     <form className="bg-white rounded-lg shadow-2xl w-1/4 fixed left-0 top-0" onSubmit={handleSubmit}>
       <header className="bg-gray-100 px-4 py-2 flex justify-end">
         <div className="text-gray-400">
@@ -189,9 +190,14 @@ export const ModalTabs = () => {
             </button>
           )}
           {selectedTask !== null && activeTab === "task" && (
-            <button onClick={handleDeleteTask}>
-              <MdDeleteForever />
-            </button>
+            <>
+              <button onClick={handleDeleteTask}>
+                <CheckIcon />
+              </button>
+              <button onClick={handleDeleteTask}>
+                <MdDeleteForever />
+              </button>
+            </>
           )}
           <button onClick={handleCloseModal}>
             <MdClose />
@@ -261,17 +267,17 @@ export const ModalTabs = () => {
             setTaskColor={setTaskColor}
             setTaskRepeat={setTaskRepeat}
 
-            // daySelected={daySelected}
+          // daySelected={daySelected}
           />
         )}
       </div>
-      {/* <div>
-        <AfterTask
+      <div>
+        {/* <AfterTask
           taskActualTime={taskActualTime}
           taskDone={taskDone}
           taskProgress={taskProgress}
-        />
-      </div> */}
+        /> */}
+      </div>
       <footer className="flex justify-end border-t p-3 mt-5">
         <button
           type="submit"
