@@ -24,13 +24,13 @@ tags:
 paths:
   /auth:
     post:
-      description: Get JWT Token
+      description: authUser
       operationId: auth_user
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/authUser_request'
+              $ref: '#/components/schemas/newUser_request'
       responses:
         "200":
           content:
@@ -38,7 +38,7 @@ paths:
               schema:
                 type: string
           description: successful operation
-      summary: Auth
+      summary: authUser
       tags:
       - User
       x-openapi-router-controller: openapi_server.controllers.user_controller
@@ -46,6 +46,15 @@ paths:
     post:
       description: create new schedule
       operationId: new_scheudle
+      parameters:
+      - description: bearer token
+        explode: false
+        in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        style: simple
       requestBody:
         content:
           application/json:
@@ -69,6 +78,14 @@ paths:
       description: get users schedules
       operationId: get_schedule
       parameters:
+      - description: bearer token
+        explode: false
+        in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        style: simple
       - description: ID of user
         explode: false
         in: path
@@ -97,6 +114,14 @@ paths:
       description: get users schedules
       operationId: patch_schedule
       parameters:
+      - description: bearer token
+        explode: false
+        in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        style: simple
       - description: ID of user
         explode: false
         in: path
@@ -130,6 +155,15 @@ paths:
     post:
       description: create new task
       operationId: new_task
+      parameters:
+      - description: bearer token
+        explode: false
+        in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        style: simple
       requestBody:
         content:
           application/json:
@@ -153,6 +187,14 @@ paths:
       description: get specific task
       operationId: get_task
       parameters:
+      - description: bearer token
+        explode: false
+        in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        style: simple
       - description: ID of Task
         explode: false
         in: path
@@ -179,6 +221,14 @@ paths:
       description: get specific task
       operationId: patch_task
       parameters:
+      - description: bearer token
+        explode: false
+        in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        style: simple
       - description: ID of Task
         explode: false
         in: path
@@ -210,15 +260,6 @@ paths:
     post:
       description: Register new user
       operationId: new_user
-      parameters:
-      - description: bearer token
-        explode: false
-        in: header
-        name: Authorization
-        required: true
-        schema:
-          type: string
-        style: simple
       requestBody:
         content:
           application/json:
@@ -227,11 +268,9 @@ paths:
       responses:
         "200":
           content:
-            application/json:
+            text/plain:
               schema:
-                items:
-                  $ref: '#/components/schemas/User'
-                type: array
+                type: string
           description: successful operation
       summary: Register new user
       tags:
@@ -242,6 +281,14 @@ paths:
       description: get users schedules
       operationId: get_user_schedules
       parameters:
+      - description: bearer token
+        explode: false
+        in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        style: simple
       - description: ID of user
         explode: false
         in: path
@@ -271,6 +318,14 @@ paths:
       description: get users tasks
       operationId: get_user_tasks
       parameters:
+      - description: bearer token
+        explode: false
+        in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        style: simple
       - description: ID of user
         explode: false
         in: path
@@ -300,6 +355,14 @@ paths:
       description: get specific user's todo
       operationId: get_user_todo
       parameters:
+      - description: bearer token
+        explode: false
+        in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        style: simple
       - description: ID of user
         explode: false
         in: path
@@ -339,7 +402,6 @@ components:
     Task:
       example:
         actualTime: 0.8008281904610115
-        color: color
         est: 2000-01-23T04:56:07.000+00:00
         start: 2000-01-23T04:56:07.000+00:00
         description: description
@@ -393,14 +455,10 @@ components:
         done:
           title: done
           type: boolean
-        color:
-          title: color
-          type: string
       title: Task
       type: object
     Schedule:
       example:
-        color: color
         start: 2000-01-23T04:56:07.000+00:00
         description: description
         end: 2000-01-23T04:56:07.000+00:00
@@ -430,42 +488,29 @@ components:
         description:
           title: description
           type: string
-        color:
-          title: color
-          type: string
       title: Schedule
       type: object
     User:
-      example:
-        nickname: nickname
-        id: id
-        uuid: uuid
       properties:
         uuid:
           format: UUID
-          title: uuid
           type: string
         id:
-          title: id
           type: string
         nickname:
-          title: nickname
           type: string
-      title: User
       type: object
     Todo:
       description: Today's todo
       example:
         schedules:
-        - color: color
-          start: 2000-01-23T04:56:07.000+00:00
+        - start: 2000-01-23T04:56:07.000+00:00
           description: description
           end: 2000-01-23T04:56:07.000+00:00
           title: title
           uuid: uuid
           userId: userId
-        - color: color
-          start: 2000-01-23T04:56:07.000+00:00
+        - start: 2000-01-23T04:56:07.000+00:00
           description: description
           end: 2000-01-23T04:56:07.000+00:00
           title: title
@@ -474,7 +519,6 @@ components:
         uuid: uuid
         tasks:
         - actualTime: 0.8008281904610115
-          color: color
           est: 2000-01-23T04:56:07.000+00:00
           start: 2000-01-23T04:56:07.000+00:00
           description: description
@@ -486,7 +530,6 @@ components:
           userId: userId
           done: true
         - actualTime: 0.8008281904610115
-          color: color
           est: 2000-01-23T04:56:07.000+00:00
           start: 2000-01-23T04:56:07.000+00:00
           description: description
@@ -526,16 +569,6 @@ components:
           title: password
           type: string
       title: newUser_request
-      type: object
-    authUser_request:
-      properties:
-        id:
-          title: id
-          type: string
-        password:
-          title: password
-          type: string
-      title: authUser_request
       type: object
   securitySchemes:
     bearerAuth:
