@@ -1,6 +1,6 @@
 import '../App.css';
 
-function TestPage() {
+function WeekPage() {
 
 
   return (
@@ -8,4 +8,4 @@ function TestPage() {
   );
 }
 
-export default TestPage;
+export default WeekPage;
