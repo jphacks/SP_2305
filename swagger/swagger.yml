@@ -62,8 +62,6 @@ paths:
             schema:
               type: object
               properties:
-                nickname:
-                  type: string
                 id:
                   type: string
                 password:
