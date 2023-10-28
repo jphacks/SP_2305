@@ -57,7 +57,7 @@ class DBTask(Base):
         task.est = self.est
         task.actual_time = self.actualTime
         task.description = self.description 
-        self.color = task.color
+        task.color = self.color
         return task
     
     
@@ -85,6 +85,7 @@ class DBSchedule(Base):
         self.start = schedule.start
         self.end = schedule.end
         self.description = schedule.description
+        self.color = schedule.color
 
     def to_schedule(self):
         schedule = Schedule()
@@ -94,6 +95,7 @@ class DBSchedule(Base):
         schedule.start =self.start
         schedule.end =self.end
         schedule.description =self.description
+        schedule.color = self.color
         return schedule
 class DBUser(Base):
     __tablename__ = 'users'
