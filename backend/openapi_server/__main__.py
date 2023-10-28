@@ -18,7 +18,7 @@ def main():
     app.app.json_encoder = encoder.JSONEncoder
     app.app.config['JSON_AS_ASCII'] = False
     app.app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {"pool_pre_ping": True}  
-    CORS(app.app)
+    CORS(app.app, resources={r"/api/*": {"origins": "*"}})
     app.add_api('openapi.yaml',
                 arguments={'title': 'JPHacks 2023 SP2305'},
                 pythonic_params=True)
