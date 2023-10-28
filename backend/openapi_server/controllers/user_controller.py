@@ -1,3 +1,4 @@
+import bcrypt
 import connexion
 import six
 from typing import Dict
@@ -11,7 +12,7 @@ from openapi_server.models.task import Task  # noqa: E501
 from openapi_server.models.todo import Todo  # noqa: E501
 from openapi_server.models.user import User  # noqa: E501
 from openapi_server import util
-
+from db.models import *
 
 def auth_user(auth_user_request=None):  # noqa: E501
     """Auth
@@ -81,4 +82,16 @@ def new_user(authorization, new_user_request=None):  # noqa: E501
     """
     if connexion.request.is_json:
         new_user_request = NewUserRequest.from_dict(connexion.request.get_json())  # noqa: E501
+    session = Session()
+    if session.query(exists().where(User.id == new_user_request.id)).scalar() > 0:
+        return None, 500
+    else:
+        user = User()
+        user.id = new_user_request.id
+        user.nickname = new_user_request.nickname
+        salt = bcrypt.gensalt(rounds=10, prefix=b'2a')
+        user.password = bcrypt.hashpw(bytes(new_user_request.password, "utf-8"), salt).decode('utf8')
+        session.add(user)
+        session.commit()
+        return user
     return 'do some magic!'
