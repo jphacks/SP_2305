@@ -23,7 +23,9 @@ const GlobalContext = React.createContext({
   ShowModalTabs: false,
   setShowModalTabs: () => { },
   activeTab: "event",
-  setActiveTab: () => { }
+  setActiveTab: () => { },
+  loginToken: "",
+  setLoginToken: () => { },
 });
 
 export default GlobalContext;
