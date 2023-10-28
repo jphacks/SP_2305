@@ -1,10 +1,10 @@
-CREATE USER kattakke;
+CREATE USER penguin;
 
-CREATE DATABASE kattakke;
+CREATE DATABASE penguin;
 
-GRANT ALL PRIVILEGES ON DATABASE kattakke TO kattakke;
+GRANT ALL PRIVILEGES ON DATABASE penguin TO penguin;
 
-\c kattakke
+\c penguin
 
 CREATE OR REPLACE FUNCTION trigger_set_timestamp()
 RETURNS TRIGGER AS $$ BEGIN NEW.updated_at = NOW(); RETURN NEW; END; $$ LANGUAGE plpgsql;
