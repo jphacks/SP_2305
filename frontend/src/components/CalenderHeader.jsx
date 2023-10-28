@@ -56,7 +56,7 @@ export const CalendarHeader = () => {
         </Button>
       </Link>
       <Link to="/week">
-        <Button>
+        <Button {...weekButtonStyle}>
           Week
         </Button>
       </Link>
