@@ -5,12 +5,10 @@ from typing import Dict
 from typing import Tuple
 from typing import Union
 
-from openapi_server.models.auth_user_request import AuthUserRequest  # noqa: E501
 from openapi_server.models.new_user_request import NewUserRequest  # noqa: E501
 from openapi_server.models.schedule import Schedule  # noqa: E501
 from openapi_server.models.task import Task  # noqa: E501
 from openapi_server.models.todo import Todo  # noqa: E501
-from openapi_server.models.user import User  # noqa: E501
 from openapi_server import util
 from db.models import *
 
@@ -78,20 +76,19 @@ def new_user(authorization, new_user_request=None):  # noqa: E501
     :param new_user_request: 
     :type new_user_request: dict | bytes
 
-    :rtype: Union[List[User], Tuple[List[User], int], Tuple[List[User], int, Dict[str, str]]
+    :rtype: Union[str, Tuple[str, int], Tuple[str, int, Dict[str, str]]
     """
     if connexion.request.is_json:
         new_user_request = NewUserRequest.from_dict(connexion.request.get_json())  # noqa: E501
     session = Session()
-    if session.query(exists().where(User.id == new_user_request.id)).scalar() > 0:
+    if session.query(exists().where(DBUser.id == new_user_request.id)).scalar() > 0:
         return None, 500
     else:
-        user = User()
+        user = DBUser()
         user.id = new_user_request.id
         user.nickname = new_user_request.nickname
         salt = bcrypt.gensalt(rounds=10, prefix=b'2a')
         user.password = bcrypt.hashpw(bytes(new_user_request.password, "utf-8"), salt).decode('utf8')
         session.add(user)
         session.commit()
-        return user
-    return 'do some magic!'
+        return ""
