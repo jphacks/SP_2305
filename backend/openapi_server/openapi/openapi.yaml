@@ -30,7 +30,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/newUser_request'
+              $ref: '#/components/schemas/authUser_request'
       responses:
         "200":
           content:
@@ -569,6 +569,16 @@ components:
           title: password
           type: string
       title: newUser_request
+      type: object
+    authUser_request:
+      properties:
+        id:
+          title: id
+          type: string
+        password:
+          title: password
+          type: string
+      title: authUser_request
       type: object
   securitySchemes:
     bearerAuth:

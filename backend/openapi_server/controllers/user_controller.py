@@ -7,6 +7,7 @@ from typing import Dict
 from typing import Tuple
 from typing import Union
 from tools.secret import key
+from openapi_server.models.auth_user_request import AuthUserRequest  # noqa: E501
 from openapi_server.models.new_user_request import NewUserRequest  # noqa: E501
 from openapi_server.models.schedule import Schedule  # noqa: E501
 from openapi_server.models.task import Task  # noqa: E501
@@ -14,23 +15,23 @@ from openapi_server.models.todo import Todo  # noqa: E501
 from openapi_server import util
 from db.models import *
 
-def auth_user(new_user_request=None):  # noqa: E501
+
+def auth_user(auth_user_request=None):  # noqa: E501
     """authUser
 
     authUser # noqa: E501
 
-    :param new_user_request: 
-    :type new_user_request: dict | bytes
+    :param auth_user_request: 
+    :type auth_user_request: dict | bytes
 
     :rtype: Union[str, Tuple[str, int], Tuple[str, int, Dict[str, str]]
     """
     if connexion.request.is_json:
-        new_user_request = NewUserRequest.from_dict(connexion.request.get_json())  # noqa: E501
+        auth_user_request = AuthUserRequest.from_dict(connexion.request.get_json())  # noqa: E501
     session = Session()
-    if session.query(exists().where(DBUser.id == new_user_request.id)).scalar() > 0:
-        user = session.query(DBUser).filter(DBUser.id == new_user_request.id).first()
-        if bcrypt.checkpw(new_user_request.password.encode('utf8'), user.password.encode('utf8')):
-            print("Auth Request")
+    if session.query(exists().where(DBUser.id == auth_user_request.id)).scalar() > 0:
+        user = session.query(DBUser).filter(DBUser.id == auth_user_request.id).first()
+        if bcrypt.checkpw(auth_user_request.password.encode('utf8'), user.password.encode('utf8')):
             session.commit()
             payload = {
                 "uuid": str(user.uuid),
@@ -38,9 +39,7 @@ def auth_user(new_user_request=None):  # noqa: E501
                 "nickname": user.nickname,
                 "permission": "User"
             }
-            print(key())
             token = jwt.encode(payload, key())
-            print(token)
             return token
     return None, 401
 

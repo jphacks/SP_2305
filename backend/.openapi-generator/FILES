@@ -13,6 +13,7 @@ openapi_server/controllers/task_controller.py
 openapi_server/controllers/user_controller.py
 openapi_server/encoder.py
 openapi_server/models/__init__.py
+openapi_server/models/auth_user_request.py
 openapi_server/models/base_model_.py
 openapi_server/models/new_user_request.py
 openapi_server/models/schedule.py
