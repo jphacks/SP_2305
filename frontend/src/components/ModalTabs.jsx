@@ -3,6 +3,7 @@ import { MdDeleteForever, MdClose } from "react-icons/md";
 import GlobalContext from "../context/GlobalContext";
 import EventForm from "./EventForm";
 import TaskForm from "./TaskForm";
+import AfterTask from "./AfterTask";
 
 export const ModalTabs = () => {
   const { daySelected, dispatchCalEvent, dispatchCalTask, selectedEvent, selectedTask, setShowModalTabs, activeTab, setActiveTab } =
@@ -48,17 +49,23 @@ export const ModalTabs = () => {
   );
 
   const [taskDescription, setTaskDescription] = useState(
-    selectedTask ? new Date(selectedTask.taskDescription) : daySelected.toDate()
-  );
+    selectedTask ? selectedTask.taskType : "");
 
   const [taskColor, setTaskColor] = useState(
-    selectedTask ? new Date(selectedTask.taskColor) : daySelected.toDate()
-  );
+    selectedTask ? selectedTask.taskType : "");
 
   const [taskRepeat, setTaskRepeat] = useState(
     selectedTask ? new Date(selectedTask.taskRepeat) : daySelected.toDate()
   );
 
+  const [taskActualTime, setTaskActualTime] = useState(
+    selectedTask ? selectedTask.taskType : "");
+
+  const [taskDone, setTaskDone] = useState(
+    selectedTask ? selectedTask.taskType : "");
+
+  const [taskProgress, setTaskProgress] = useState(
+    selectedTask ? selectedTask.taskType : "");
 
 
 
@@ -205,6 +212,13 @@ export const ModalTabs = () => {
             daySelected={daySelected}
           />
         )}
+      </div>
+      <div>
+        <AfterTask
+          taskActualTime={taskActualTime}
+          taskDone={taskDone}
+          taskProgress={taskProgress}
+        />
       </div>
       <footer className="flex justify-end border-t p-3 mt-5">
         <button
