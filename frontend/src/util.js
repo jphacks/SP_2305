@@ -20,8 +20,8 @@ export function getWeekMatrix(day = dayjs()) {
   let currentDayCount = day.date() - 1;
   const weekMatrix = new Array(24).fill([]).map(() => {
     currentTimeCount++;
-    currentDayCount = day.date() - 1;
-    return new Array(7).fill(null).map(() => {
+    currentDayCount = day.date() - 2;
+    return new Array(8).fill(null).map(() => {
       currentDayCount++;
       return dayjs(new Date(year, month, currentDayCount, currentTimeCount));
     });

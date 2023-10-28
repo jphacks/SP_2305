@@ -5,11 +5,11 @@ export const Week = (props) => {
   const { week } = props;
 
   return (
-    <div className='flex-1 grid grid-cols-7 grid-rows-24'>
+    <div className='flex-1 grid grid-cols-8 grid-rows-24'>
       {week.map((hour, i) => (
         <React.Fragment key={i}>
           {hour.map((day, idx) => (
-            <TimeTable day={day} key={idx} rowId={i}/>
+            <TimeTable day={day} key={idx} rowId={i} columnId={idx} />
           ))}
         </React.Fragment>
       ))}
