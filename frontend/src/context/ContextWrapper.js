@@ -42,7 +42,9 @@ const initTasks = () => {
   return parsedTasks;
 };
 
+
 const ContextWrapper = (props) => {
+  const [loginToken, setLoginToken] = useState();
   const [monthIndex, setMonthIndex] = useState(dayjs().month());
   const [weekStartDay, setWeekStartDay] = useState(dayjs());
   const [miniMonthIndex, setMiniMonthIndex] = useState(dayjs().month());
@@ -63,6 +65,20 @@ const ContextWrapper = (props) => {
 
   const [showModalTabs, setShowModalTabs] = useState(false);
   const [activeTab, setActiveTab] = useState("event");
+  
+  useEffect(() => {
+    // 以下構文でlocalStorageに保存
+    // localStorage.setItem('key', 'value')
+    if(loginToken)
+      localStorage.setItem("loginToken", JSON.stringify(loginToken));
+  }, [loginToken]);
+
+  useEffect(() => {
+    const storedData = localStorage.getItem('loginToken');
+    if (storedData) {
+      setLoginToken(storedData);
+    }
+  }, []);
 
   useEffect(() => {
     // 以下構文でlocalStorageに保存
@@ -123,7 +139,9 @@ const ContextWrapper = (props) => {
         showModalTabs,
         setShowModalTabs,
         activeTab,
-        setActiveTab
+        setActiveTab,
+        loginToken,
+        setLoginToken
       }}
     >
       {props.children}
