@@ -1,6 +1,7 @@
 import React, { useReducer, useState, useEffect } from "react";
 import GlobalContext from "./GlobalContext";
 import dayjs from "dayjs";
+import { getMonth } from '../util';
 
 const saveEventsReducer = (state, { type, payload }) => {
   switch (type) {
@@ -44,7 +45,9 @@ const initTasks = () => {
 
 const ContextWrapper = (props) => {
   const [monthIndex, setMonthIndex] = useState(dayjs().month());
+  const [miniMonthIndex, setMiniMonthIndex] = useState(dayjs().month());
   const [daySelected, setDaySelected] = useState(dayjs());
+  const [miniDaySelected, setMiniDaySelected] = useState(dayjs());
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [savedEvents, dispatchCalEvent] = useReducer(
     saveEventsReducer,
@@ -84,6 +87,16 @@ const ContextWrapper = (props) => {
       setSelectedTask(null);
     }
   }, [showModalTabs, activeTab]);
+  
+  useEffect(() => {
+      setMonthIndex(miniMonthIndex);
+      setDaySelected(miniDaySelected);
+  }, [miniDaySelected]);
+
+  useEffect(() => {
+      setMiniDaySelected(daySelected);
+      setMiniMonthIndex(monthIndex);
+  }, [monthIndex]);
 
   return (
     <GlobalContext.Provider
@@ -92,6 +105,10 @@ const ContextWrapper = (props) => {
         setMonthIndex,
         daySelected,
         setDaySelected,
+        miniMonthIndex, 
+        setMiniMonthIndex,
+        miniDaySelected, 
+        setMiniDaySelected,
         selectedEvent,
         setSelectedEvent,
         dispatchCalEvent,
