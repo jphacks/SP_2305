@@ -53,7 +53,30 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/User'
-
+  /auth:
+    post:
+      tags:
+        - User
+      summary: Auth
+      description: Get JWT Token
+      operationId: authUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            text/plain:
+              schema:
+                type: string
   /user/{userId}/schedules:
     get:
       tags:
@@ -61,6 +84,8 @@ paths:
       summary: get user schedules
       description: get users schedules
       operationId: getUserSchedules
+      security:
+        - bearerAuth: []
       parameters:
         - name: userId
           in: path
@@ -87,6 +112,8 @@ paths:
       summary: get user tasks
       description: get users tasks
       operationId: getUserTasks
+      security:
+        - bearerAuth: []
       parameters:
         - name: userId
           in: path
@@ -111,6 +138,8 @@ paths:
       summary: get user's todo
       description: get specific user's todo
       operationId: getUserTodo
+      security:
+        - bearerAuth: []
       parameters:
         - name: userId
           in: path
@@ -135,6 +164,8 @@ paths:
       summary: create new task
       description: create new task
       operationId: newTask
+      security:
+        - bearerAuth: []
       requestBody:
         content:
           application/json:
@@ -154,6 +185,8 @@ paths:
       summary: get specific task
       description: get specific task
       operationId: getTask
+      security:
+        - bearerAuth: []
       parameters:
         - name: taskId
           in: path
@@ -176,6 +209,8 @@ paths:
       summary: get specific task
       description: get specific task
       operationId: patchTask
+      security:
+        - bearerAuth: []
       parameters:
         - name: taskId
           in: path
@@ -203,6 +238,8 @@ paths:
       summary: create new schedule
       description: create new schedule
       operationId: newScheudle
+      security:
+        - bearerAuth: []
       requestBody:
         content:
           application/json:
@@ -222,6 +259,8 @@ paths:
       summary: get user schedules
       description: get users schedules
       operationId: patchSchedule
+      security:
+        - bearerAuth: []
       parameters:
         - name: scheduleId
           in: path
@@ -250,6 +289,8 @@ paths:
       summary: get user schedules
       description: get users schedules
       operationId: getSchedule
+      security:
+        - bearerAuth: []
       parameters:
         - name: scheduleId
           in: path
@@ -303,7 +344,8 @@ components:
           type: string
         done:
           type: boolean
-
+        color:
+          type: string
     Schedule:
       type: object
       properties:
@@ -323,7 +365,8 @@ components:
           format: date-time
         description:
           type: string
-
+        color:
+          type: string
     User:
       type: object
       properties:
