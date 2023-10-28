@@ -8,7 +8,7 @@ from openapi_server.models.task import Task  # noqa: E501
 from openapi_server import util
 
 
-def get_task(task_id):  # noqa: E501
+def get_task(task_id, auth_login_request=None):  # noqa: E501
     """get specific task
 
     get specific task # noqa: E501
@@ -21,7 +21,7 @@ def get_task(task_id):  # noqa: E501
     return 'do some magic!'
 
 
-def new_task(task=None):  # noqa: E501
+def new_task(task=None, auth_login_request=None):  # noqa: E501
     """create new task
 
     create new task # noqa: E501
@@ -36,7 +36,7 @@ def new_task(task=None):  # noqa: E501
     return 'do some magic!'
 
 
-def patch_task(task_id, task=None):  # noqa: E501
+def patch_task(task_id, task=None, auth_login_request=None):  # noqa: E501
     """get specific task
 
     get specific task # noqa: E501

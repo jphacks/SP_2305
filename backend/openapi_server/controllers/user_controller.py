@@ -28,7 +28,7 @@ def auth_user(auth_user_request=None):  # noqa: E501
     return 'do some magic!'
 
 
-def get_user_schedules(user_id):  # noqa: E501
+def get_user_schedules(user_id, auth_login_request=None):  # noqa: E501
     """get user schedules
 
     get users schedules # noqa: E501
@@ -41,7 +41,7 @@ def get_user_schedules(user_id):  # noqa: E501
     return 'do some magic!'
 
 
-def get_user_tasks(user_id):  # noqa: E501
+def get_user_tasks(user_id, auth_login_request=None):  # noqa: E501
     """get user tasks
 
     get users tasks # noqa: E501
@@ -54,7 +54,7 @@ def get_user_tasks(user_id):  # noqa: E501
     return 'do some magic!'
 
 
-def get_user_todo(user_id):  # noqa: E501
+def get_user_todo(user_id, auth_login_request=None):  # noqa: E501
     """get user&#39;s todo
 
     get specific user&#39;s todo # noqa: E501

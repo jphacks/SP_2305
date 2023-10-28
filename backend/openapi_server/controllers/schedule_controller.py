@@ -8,7 +8,7 @@ from openapi_server.models.schedule import Schedule  # noqa: E501
 from openapi_server import util
 
 
-def get_schedule(schedule_id):  # noqa: E501
+def get_schedule(schedule_id, auth_login_request=None):  # noqa: E501
     """get user schedules
 
     get users schedules # noqa: E501
@@ -21,7 +21,7 @@ def get_schedule(schedule_id):  # noqa: E501
     return 'do some magic!'
 
 
-def new_scheudle(schedule=None):  # noqa: E501
+def new_scheudle(schedule=None, auth_login_request=None):  # noqa: E501
     """create new schedule
 
     create new schedule # noqa: E501
@@ -36,7 +36,7 @@ def new_scheudle(schedule=None):  # noqa: E501
     return 'do some magic!'
 
 
-def patch_schedule(schedule_id, schedule=None):  # noqa: E501
+def patch_schedule(schedule_id, schedule=None, auth_login_request=None):  # noqa: E501
     """get user schedules
 
     get users schedules # noqa: E501
