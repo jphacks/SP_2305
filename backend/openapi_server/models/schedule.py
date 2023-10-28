@@ -15,7 +15,7 @@ class Schedule(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, uuid=None, user_id=None, title=None, start=None, end=None, description=None, color=None):  # noqa: E501
+    def __init__(self, uuid=None, user_id=None, title=None, start=None, end=None, description=None):  # noqa: E501
         """Schedule - a model defined in OpenAPI
 
         :param uuid: The uuid of this Schedule.  # noqa: E501
@@ -30,8 +30,6 @@ class Schedule(Model):
         :type end: datetime
         :param description: The description of this Schedule.  # noqa: E501
         :type description: str
-        :param color: The color of this Schedule.  # noqa: E501
-        :type color: str
         """
         self.openapi_types = {
             'uuid': str,
@@ -39,8 +37,7 @@ class Schedule(Model):
             'title': str,
             'start': datetime,
             'end': datetime,
-            'description': str,
-            'color': str
+            'description': str
         }
 
         self.attribute_map = {
@@ -49,8 +46,7 @@ class Schedule(Model):
             'title': 'title',
             'start': 'start',
             'end': 'end',
-            'description': 'description',
-            'color': 'color'
+            'description': 'description'
         }
 
         self._uuid = uuid
@@ -59,7 +55,6 @@ class Schedule(Model):
         self._start = start
         self._end = end
         self._description = description
-        self._color = color
 
     @classmethod
     def from_dict(cls, dikt) -> 'Schedule':
@@ -197,24 +192,3 @@ class Schedule(Model):
         """
 
         self._description = description
-
-    @property
-    def color(self):
-        """Gets the color of this Schedule.
-
-
-        :return: The color of this Schedule.
-        :rtype: str
-        """
-        return self._color
-
-    @color.setter
-    def color(self, color):
-        """Sets the color of this Schedule.
-
-
-        :param color: The color of this Schedule.
-        :type color: str
-        """
-
-        self._color = color

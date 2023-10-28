@@ -48,12 +48,9 @@ paths:
         '200':
           description: successful operation
           content:
-            application/json:
+            text/plain:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/User'
-
+                type: string
   /user/{userId}/schedules:
     get:
       tags:

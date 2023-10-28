@@ -15,7 +15,7 @@ class Task(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, uuid=None, user_id=None, title=None, type=None, start=None, end=None, deadline=None, est=None, actual_time=None, description=None, done=None, color=None):  # noqa: E501
+    def __init__(self, uuid=None, user_id=None, title=None, type=None, start=None, end=None, deadline=None, est=None, actual_time=None, description=None, done=None):  # noqa: E501
         """Task - a model defined in OpenAPI
 
         :param uuid: The uuid of this Task.  # noqa: E501
@@ -40,8 +40,6 @@ class Task(Model):
         :type description: str
         :param done: The done of this Task.  # noqa: E501
         :type done: bool
-        :param color: The color of this Task.  # noqa: E501
-        :type color: str
         """
         self.openapi_types = {
             'uuid': str,
@@ -54,8 +52,7 @@ class Task(Model):
             'est': datetime,
             'actual_time': float,
             'description': str,
-            'done': bool,
-            'color': str
+            'done': bool
         }
 
         self.attribute_map = {
@@ -69,8 +66,7 @@ class Task(Model):
             'est': 'est',
             'actual_time': 'actualTime',
             'description': 'description',
-            'done': 'done',
-            'color': 'color'
+            'done': 'done'
         }
 
         self._uuid = uuid
@@ -84,7 +80,6 @@ class Task(Model):
         self._actual_time = actual_time
         self._description = description
         self._done = done
-        self._color = color
 
     @classmethod
     def from_dict(cls, dikt) -> 'Task':
@@ -333,24 +328,3 @@ class Task(Model):
         """
 
         self._done = done
-
-    @property
-    def color(self):
-        """Gets the color of this Task.
-
-
-        :return: The color of this Task.
-        :rtype: str
-        """
-        return self._color
-
-    @color.setter
-    def color(self, color):
-        """Sets the color of this Task.
-
-
-        :param color: The color of this Task.
-        :type color: str
-        """
-
-        self._color = color

@@ -4,28 +4,11 @@ from typing import Dict
 from typing import Tuple
 from typing import Union
 
-from openapi_server.models.auth_user_request import AuthUserRequest  # noqa: E501
 from openapi_server.models.new_user_request import NewUserRequest  # noqa: E501
 from openapi_server.models.schedule import Schedule  # noqa: E501
 from openapi_server.models.task import Task  # noqa: E501
 from openapi_server.models.todo import Todo  # noqa: E501
-from openapi_server.models.user import User  # noqa: E501
 from openapi_server import util
-
-
-def auth_user(auth_user_request=None):  # noqa: E501
-    """Auth
-
-    Get JWT Token # noqa: E501
-
-    :param auth_user_request: 
-    :type auth_user_request: dict | bytes
-
-    :rtype: Union[str, Tuple[str, int], Tuple[str, int, Dict[str, str]]
-    """
-    if connexion.request.is_json:
-        auth_user_request = AuthUserRequest.from_dict(connexion.request.get_json())  # noqa: E501
-    return 'do some magic!'
 
 
 def get_user_schedules(user_id):  # noqa: E501
@@ -77,7 +60,7 @@ def new_user(authorization, new_user_request=None):  # noqa: E501
     :param new_user_request: 
     :type new_user_request: dict | bytes
 
-    :rtype: Union[List[User], Tuple[List[User], int], Tuple[List[User], int, Dict[str, str]]
+    :rtype: Union[str, Tuple[str, int], Tuple[str, int, Dict[str, str]]
     """
     if connexion.request.is_json:
         new_user_request = NewUserRequest.from_dict(connexion.request.get_json())  # noqa: E501

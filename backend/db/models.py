@@ -6,7 +6,7 @@ from datetime import datetime
 Base = declarative_base()
 global session
 
-class Task(Base):
+class DBTask(Base):
     __tablename__ = 'tasks'
     uuid = Column(UUID, primary_key=True,
                        server_default=text('gen_random_uuid()'))
@@ -31,7 +31,7 @@ class Task(Base):
     def as_dict(self):
        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
     
-class Schedule(Base):
+class DBSchedule(Base):
     __tablename__ = 'schedules'
     uuid = Column(UUID, primary_key=True,
                        server_default=text('gen_random_uuid()'))
@@ -49,7 +49,7 @@ class Schedule(Base):
         'CURRENT_TIMESTAMP'), onupdate=datetime.utcnow)
     def as_dict(self):
        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
-class User(Base):
+class DBUser(Base):
     __tablename__ = 'users'
     uuid = Column(UUID, primary_key=True,
                        server_default=text('gen_random_uuid()'))
