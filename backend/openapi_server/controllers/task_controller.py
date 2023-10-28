@@ -26,10 +26,10 @@ def get_task(authorization = None, task_id = None, token_info = None):  # noqa: 
         print("GETTask")
         dbtask = session.query(DBTask).filter(DBTask.uuid == task_id).first()
         if token_info['permission'] != 'Admin' and dbtask.userId != token_info['uuid']:
-            return null, 401
+            return None, 401
         print(dbtask)
         return dbtask.to_task()
-    return null, 400
+    return None, 400
 
 
 def new_task(authorization=None, task=None, token_info = None):  # noqa: E501
@@ -79,9 +79,9 @@ def patch_task(authorization = None, task_id = None, task=None, token_info = Non
     if session.query(exists().where(DBTask.uuid == task_id)).scalar() > 0:
         dbtask = session.query(DBTask).filter(DBTask.uuid == task_id).first()
         if token_info['permission'] != 'Admin' and dbtask.userId != token_info['uuid']:
-            return null, 401
+            return None, 401
         task.uuid = task_id
         dbtask.from_task(task)
         session.commit()
         return dbtask.to_task()
-    return null, 400
+    return None, 400

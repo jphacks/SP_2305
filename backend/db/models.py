@@ -76,6 +76,22 @@ class DBSchedule(Base):
         'CURRENT_TIMESTAMP'), onupdate=datetime.utcnow)
     def as_dict(self):
        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
+    def from_schedule(self, schedule: Schedule):
+        self.userId = schedule.user_id
+        self.title = schedule.title
+        self.start = schedule.start
+        self.end = schedule.end
+        self.description = schedule.description
+
+    def to_schedule(self):
+        schedule = Schedule()
+        schedule.uuid =self.uuid
+        schedule.user_id =self.userId
+        schedule.title =self.title
+        schedule.start =self.start
+        schedule.end =self.end
+        schedule.description =self.description
+        return schedule
 class DBUser(Base):
     __tablename__ = 'users'
     uuid = Column(UUID, primary_key=True,
