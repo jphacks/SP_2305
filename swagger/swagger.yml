@@ -330,14 +330,16 @@ components:
           format: UUID
         title:
           type: string
-        type:
+        taskType:
           type: string
           enum: [deadLineTrue, deadLineFalse]
-        deadline:
+        deadLine:
           type: string
           format: date-time
-        est:
+        taskEst:
           type: number
+        taskEstUnit:
+          type: string
         actualTime:
           type: number
         description:
