@@ -9,7 +9,7 @@ export const MiniDay = (props) => {
   // 今日の日付を色付けする
   const getCurrentDayClass = () => {
     return day.format("DD-MM-YY") === dayjs().format("DD-MM-YY")
-      ? "bg-white text-regal-blue rounded-full w-7 font-bold"
+      ? "bg-purple-600 text-regal-blue rounded-full w-7 font-bold"
       : "";
   };
 
