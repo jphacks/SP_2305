@@ -21,6 +21,7 @@ const TaskForm = ({ taskTitle, taskType, taskStartTime, taskEndTime, taskDeadlin
 
   const unitOptions = [
     { label: "分", value: "minute" },
+    { label: "時間", value: "hour" },
     { label: "日", value: "day" },
   ]
 
