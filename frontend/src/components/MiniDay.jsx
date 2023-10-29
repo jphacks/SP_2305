@@ -9,9 +9,10 @@ export const MiniDay = (props) => {
   // 今日の日付を色付けする
   const getCurrentDayClass = () => {
     return day.format("DD-MM-YY") === dayjs().format("DD-MM-YY")
-      ? "bg-white text-regal-blue rounded-full w-7 font-bold"
+      ? "bg-purple-600 text-regal-blue rounded-full w-7 font-bold"
       : "";
   };
+
 
   const getSelectedDayClass = () => {
     return day.format("DD-MM-YY") === miniDaySelected.format("DD-MM-YY")
@@ -27,8 +28,8 @@ export const MiniDay = (props) => {
           setMiniDaySelected(day);
         }}
       >
-        {/* 1行目に曜日を表示 */}
-        <p className={`text-sm p-1 my-1 text-center text-white ${getCurrentDayClass()} ${getSelectedDayClass()}`}>
+        {/* 1行目に曜日を表示しない */}
+        <p className={`text-sm p-1 my-1 text-center ${getCurrentDayClass()} ${getSelectedDayClass()}`}>
           {day.format("DD")}
         </p>
       </header>
