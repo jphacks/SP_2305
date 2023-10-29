@@ -401,20 +401,21 @@ components:
   schemas:
     Task:
       example:
+        taskEstUnit: taskEstUnit
         color: color
-        est: 0.8008281904610115
         for: 5.637376656633329
         description: description
         title: title
-        type: deadLineTrue
         userId: userId
         done: true
+        deadLine: 2000-01-23T04:56:07.000+00:00
         frequency: week
         actualTime: 6.027456183070403
+        taskType: deadLineTrue
         repeat: 1.4658129805029452
         progress: 5.962133916683182
         id: id
-        deadline: 2000-01-23T04:56:07.000+00:00
+        taskEst: 0.8008281904610115
       properties:
         id:
           format: UUID
@@ -427,19 +428,22 @@ components:
         title:
           title: title
           type: string
-        type:
+        taskType:
           enum:
           - deadLineTrue
           - deadLineFalse
-          title: type
+          title: taskType
           type: string
-        deadline:
+        deadLine:
           format: date-time
-          title: deadline
+          title: deadLine
           type: string
-        est:
-          title: est
+        taskEst:
+          title: taskEst
           type: number
+        taskEstUnit:
+          title: taskEstUnit
+          type: string
         actualTime:
           title: actualTime
           type: number
@@ -522,20 +526,21 @@ components:
       description: バックエンドからの一つTask割り当て情報
       example:
         Task:
+          taskEstUnit: taskEstUnit
           color: color
-          est: 0.8008281904610115
           for: 5.637376656633329
           description: description
           title: title
-          type: deadLineTrue
           userId: userId
           done: true
+          deadLine: 2000-01-23T04:56:07.000+00:00
           frequency: week
           actualTime: 6.027456183070403
+          taskType: deadLineTrue
           repeat: 1.4658129805029452
           progress: 5.962133916683182
           id: id
-          deadline: 2000-01-23T04:56:07.000+00:00
+          taskEst: 0.8008281904610115
         start: 2000-01-23T04:56:07.000+00:00
         end: 2000-01-23T04:56:07.000+00:00
       properties:
@@ -572,37 +577,39 @@ components:
         uuid: uuid
         tasks:
         - Task:
+            taskEstUnit: taskEstUnit
             color: color
-            est: 0.8008281904610115
             for: 5.637376656633329
             description: description
             title: title
-            type: deadLineTrue
             userId: userId
             done: true
+            deadLine: 2000-01-23T04:56:07.000+00:00
             frequency: week
             actualTime: 6.027456183070403
+            taskType: deadLineTrue
             repeat: 1.4658129805029452
             progress: 5.962133916683182
             id: id
-            deadline: 2000-01-23T04:56:07.000+00:00
+            taskEst: 0.8008281904610115
           start: 2000-01-23T04:56:07.000+00:00
           end: 2000-01-23T04:56:07.000+00:00
         - Task:
+            taskEstUnit: taskEstUnit
             color: color
-            est: 0.8008281904610115
             for: 5.637376656633329
             description: description
             title: title
-            type: deadLineTrue
             userId: userId
             done: true
+            deadLine: 2000-01-23T04:56:07.000+00:00
             frequency: week
             actualTime: 6.027456183070403
+            taskType: deadLineTrue
             repeat: 1.4658129805029452
             progress: 5.962133916683182
             id: id
-            deadline: 2000-01-23T04:56:07.000+00:00
+            taskEst: 0.8008281904610115
           start: 2000-01-23T04:56:07.000+00:00
           end: 2000-01-23T04:56:07.000+00:00
       properties:

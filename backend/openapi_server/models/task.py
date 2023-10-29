@@ -15,7 +15,7 @@ class Task(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, id=None, user_id=None, title=None, type=None, deadline=None, est=None, actual_time=None, description=None, done=None, color=None, repeat=None, progress=None, _for=None, frequency=None):  # noqa: E501
+    def __init__(self, id=None, user_id=None, title=None, task_type=None, dead_line=None, task_est=None, task_est_unit=None, actual_time=None, description=None, done=None, color=None, repeat=None, progress=None, _for=None, frequency=None):  # noqa: E501
         """Task - a model defined in OpenAPI
 
         :param id: The id of this Task.  # noqa: E501
@@ -24,12 +24,14 @@ class Task(Model):
         :type user_id: str
         :param title: The title of this Task.  # noqa: E501
         :type title: str
-        :param type: The type of this Task.  # noqa: E501
-        :type type: str
-        :param deadline: The deadline of this Task.  # noqa: E501
-        :type deadline: datetime
-        :param est: The est of this Task.  # noqa: E501
-        :type est: float
+        :param task_type: The task_type of this Task.  # noqa: E501
+        :type task_type: str
+        :param dead_line: The dead_line of this Task.  # noqa: E501
+        :type dead_line: datetime
+        :param task_est: The task_est of this Task.  # noqa: E501
+        :type task_est: float
+        :param task_est_unit: The task_est_unit of this Task.  # noqa: E501
+        :type task_est_unit: str
         :param actual_time: The actual_time of this Task.  # noqa: E501
         :type actual_time: float
         :param description: The description of this Task.  # noqa: E501
@@ -51,9 +53,10 @@ class Task(Model):
             'id': str,
             'user_id': str,
             'title': str,
-            'type': str,
-            'deadline': datetime,
-            'est': float,
+            'task_type': str,
+            'dead_line': datetime,
+            'task_est': float,
+            'task_est_unit': str,
             'actual_time': float,
             'description': str,
             'done': bool,
@@ -68,9 +71,10 @@ class Task(Model):
             'id': 'id',
             'user_id': 'userId',
             'title': 'title',
-            'type': 'type',
-            'deadline': 'deadline',
-            'est': 'est',
+            'task_type': 'taskType',
+            'dead_line': 'deadLine',
+            'task_est': 'taskEst',
+            'task_est_unit': 'taskEstUnit',
             'actual_time': 'actualTime',
             'description': 'description',
             'done': 'done',
@@ -84,9 +88,10 @@ class Task(Model):
         self._id = id
         self._user_id = user_id
         self._title = title
-        self._type = type
-        self._deadline = deadline
-        self._est = est
+        self._task_type = task_type
+        self._dead_line = dead_line
+        self._task_est = task_est
+        self._task_est_unit = task_est_unit
         self._actual_time = actual_time
         self._description = description
         self._done = done
@@ -171,73 +176,94 @@ class Task(Model):
         self._title = title
 
     @property
-    def type(self):
-        """Gets the type of this Task.
+    def task_type(self):
+        """Gets the task_type of this Task.
 
 
-        :return: The type of this Task.
+        :return: The task_type of this Task.
         :rtype: str
         """
-        return self._type
+        return self._task_type
 
-    @type.setter
-    def type(self, type):
-        """Sets the type of this Task.
+    @task_type.setter
+    def task_type(self, task_type):
+        """Sets the task_type of this Task.
 
 
-        :param type: The type of this Task.
-        :type type: str
+        :param task_type: The task_type of this Task.
+        :type task_type: str
         """
         allowed_values = ["deadLineTrue", "deadLineFalse"]  # noqa: E501
-        if type not in allowed_values:
+        if task_type not in allowed_values:
             raise ValueError(
-                "Invalid value for `type` ({0}), must be one of {1}"
-                .format(type, allowed_values)
+                "Invalid value for `task_type` ({0}), must be one of {1}"
+                .format(task_type, allowed_values)
             )
 
-        self._type = type
+        self._task_type = task_type
 
     @property
-    def deadline(self):
-        """Gets the deadline of this Task.
+    def dead_line(self):
+        """Gets the dead_line of this Task.
 
 
-        :return: The deadline of this Task.
+        :return: The dead_line of this Task.
         :rtype: datetime
         """
-        return self._deadline
+        return self._dead_line
 
-    @deadline.setter
-    def deadline(self, deadline):
-        """Sets the deadline of this Task.
+    @dead_line.setter
+    def dead_line(self, dead_line):
+        """Sets the dead_line of this Task.
 
 
-        :param deadline: The deadline of this Task.
-        :type deadline: datetime
+        :param dead_line: The dead_line of this Task.
+        :type dead_line: datetime
         """
 
-        self._deadline = deadline
+        self._dead_line = dead_line
 
     @property
-    def est(self):
-        """Gets the est of this Task.
+    def task_est(self):
+        """Gets the task_est of this Task.
 
 
-        :return: The est of this Task.
+        :return: The task_est of this Task.
         :rtype: float
         """
-        return self._est
+        return self._task_est
 
-    @est.setter
-    def est(self, est):
-        """Sets the est of this Task.
+    @task_est.setter
+    def task_est(self, task_est):
+        """Sets the task_est of this Task.
 
 
-        :param est: The est of this Task.
-        :type est: float
+        :param task_est: The task_est of this Task.
+        :type task_est: float
         """
 
-        self._est = est
+        self._task_est = task_est
+
+    @property
+    def task_est_unit(self):
+        """Gets the task_est_unit of this Task.
+
+
+        :return: The task_est_unit of this Task.
+        :rtype: str
+        """
+        return self._task_est_unit
+
+    @task_est_unit.setter
+    def task_est_unit(self, task_est_unit):
+        """Sets the task_est_unit of this Task.
+
+
+        :param task_est_unit: The task_est_unit of this Task.
+        :type task_est_unit: str
+        """
+
+        self._task_est_unit = task_est_unit
 
     @property
     def actual_time(self):
