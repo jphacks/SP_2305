@@ -1,6 +1,6 @@
 # カラクル
 
-[![IMAGE ALT TEXT HERE](![Alt text](/img/img.png))](https://www.youtube.com/watch?v=yYRQEdfGjEg)
+[![Alt text](/img/img.png)](https://www.youtube.com/watch?v=yYRQEdfGjEg)
 
 ## 製品概要
 ### 背景(製品開発のきっかけ、課題等）
