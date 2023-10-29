@@ -15,7 +15,10 @@ export const MiniCalendarHeader = () => {
   return (
     <header className="px-4 py-2 flex items-center">
       <h2 className="ml-4 text-xl text-gray-500 font-bold">
-        {dayjs(new Date(dayjs().year(), miniMonthIndex)).format("MM YYYY")}
+        {dayjs(new Date(dayjs().year(), miniMonthIndex)).format("MM")}
+      </h2>
+      <h2 className="ml-4 text-xl text-gray-500">
+        {dayjs(new Date(dayjs().year(), miniMonthIndex)).format("YYYY")}
       </h2>
       <button onClick={handlePrevMonth}>
         <span className="cursor-pointer text-gray-600 mx-2">
@@ -27,7 +30,7 @@ export const MiniCalendarHeader = () => {
           <MdChevronRight />
         </span>
       </button>
-      
+
 
     </header>
   );
