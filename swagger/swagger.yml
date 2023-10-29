@@ -356,6 +356,12 @@ components:
           type: number
         progress:
           type: number
+        for:
+          type: number
+          description: 頻度の場合何回やるか？
+        frequency:
+          type: string
+          enum: [week, month, year]
     Schedule:
       type: object
       properties:
@@ -387,7 +393,18 @@ components:
           type: string
         nickname:
           type: string
-        
+    AITask:
+      type: object
+      description: バックエンドからの一つTask割り当て情報
+      properties:
+        Task:
+          $ref: '#/components/schemas/Schedule'
+        start:
+          type: string
+          format: date-time
+        end:
+          type: string
+          format: date-time
     Todo:
       type: object
       description: Today's todo
@@ -398,7 +415,7 @@ components:
         tasks:
           type: array
           items:
-            $ref: '#/components/schemas/Task'
+            $ref: '#/components/schemas/AITask'
         schedules:
           type: array
           items:

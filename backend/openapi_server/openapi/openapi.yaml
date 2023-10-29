@@ -404,12 +404,14 @@ components:
         color: color
         est: 0.8008281904610115
         start: 2000-01-23T04:56:07.000+00:00
+        for: 5.637376656633329
         description: description
         title: title
         type: startend
         uuid: uuid
         userId: userId
         done: true
+        frequency: week
         actualTime: 6.027456183070403
         repeat: 1.4658129805029452
         progress: 5.962133916683182
@@ -466,6 +468,17 @@ components:
         progress:
           title: progress
           type: number
+        for:
+          description: 頻度の場合何回やるか？
+          title: for
+          type: number
+        frequency:
+          enum:
+          - week
+          - month
+          - year
+          title: frequency
+          type: string
       title: Task
       type: object
     Schedule:
@@ -515,6 +528,32 @@ components:
         nickname:
           type: string
       type: object
+    AITask:
+      description: バックエンドからの一つTask割り当て情報
+      example:
+        Task:
+          color: color
+          start: 2000-01-23T04:56:07.000+00:00
+          description: description
+          end: 2000-01-23T04:56:07.000+00:00
+          title: title
+          uuid: uuid
+          userId: userId
+        start: 2000-01-23T04:56:07.000+00:00
+        end: 2000-01-23T04:56:07.000+00:00
+      properties:
+        Task:
+          $ref: '#/components/schemas/Schedule'
+        start:
+          format: date-time
+          title: start
+          type: string
+        end:
+          format: date-time
+          title: end
+          type: string
+      title: AITask
+      type: object
     Todo:
       description: Today's todo
       example:
@@ -535,34 +574,26 @@ components:
           userId: userId
         uuid: uuid
         tasks:
-        - color: color
-          est: 0.8008281904610115
+        - Task:
+            color: color
+            start: 2000-01-23T04:56:07.000+00:00
+            description: description
+            end: 2000-01-23T04:56:07.000+00:00
+            title: title
+            uuid: uuid
+            userId: userId
           start: 2000-01-23T04:56:07.000+00:00
-          description: description
-          title: title
-          type: startend
-          uuid: uuid
-          userId: userId
-          done: true
-          actualTime: 6.027456183070403
-          repeat: 1.4658129805029452
-          progress: 5.962133916683182
           end: 2000-01-23T04:56:07.000+00:00
-          deadline: 2000-01-23T04:56:07.000+00:00
-        - color: color
-          est: 0.8008281904610115
+        - Task:
+            color: color
+            start: 2000-01-23T04:56:07.000+00:00
+            description: description
+            end: 2000-01-23T04:56:07.000+00:00
+            title: title
+            uuid: uuid
+            userId: userId
           start: 2000-01-23T04:56:07.000+00:00
-          description: description
-          title: title
-          type: startend
-          uuid: uuid
-          userId: userId
-          done: true
-          actualTime: 6.027456183070403
-          repeat: 1.4658129805029452
-          progress: 5.962133916683182
           end: 2000-01-23T04:56:07.000+00:00
-          deadline: 2000-01-23T04:56:07.000+00:00
       properties:
         uuid:
           format: UUID
@@ -570,7 +601,7 @@ components:
           type: string
         tasks:
           items:
-            $ref: '#/components/schemas/Task'
+            $ref: '#/components/schemas/AITask'
           title: tasks
           type: array
         schedules:
