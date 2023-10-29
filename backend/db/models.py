@@ -39,7 +39,7 @@ class DBTask(Base):
         self.estUnit = task.task_est_unit
         self.actualTime = task.task_actual_time
         self.description = task.description
-        self.done = task.done
+        self.done = task.task_done
         self.color = task.color
     def to_task(self):
         task = Task()
@@ -48,6 +48,7 @@ class DBTask(Base):
         task.title = self.title 
         task.task_type = self.type 
         task.dead_line = self.deadline
+        task.task_done = self.done
         task.task_est = self.est
         task.task_est_unit = self.estUnit
         task.task_actual_time = self.actualTime
