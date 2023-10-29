@@ -79,8 +79,12 @@ def search_fastest(_schelist, _tasklist, _current_time, _interbal):
     global che
     # _current_timeと同じかより前に終わるスケジュールを無視
     _schelist_copy = [x for x in _schelist if (_current_time < x["end"])]
-    # tasklistの所要時間にinterbalを追加
+    # _schelist_copyにfromtask属性の追加
+    for sche in _schelist_copy:
+        sche["fromtask"] = False
+
     _tasklist_copy = _tasklist.copy()
+    # tasklistの所要時間にinterbalを追加
     for task in _tasklist_copy:
         task["need_time"] += _interbal
         task["must_end"] += _interbal
@@ -108,20 +112,21 @@ def search_fastest(_schelist, _tasklist, _current_time, _interbal):
         for sche in fastest_schelist:
             if sche["fromtask"]:
                 sche["end"] -= interbal
+            del sche["fromtask"]
     return fastest_schelist
 
 if __name__ == "__main__":
     scheli = [
-        {"id": 0, "start": datetime.datetime(2023, 10, 27, 23, 00), "end": datetime.datetime(2023, 10, 28,  7, 00), "fromtask": False},
-        {"id": 1, "start": datetime.datetime(2023, 10, 28, 23,  0), "end": datetime.datetime(2023, 10, 29,  7, 00), "fromtask": False},
-        {"id": 2, "start": datetime.datetime(2023, 10, 29, 23,  0), "end": datetime.datetime(2023, 10, 30,  7, 00), "fromtask": False},
-        {"id": 3, "start": datetime.datetime(2023, 10, 30, 23, 00), "end": datetime.datetime(2023, 10, 31,  7, 00), "fromtask": False},
-        {"id": 4, "start": datetime.datetime(2023, 10, 31, 23, 00), "end": datetime.datetime(2023, 11,  1,  7, 00), "fromtask": False},
-        {"id": 5, "start": datetime.datetime(2023, 11,  1, 23, 00), "end": datetime.datetime(2023, 11,  2,  7, 00), "fromtask": False},
-        {"id": 6, "start": datetime.datetime(2023, 11,  2, 23, 00), "end": datetime.datetime(2023, 11,  3,  7, 00), "fromtask": False},
-        {"id": 7, "start": datetime.datetime(2023, 11,  3, 23, 00), "end": datetime.datetime(2023, 11,  4,  7, 00), "fromtask": False},
-        {"id": 8, "start": datetime.datetime(2023, 11,  4, 23, 00), "end": datetime.datetime(2023, 11,  5,  7, 00), "fromtask": False},
-        {"id": 9, "start": datetime.datetime(2023, 11,  5, 23, 00), "end": datetime.datetime(2023, 11,  6,  7, 00), "fromtask": False},
+        {"id": 0, "start": datetime.datetime(2023, 10, 27, 23, 00), "end": datetime.datetime(2023, 10, 28,  7, 00)},
+        {"id": 1, "start": datetime.datetime(2023, 10, 28, 23,  0), "end": datetime.datetime(2023, 10, 29,  7, 00)},
+        {"id": 2, "start": datetime.datetime(2023, 10, 29, 23,  0), "end": datetime.datetime(2023, 10, 30,  7, 00)},
+        {"id": 3, "start": datetime.datetime(2023, 10, 30, 23, 00), "end": datetime.datetime(2023, 10, 31,  7, 00)},
+        {"id": 4, "start": datetime.datetime(2023, 10, 31, 23, 00), "end": datetime.datetime(2023, 11,  1,  7, 00)},
+        {"id": 5, "start": datetime.datetime(2023, 11,  1, 23, 00), "end": datetime.datetime(2023, 11,  2,  7, 00)},
+        {"id": 6, "start": datetime.datetime(2023, 11,  2, 23, 00), "end": datetime.datetime(2023, 11,  3,  7, 00)},
+        {"id": 7, "start": datetime.datetime(2023, 11,  3, 23, 00), "end": datetime.datetime(2023, 11,  4,  7, 00)},
+        {"id": 8, "start": datetime.datetime(2023, 11,  4, 23, 00), "end": datetime.datetime(2023, 11,  5,  7, 00)},
+        {"id": 9, "start": datetime.datetime(2023, 11,  5, 23, 00), "end": datetime.datetime(2023, 11,  6,  7, 00)},
     ]
     taskli = [
         {"id": 101, "must_end": datetime.datetime(2023, 10, 29, 23, 00), "need_time": datetime.timedelta(hours=10)},
