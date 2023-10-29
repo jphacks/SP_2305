@@ -15,7 +15,7 @@ class Task(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, id=None, user_id=None, title=None, task_type=None, dead_line=None, task_est=None, task_est_unit=None, actual_time=None, description=None, done=None, color=None, repeat=None, progress=None, _for=None, frequency=None):  # noqa: E501
+    def __init__(self, id=None, user_id=None, title=None, task_type=None, dead_line=None, task_est=None, task_est_unit=None, task_actual_time=None, description=None, done=None, color=None, repeat=None, task_progress=None, for_number=None, frequency_unit=None):  # noqa: E501
         """Task - a model defined in OpenAPI
 
         :param id: The id of this Task.  # noqa: E501
@@ -32,8 +32,8 @@ class Task(Model):
         :type task_est: float
         :param task_est_unit: The task_est_unit of this Task.  # noqa: E501
         :type task_est_unit: str
-        :param actual_time: The actual_time of this Task.  # noqa: E501
-        :type actual_time: float
+        :param task_actual_time: The task_actual_time of this Task.  # noqa: E501
+        :type task_actual_time: float
         :param description: The description of this Task.  # noqa: E501
         :type description: str
         :param done: The done of this Task.  # noqa: E501
@@ -42,12 +42,12 @@ class Task(Model):
         :type color: str
         :param repeat: The repeat of this Task.  # noqa: E501
         :type repeat: float
-        :param progress: The progress of this Task.  # noqa: E501
-        :type progress: float
-        :param _for: The _for of this Task.  # noqa: E501
-        :type _for: float
-        :param frequency: The frequency of this Task.  # noqa: E501
-        :type frequency: str
+        :param task_progress: The task_progress of this Task.  # noqa: E501
+        :type task_progress: float
+        :param for_number: The for_number of this Task.  # noqa: E501
+        :type for_number: float
+        :param frequency_unit: The frequency_unit of this Task.  # noqa: E501
+        :type frequency_unit: str
         """
         self.openapi_types = {
             'id': str,
@@ -57,14 +57,14 @@ class Task(Model):
             'dead_line': datetime,
             'task_est': float,
             'task_est_unit': str,
-            'actual_time': float,
+            'task_actual_time': float,
             'description': str,
             'done': bool,
             'color': str,
             'repeat': float,
-            'progress': float,
-            '_for': float,
-            'frequency': str
+            'task_progress': float,
+            'for_number': float,
+            'frequency_unit': str
         }
 
         self.attribute_map = {
@@ -75,14 +75,14 @@ class Task(Model):
             'dead_line': 'deadLine',
             'task_est': 'taskEst',
             'task_est_unit': 'taskEstUnit',
-            'actual_time': 'actualTime',
+            'task_actual_time': 'taskActualTime',
             'description': 'description',
             'done': 'done',
             'color': 'color',
             'repeat': 'repeat',
-            'progress': 'progress',
-            '_for': 'for',
-            'frequency': 'frequency'
+            'task_progress': 'taskProgress',
+            'for_number': 'forNumber',
+            'frequency_unit': 'frequencyUnit'
         }
 
         self._id = id
@@ -92,14 +92,14 @@ class Task(Model):
         self._dead_line = dead_line
         self._task_est = task_est
         self._task_est_unit = task_est_unit
-        self._actual_time = actual_time
+        self._task_actual_time = task_actual_time
         self._description = description
         self._done = done
         self._color = color
         self._repeat = repeat
-        self._progress = progress
-        self.__for = _for
-        self._frequency = frequency
+        self._task_progress = task_progress
+        self._for_number = for_number
+        self._frequency_unit = frequency_unit
 
     @classmethod
     def from_dict(cls, dikt) -> 'Task':
@@ -266,25 +266,25 @@ class Task(Model):
         self._task_est_unit = task_est_unit
 
     @property
-    def actual_time(self):
-        """Gets the actual_time of this Task.
+    def task_actual_time(self):
+        """Gets the task_actual_time of this Task.
 
 
-        :return: The actual_time of this Task.
+        :return: The task_actual_time of this Task.
         :rtype: float
         """
-        return self._actual_time
+        return self._task_actual_time
 
-    @actual_time.setter
-    def actual_time(self, actual_time):
-        """Sets the actual_time of this Task.
+    @task_actual_time.setter
+    def task_actual_time(self, task_actual_time):
+        """Sets the task_actual_time of this Task.
 
 
-        :param actual_time: The actual_time of this Task.
-        :type actual_time: float
+        :param task_actual_time: The task_actual_time of this Task.
+        :type task_actual_time: float
         """
 
-        self._actual_time = actual_time
+        self._task_actual_time = task_actual_time
 
     @property
     def description(self):
@@ -371,72 +371,72 @@ class Task(Model):
         self._repeat = repeat
 
     @property
-    def progress(self):
-        """Gets the progress of this Task.
+    def task_progress(self):
+        """Gets the task_progress of this Task.
 
 
-        :return: The progress of this Task.
+        :return: The task_progress of this Task.
         :rtype: float
         """
-        return self._progress
+        return self._task_progress
 
-    @progress.setter
-    def progress(self, progress):
-        """Sets the progress of this Task.
+    @task_progress.setter
+    def task_progress(self, task_progress):
+        """Sets the task_progress of this Task.
 
 
-        :param progress: The progress of this Task.
-        :type progress: float
+        :param task_progress: The task_progress of this Task.
+        :type task_progress: float
         """
 
-        self._progress = progress
+        self._task_progress = task_progress
 
     @property
-    def _for(self):
-        """Gets the _for of this Task.
+    def for_number(self):
+        """Gets the for_number of this Task.
 
         頻度の場合何回やるか？  # noqa: E501
 
-        :return: The _for of this Task.
+        :return: The for_number of this Task.
         :rtype: float
         """
-        return self.__for
+        return self._for_number
 
-    @_for.setter
-    def _for(self, _for):
-        """Sets the _for of this Task.
+    @for_number.setter
+    def for_number(self, for_number):
+        """Sets the for_number of this Task.
 
         頻度の場合何回やるか？  # noqa: E501
 
-        :param _for: The _for of this Task.
-        :type _for: float
+        :param for_number: The for_number of this Task.
+        :type for_number: float
         """
 
-        self.__for = _for
+        self._for_number = for_number
 
     @property
-    def frequency(self):
-        """Gets the frequency of this Task.
+    def frequency_unit(self):
+        """Gets the frequency_unit of this Task.
 
 
-        :return: The frequency of this Task.
+        :return: The frequency_unit of this Task.
         :rtype: str
         """
-        return self._frequency
+        return self._frequency_unit
 
-    @frequency.setter
-    def frequency(self, frequency):
-        """Sets the frequency of this Task.
+    @frequency_unit.setter
+    def frequency_unit(self, frequency_unit):
+        """Sets the frequency_unit of this Task.
 
 
-        :param frequency: The frequency of this Task.
-        :type frequency: str
+        :param frequency_unit: The frequency_unit of this Task.
+        :type frequency_unit: str
         """
         allowed_values = ["week", "month", "year"]  # noqa: E501
-        if frequency not in allowed_values:
+        if frequency_unit not in allowed_values:
             raise ValueError(
-                "Invalid value for `frequency` ({0}), must be one of {1}"
-                .format(frequency, allowed_values)
+                "Invalid value for `frequency_unit` ({0}), must be one of {1}"
+                .format(frequency_unit, allowed_values)
             )
 
-        self._frequency = frequency
+        self._frequency_unit = frequency_unit
