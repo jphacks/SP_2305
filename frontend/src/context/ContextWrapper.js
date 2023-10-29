@@ -63,7 +63,7 @@ const ContextWrapper = (props) => {
     initTasks
   );
 
-  const [taskActualTime, setTaskActualTime] = useState(selectedTask && selectedTask.taskActualTime ? selectedTask.taskActualTime : "60");
+  const [taskActualTime, setTaskActualTime] = useState(selectedTask && selectedTask.taskActualTime ? selectedTask.taskActualTime : 60);
   const [taskDone, setTaskDone] = useState(selectedTask ? selectedTask.taskDone : false);
   const [taskProgress, setTaskProgress] = useState(selectedTask ? selectedTask.taskProgress : 0);
 
