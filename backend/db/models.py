@@ -15,7 +15,7 @@ class DBTask(Base):
                        server_default=text('gen_random_uuid()'))
     userId = Column(VARCHAR, nullable=False)
     title = Column(VARCHAR, nullable=False)
-    tasktype = Column(VARCHAR, nullable=False)
+    type = Column(VARCHAR, nullable=False)
     deadline = Column(TIMESTAMP, nullable=False, server_default=text(
         'CURRENT_TIMESTAMP'))
     est = Column(INTEGER, nullable=False)
@@ -33,11 +33,11 @@ class DBTask(Base):
     def from_task(self, task: Task):
         self.userId = task.user_id
         self.title = task.title
-        self.type = task.taskType
-        self.deadline = task.deadLine
-        self.est = task.taskEst
-        self.estUnit = task.taskEstUnit
-        self.actualTime = task.actual_time
+        self.type = task.task_type
+        self.deadline = task.dead_line
+        self.est = task.task_est
+        self.estUnit = task.task_est_unit
+        self.actualTime = task.task_actual_time
         self.description = task.description
         self.done = task.done
         self.color = task.color
@@ -46,11 +46,11 @@ class DBTask(Base):
         task.user_id = self.userId 
         task.id = self.uuid
         task.title = self.title 
-        task.type = self.type 
-        task.deadLine = self.deadline
-        task.taskEst = self.est
-        task.taskEstUnit = self.estUnit
-        task.actual_time = self.actualTime
+        task.task_type = self.type 
+        task.dead_line = self.deadline
+        task.task_est = self.est
+        task.task_est_unit = self.estUnit
+        task.task_actual_time = self.actualTime
         task.description = self.description 
         task.color = self.color
         return task

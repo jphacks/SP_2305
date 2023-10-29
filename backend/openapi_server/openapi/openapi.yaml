@@ -401,20 +401,20 @@ components:
   schemas:
     Task:
       example:
+        frequencyUnit: week
         taskEstUnit: taskEstUnit
         color: color
-        for: 5.637376656633329
+        taskActualTime: 6.027456183070403
         description: description
         title: title
         userId: userId
         done: true
         deadLine: 2000-01-23T04:56:07.000+00:00
-        frequency: week
-        actualTime: 6.027456183070403
         taskType: deadLineTrue
         repeat: 1.4658129805029452
-        progress: 5.962133916683182
+        forNumber: 5.637376656633329
         id: id
+        taskProgress: 5.962133916683182
         taskEst: 0.8008281904610115
       properties:
         id:
@@ -444,8 +444,8 @@ components:
         taskEstUnit:
           title: taskEstUnit
           type: string
-        actualTime:
-          title: actualTime
+        taskActualTime:
+          title: taskActualTime
           type: number
         description:
           title: description
@@ -459,19 +459,19 @@ components:
         repeat:
           title: repeat
           type: number
-        progress:
-          title: progress
+        taskProgress:
+          title: taskProgress
           type: number
-        for:
+        forNumber:
           description: 頻度の場合何回やるか？
-          title: for
+          title: forNumber
           type: number
-        frequency:
+        frequencyUnit:
           enum:
           - week
           - month
           - year
-          title: frequency
+          title: frequencyUnit
           type: string
       title: Task
       type: object
@@ -526,20 +526,20 @@ components:
       description: バックエンドからの一つTask割り当て情報
       example:
         Task:
+          frequencyUnit: week
           taskEstUnit: taskEstUnit
           color: color
-          for: 5.637376656633329
+          taskActualTime: 6.027456183070403
           description: description
           title: title
           userId: userId
           done: true
           deadLine: 2000-01-23T04:56:07.000+00:00
-          frequency: week
-          actualTime: 6.027456183070403
           taskType: deadLineTrue
           repeat: 1.4658129805029452
-          progress: 5.962133916683182
+          forNumber: 5.637376656633329
           id: id
+          taskProgress: 5.962133916683182
           taskEst: 0.8008281904610115
         start: 2000-01-23T04:56:07.000+00:00
         end: 2000-01-23T04:56:07.000+00:00
@@ -577,38 +577,38 @@ components:
         uuid: uuid
         tasks:
         - Task:
+            frequencyUnit: week
             taskEstUnit: taskEstUnit
             color: color
-            for: 5.637376656633329
+            taskActualTime: 6.027456183070403
             description: description
             title: title
             userId: userId
             done: true
             deadLine: 2000-01-23T04:56:07.000+00:00
-            frequency: week
-            actualTime: 6.027456183070403
             taskType: deadLineTrue
             repeat: 1.4658129805029452
-            progress: 5.962133916683182
+            forNumber: 5.637376656633329
             id: id
+            taskProgress: 5.962133916683182
             taskEst: 0.8008281904610115
           start: 2000-01-23T04:56:07.000+00:00
           end: 2000-01-23T04:56:07.000+00:00
         - Task:
+            frequencyUnit: week
             taskEstUnit: taskEstUnit
             color: color
-            for: 5.637376656633329
+            taskActualTime: 6.027456183070403
             description: description
             title: title
             userId: userId
             done: true
             deadLine: 2000-01-23T04:56:07.000+00:00
-            frequency: week
-            actualTime: 6.027456183070403
             taskType: deadLineTrue
             repeat: 1.4658129805029452
-            progress: 5.962133916683182
+            forNumber: 5.637376656633329
             id: id
+            taskProgress: 5.962133916683182
             taskEst: 0.8008281904610115
           start: 2000-01-23T04:56:07.000+00:00
           end: 2000-01-23T04:56:07.000+00:00

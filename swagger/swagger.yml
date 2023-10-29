@@ -340,7 +340,7 @@ components:
           type: number
         taskEstUnit:
           type: string
-        actualTime:
+        taskActualTime:
           type: number
         description:
           type: string
@@ -350,12 +350,12 @@ components:
           type: string
         repeat:
           type: number
-        progress:
+        taskProgress:
           type: number
-        for:
+        forNumber:
           type: number
           description: 頻度の場合何回やるか？
-        frequency:
+        frequencyUnit:
           type: string
           enum: [week, month, year]
     Schedule:
