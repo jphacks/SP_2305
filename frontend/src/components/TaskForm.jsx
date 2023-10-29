@@ -6,14 +6,15 @@ import PropTypes from 'prop-types';
 import { Select, Switch, FormControl, FormLabel } from "@chakra-ui/react";
 
 
-const TaskForm = ({ taskTitle, taskType, taskStartTime, taskEndTime, taskDeadline, taskEstNumber, taskEstUnit,  forNumber, frequencyUnit, taskDescription, taskColor, taskRepeat,
+const TaskForm = ({ taskTitle, taskType, taskStartTime, taskEndTime, taskDeadline, taskEstNumber, taskEstUnit, forNumber, frequencyUnit, taskDescription, taskColor, taskRepeat,
   setTaskTitle, setTaskType, setTaskStartTime, setTaskEndTime, setTaskDeadline, setTaskEstNumber, setTaskEstUnit, setForNumber, setFrequencyUnit, setTaskDescription, setTaskColor, setTaskRepeat }) => {
 
   // カラースタイルの選択肢
   const colorOptions = [
-    { label: "Red", style: "bg-red-200" },
-    { label: "Blue", style: "bg-blue-200" },
-    { label: "Green", style: "bg-green-200" },
+    { label: "Red", style: "bg-red-pale border-red-dark" },
+    { label: "Blue", style: "bg-blue-pale border-blue-dark" },
+    { label: "Green", style: "bg-green-pale border-green-dark" },
+    { label: "Yellow", style: "bg-yellow-pale border-yellow-dark" },
     // 他の色の選択肢を追加
   ];
 
