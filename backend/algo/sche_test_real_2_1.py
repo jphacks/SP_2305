@@ -75,6 +75,37 @@ def search_insert_datetime(_schelist, _task, _current_time):
 che = 0
 # _schelistはソート済み、時間が重複しないのが前提
 def search_fastest(_schelist, _tasklist, _current_time, _interbal):
+    """
+    Parameters
+    ----------
+    _schelist : list
+        スケジュールのリスト。
+        スケジュールどうしの時間の重複がなく、また昇順に並んでいる必要があります
+        [
+            {"id": any, "start": datetime.datetime, "end": datetime.datetime},
+            ...
+        ]
+        
+    _tasklist : list
+        タスクのリスト。
+        [
+            {"id": any, "must_end": datetime.datetime, "need_time": datetime.timedelta},
+            ...
+        ]
+    _current_time : datetime.datetime
+        この時間以降にタスクを入れます
+    _interbal: datetime.timedelta
+        タスクの後ろにこの長さの休憩時間を入れます
+
+    Returns
+    -------
+    list
+        条件を満たすスケジュールが見つからなかった場合、空のリストとなります
+        [
+            {"id": any, "start": datetime.datetime, "end": datetime.datetime},
+            ...
+        ]
+    """
     global che
     # _current_timeと同じかより前に終わるスケジュールを無視
     _schelist_copy = [x for x in _schelist if (_current_time < x["end"])]
