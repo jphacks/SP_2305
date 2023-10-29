@@ -123,7 +123,7 @@ const ContextWrapper = (props) => {
 
   useEffect(() => {
     selectedTask && setTaskActualTime(selectedTask.taskActualTime);
-    selectedTask && setTaskDone(selectedTask.taskDone);
+    selectedTask ? setTaskDone(selectedTask.taskDone) : setTaskDone(false)
     selectedTask && setTaskProgress(selectedTask.taskProgress);
 }, [selectedTask]);
 
