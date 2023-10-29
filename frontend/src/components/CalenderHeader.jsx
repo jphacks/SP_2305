@@ -32,16 +32,16 @@ export const CalendarHeader = () => {
   };
 
   return (
-    <header className="w-900 h-87 px-4 py-2 flex items-center">
+    <header className="w-900 h-87 px-4 py-2 flex items-center mb-5">
       <div className="w-201 h-87 flex items-center">
-        <h1 className="ml-4 text-7xl text-gray-500 font-bold">
+        <h1 className="ml-4 text-7xl text-haiiro">
           {dayjs(new Date(dayjs().year(), monthIndex)).format("MM")}
         </h1>
         <div className='w-98 h-53 flex-col items-center ml-8'>
-          <h2 className="ml-8 text-3xl text-gray-500">
+          <h2 className="ml-8 text-3xl text-haiiro">
             {dayjs(new Date(dayjs().year(), monthIndex)).format("YYYY")}
           </h2>
-          <h2 className="ml-9 text-base text-gray-500">
+          <h2 className="ml-9 text-base text-haiiro">
             {dayjs(new Date(dayjs().year(), monthIndex)).format("MMMM")}
           </h2>
         </div>
