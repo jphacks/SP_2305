@@ -13,6 +13,7 @@ export const MiniDay = (props) => {
       : "";
   };
 
+
   const getSelectedDayClass = () => {
     return day.format("DD-MM-YY") === miniDaySelected.format("DD-MM-YY")
       ? "bg-blue-400 text-white rounded-full w-7"
@@ -27,8 +28,8 @@ export const MiniDay = (props) => {
           setMiniDaySelected(day);
         }}
       >
-        {/* 1行目に曜日を表示 */}
-        <p className={`text-sm p-1 my-1 text-center text-white ${getCurrentDayClass()} ${getSelectedDayClass()}`}>
+        {/* 1行目に曜日を表示しない */}
+        <p className={`text-sm p-1 my-1 text-center ${getCurrentDayClass()} ${getSelectedDayClass()}`}>
           {day.format("DD")}
         </p>
       </header>
