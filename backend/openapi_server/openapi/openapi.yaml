@@ -533,17 +533,26 @@ components:
       example:
         Task:
           color: color
+          est: 0.8008281904610115
           start: 2000-01-23T04:56:07.000+00:00
+          for: 5.637376656633329
           description: description
-          end: 2000-01-23T04:56:07.000+00:00
           title: title
+          type: startend
           uuid: uuid
           userId: userId
+          done: true
+          frequency: week
+          actualTime: 6.027456183070403
+          repeat: 1.4658129805029452
+          progress: 5.962133916683182
+          end: 2000-01-23T04:56:07.000+00:00
+          deadline: 2000-01-23T04:56:07.000+00:00
         start: 2000-01-23T04:56:07.000+00:00
         end: 2000-01-23T04:56:07.000+00:00
       properties:
         Task:
-          $ref: '#/components/schemas/Schedule'
+          $ref: '#/components/schemas/Task'
         start:
           format: date-time
           title: start
@@ -576,22 +585,40 @@ components:
         tasks:
         - Task:
             color: color
+            est: 0.8008281904610115
             start: 2000-01-23T04:56:07.000+00:00
+            for: 5.637376656633329
             description: description
-            end: 2000-01-23T04:56:07.000+00:00
             title: title
+            type: startend
             uuid: uuid
             userId: userId
+            done: true
+            frequency: week
+            actualTime: 6.027456183070403
+            repeat: 1.4658129805029452
+            progress: 5.962133916683182
+            end: 2000-01-23T04:56:07.000+00:00
+            deadline: 2000-01-23T04:56:07.000+00:00
           start: 2000-01-23T04:56:07.000+00:00
           end: 2000-01-23T04:56:07.000+00:00
         - Task:
             color: color
+            est: 0.8008281904610115
             start: 2000-01-23T04:56:07.000+00:00
+            for: 5.637376656633329
             description: description
-            end: 2000-01-23T04:56:07.000+00:00
             title: title
+            type: startend
             uuid: uuid
             userId: userId
+            done: true
+            frequency: week
+            actualTime: 6.027456183070403
+            repeat: 1.4658129805029452
+            progress: 5.962133916683182
+            end: 2000-01-23T04:56:07.000+00:00
+            deadline: 2000-01-23T04:56:07.000+00:00
           start: 2000-01-23T04:56:07.000+00:00
           end: 2000-01-23T04:56:07.000+00:00
       properties:

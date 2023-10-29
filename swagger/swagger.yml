@@ -398,7 +398,7 @@ components:
       description: バックエンドからの一つTask割り当て情報
       properties:
         Task:
-          $ref: '#/components/schemas/Schedule'
+          $ref: '#/components/schemas/Task'
         start:
           type: string
           format: date-time
