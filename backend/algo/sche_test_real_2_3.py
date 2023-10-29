@@ -72,7 +72,6 @@ def search_insert_datetime(_schelist, _task, _current_time):
         return sche["end"]
     return None
 
-che = 0
 # _schelistはソート済み、時間が重複しないのが前提
 # 5sルール
 def search_fastest(_schelist, _tasklist, _current_time, _interbal):
@@ -109,7 +108,7 @@ def search_fastest(_schelist, _tasklist, _current_time, _interbal):
             ...
         ]
     """
-    global che
+
     # _current_timeと同じかより前に終わるスケジュールを無視
     _schelist_copy = [x for x in _schelist if (_current_time < x["end"])]
     # _schelist_copyにfromtask属性の追加
@@ -126,6 +125,7 @@ def search_fastest(_schelist, _tasklist, _current_time, _interbal):
     _tasklist_copy.sort(key=lambda x: x["must_end"])
 
     fastest_schelist = []
+    che = 0
     timekeeper_start = time.time()
     for i, tasklist in enumerate(itertools.permutations(_tasklist_copy)):
         che += 1
@@ -153,6 +153,7 @@ def search_fastest(_schelist, _tasklist, _current_time, _interbal):
             if sche["fromtask"]:
                 sche["end"] -= interbal
             del sche["fromtask"]
+    #print(che)
     return fastest_schelist
 
 if __name__ == "__main__":
@@ -188,4 +189,3 @@ if __name__ == "__main__":
     sto = time.time()
     pprint.pprint(result)
     print(sto-st)
-    print(che)
