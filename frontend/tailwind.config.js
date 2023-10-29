@@ -6,6 +6,7 @@ module.exports = {
       colors: {
         'regal-blue': '#4D8DA9',
         'text-color': '#C1E1EE',
+        'haiiro': '#333333',
       },
     },
   },
