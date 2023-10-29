@@ -52,6 +52,7 @@ const saveTasksReducer = async (state, { type, payload }) => {
       
     case "update":
       payload['userId'] = USER_INFO.uuid;
+      if(payload["id"])
       apiClient.task._taskId(payload["id"]).$patch({ body: payload, headers: constructAuthHeader(JWT_TOKEN)})
         .catch(() => {
         throw new Error('Invalid credential')
