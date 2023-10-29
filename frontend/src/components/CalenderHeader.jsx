@@ -77,6 +77,7 @@ export const CalendarHeader = () => {
           </Button>
         </Link>
       </div>
+
       <ButtonGroup
         size='sm'
         isAttached
@@ -90,6 +91,6 @@ export const CalendarHeader = () => {
         <IconButton aria-label='Add to friends' icon={<AddIcon />} />
       </ButtonGroup>
 
-    </header>
+    </header >
   );
 };

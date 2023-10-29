@@ -11,7 +11,7 @@ import { TodayTask } from "./TodayTask";
 
 
 export const Sidebar = () => {
-  const [currentMonth, setCurrentMonth] = useState(getMonth());
+  const [currentMonth, setCurrentMonth, showSideBar, setShowSideBar] = useState(getMonth());
   const { miniMonthIndex, monthIndex, setMiniDaySelected, daySelected } = useContext(GlobalContext);
   const today = dayjs();
 
@@ -23,13 +23,25 @@ export const Sidebar = () => {
     setCurrentMonth(getMonth(monthIndex));
   }, [monthIndex]);
 
+
   return (
     <div className="px-4 py-2 items-center">
       <p className="ml-4 text-base text-gray-500">
         Today
       </p>
+      <ButtonGroup
+        size='sm'
+        isAttached
+        variant='outline'
+        marginLeft='auto'
+        onClick={() => {
+          setShowSideBar(false);
+        }}
+      >
+        <IconButton aria-label='Add to friends' icon={<AddIcon />} />
+      </ButtonGroup>
       <div className="px-4 py-2 flex items-center">
-        <h1 className="ml-4 text-xl text-gray-500 font-bold">
+        <h1 className="ml-4 text-4xl text-gray-500 font-bold">
           {dayjs().format("MM/DD")}
         </h1>
         <div className="px-4 py-2 items-center">
