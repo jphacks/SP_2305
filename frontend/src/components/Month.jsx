@@ -5,8 +5,8 @@ import { Day2 } from "./Day2"
 export const Month = (props) => {
   const { month } = props;
   return (
-    <div>
-      <div className='flex-1 grid grid-cols-7 grid-rows-1'>
+    <div className='flex flex-col h-screen'>
+      <div className='grid grid-cols-7 grid-rows-1'>
         {month.map((row, i) => (
           <React.Fragment key={i}>
             {row.map((day, idx) => (
@@ -24,6 +24,6 @@ export const Month = (props) => {
           </React.Fragment>
         ))}
       </div>
-    </div>
+    </div >
   );
 }
