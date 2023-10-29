@@ -50,18 +50,18 @@ export const CalendarHeader = () => {
       {/* <button onClick={handleReset} className="border rounded py-2 px-4 mr-5">
         Today
       </button> */}
-      <div className="w-50 h-19 ml-20">
-        <button onClick={handlePrevMonth}>
-          <span className="w-19 h-13 cursor-pointer text-gray-600 mx-2">
-            <MdChevronLeft />
-          </span>
-        </button>
-        <button onClick={handelNextMonth}>
-          <span className="w-19 h-13 cursor-pointer text-gray-600 mx-2">
-            <MdChevronRight />
-          </span>
-        </button>
-      </div>
+      {/* <div className="w-50 h-19 ml-20"> */}
+      <button onClick={handlePrevMonth}>
+        <span className="w-19 h-13 cursor-pointer text-gray-600 mx-2">
+          <MdChevronLeft />
+        </span>
+      </button>
+      <button onClick={handelNextMonth}>
+        <span className="w-19 h-13 cursor-pointer text-gray-600 mx-2">
+          <MdChevronRight />
+        </span>
+      </button>
+      {/* </div> */}
       {/* <h2 className="ml-4 tgixt-xl text-gray-500 font-bold">
         {dayjs(new Date(dayjs().year(), monthIndex)).format("MMMM YYYY")}
       </h2> */}
@@ -86,7 +86,7 @@ export const CalendarHeader = () => {
           setShowModalTabs(true);
         }}
       >
-        <Button>Add</Button>
+        {/* <Button>Add</Button> */}
         <IconButton aria-label='Add to friends' icon={<AddIcon />} />
       </ButtonGroup>
 
