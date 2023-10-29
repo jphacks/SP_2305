@@ -5,15 +5,15 @@ import time
 import pprint
 
 """
-task: {"id": , "can_start": <datetime>, "must_end": <datetime>, "need_time": <timedelta>}
-sche: {"id": , "start": <datetime>, "end": <datetime>, "fromtask": <boolean>}
+task: {"uuid": , "can_start": <datetime>, "deadline": <datetime>, "est": <timedelta>}
+sche: {"uuid": , "start": <datetime>, "end": <datetime>, "fromtask": <boolean>}
 """
 
 def task2sche(_task, _start):
     return {
-        "id": _task["id"], 
+        "uuid": _task["uuid"], 
         "start": _start, 
-        "end": _start + _task["need_time"],
+        "end": _start + _task["est"],
         "fromtask": True
     }
 
@@ -31,14 +31,14 @@ def search_insert_datetime(_schelist, _task, _current_time):
     # current_time < sche["end"]
 
     # current_timeをtaskの開始時刻にしたとき締切を守れるか
-    if current_time + _task["need_time"] <= _task["must_end"]:
+    if current_time + _task["est"] <= _task["deadline"]:
         # current_timeをtaskの開始時刻にしたときschelistと被るか
         # current_timeと同じかより前に終わるschelistのscheは存在せず、
         # schelistは順に並んでいるので最初の要素と被らなければ被るスケジュールはない
         # 被らなかったらcurrent_timeを結果にする
         overlap = False
         if _schelist:
-            overlap = overlap_judge(_current_time, _current_time + _task["need_time"], _schelist[0]["start"], _schelist[0]["end"])
+            overlap = overlap_judge(_current_time, _current_time + _task["est"], _schelist[0]["start"], _schelist[0]["end"])
         if not overlap:
             return _current_time
     
@@ -55,7 +55,7 @@ def search_insert_datetime(_schelist, _task, _current_time):
         # _schelistは順番に並んでいるので、
         # あるscheの終了をtaskの開始にして締切に間に合わないのなら、
         # その次のscheも間に合わないから考慮しなくてよい
-        if (_task["must_end"] < sche["end"] + _task["need_time"]):
+        if (_task["deadline"] < sche["end"] + _task["est"]):
             break
         # _schelistの、taskの開始に設定したscheの次の要素と被らなければ、
         # 次の次の要素と被ることもないのでそれ以上検査しない
@@ -63,7 +63,7 @@ def search_insert_datetime(_schelist, _task, _current_time):
         if len(_schelist) > schelist_search_start_idx+i+1:
             overlap = overlap_judge(
                 sche["end"],
-                sche["end"] + _task["need_time"], 
+                sche["end"] + _task["est"], 
                 _schelist[schelist_search_start_idx+i+1]["start"], 
                 _schelist[schelist_search_start_idx+i+1]["end"]
             )
@@ -82,14 +82,14 @@ def search_fastest(_schelist, _tasklist, _current_time, _interbal):
         スケジュールのリスト。
         スケジュールどうしの時間の重複がなく、また昇順に並んでいる必要があります
         [
-            {"id": any, "start": datetime.datetime, "end": datetime.datetime},
+            {"uuid": any, "start": datetime.datetime, "end": datetime.datetime},
             ...
         ]
         
     _tasklist : list
         タスクのリスト。
         [
-            {"id": any, "must_end": datetime.datetime, "need_time": datetime.timedelta},
+            {"uuid": any, "deadline": datetime.datetime, "est": datetime.timedelta},
             ...
         ]
     _current_time : datetime.datetime
@@ -104,7 +104,7 @@ def search_fastest(_schelist, _tasklist, _current_time, _interbal):
         _current_timeと同じかより前に終わるスケジュールは含まれません
         条件を満たすスケジュールが見つからなかった場合、空のリストとなります。
         [
-            {"id": any, "start": datetime.datetime, "end": datetime.datetime},
+            {"uuid": any, "start": datetime.datetime, "end": datetime.datetime},
             ...
         ]
     """
@@ -118,11 +118,11 @@ def search_fastest(_schelist, _tasklist, _current_time, _interbal):
     _tasklist_copy = _tasklist.copy()
     # tasklistの所要時間にinterbalを追加
     for task in _tasklist_copy:
-        task["need_time"] += _interbal
-        task["must_end"] += _interbal
+        task["est"] += _interbal
+        task["deadline"] += _interbal
     # tasklistの順を変えて、締め切りの近いものを先頭に、同じ締め切りでも所要時間の長いものを先頭に
-    _tasklist_copy.sort(reverse=True, key=lambda x: x["need_time"])
-    _tasklist_copy.sort(key=lambda x: x["must_end"])
+    _tasklist_copy.sort(reverse=True, key=lambda x: x["est"])
+    _tasklist_copy.sort(key=lambda x: x["deadline"])
 
     fastest_schelist = []
     che = 0
@@ -158,27 +158,27 @@ def search_fastest(_schelist, _tasklist, _current_time, _interbal):
 
 if __name__ == "__main__":
     scheli = [
-        {"id": 0, "start": datetime.datetime(2023, 10, 27, 23, 00), "end": datetime.datetime(2023, 10, 28,  7, 00)},
-        {"id": 1, "start": datetime.datetime(2023, 10, 28, 23,  0), "end": datetime.datetime(2023, 10, 29,  7, 00)},
-        {"id": 2, "start": datetime.datetime(2023, 10, 29, 23,  0), "end": datetime.datetime(2023, 10, 30,  7, 00)},
-        {"id": 3, "start": datetime.datetime(2023, 10, 30, 23, 00), "end": datetime.datetime(2023, 10, 31,  7, 00)},
-        {"id": 4, "start": datetime.datetime(2023, 10, 31, 23, 00), "end": datetime.datetime(2023, 11,  1,  7, 00)},
-        {"id": 5, "start": datetime.datetime(2023, 11,  1, 23, 00), "end": datetime.datetime(2023, 11,  2,  7, 00)},
-        {"id": 6, "start": datetime.datetime(2023, 11,  2, 23, 00), "end": datetime.datetime(2023, 11,  3,  7, 00)},
-        {"id": 7, "start": datetime.datetime(2023, 11,  3, 23, 00), "end": datetime.datetime(2023, 11,  4,  7, 00)},
-        {"id": 8, "start": datetime.datetime(2023, 11,  4, 23, 00), "end": datetime.datetime(2023, 11,  5,  7, 00)},
-        {"id": 9, "start": datetime.datetime(2023, 11,  5, 23, 00), "end": datetime.datetime(2023, 11,  6,  7, 00)},
+        {"uuid": 0, "start": datetime.datetime(2023, 10, 27, 23, 00), "end": datetime.datetime(2023, 10, 28,  7, 00)},
+        {"uuid": 1, "start": datetime.datetime(2023, 10, 28, 23,  0), "end": datetime.datetime(2023, 10, 29,  7, 00)},
+        {"uuid": 2, "start": datetime.datetime(2023, 10, 29, 23,  0), "end": datetime.datetime(2023, 10, 30,  7, 00)},
+        {"uuid": 3, "start": datetime.datetime(2023, 10, 30, 23, 00), "end": datetime.datetime(2023, 10, 31,  7, 00)},
+        {"uuid": 4, "start": datetime.datetime(2023, 10, 31, 23, 00), "end": datetime.datetime(2023, 11,  1,  7, 00)},
+        {"uuid": 5, "start": datetime.datetime(2023, 11,  1, 23, 00), "end": datetime.datetime(2023, 11,  2,  7, 00)},
+        {"uuid": 6, "start": datetime.datetime(2023, 11,  2, 23, 00), "end": datetime.datetime(2023, 11,  3,  7, 00)},
+        {"uuid": 7, "start": datetime.datetime(2023, 11,  3, 23, 00), "end": datetime.datetime(2023, 11,  4,  7, 00)},
+        {"uuid": 8, "start": datetime.datetime(2023, 11,  4, 23, 00), "end": datetime.datetime(2023, 11,  5,  7, 00)},
+        {"uuid": 9, "start": datetime.datetime(2023, 11,  5, 23, 00), "end": datetime.datetime(2023, 11,  6,  7, 00)},
     ]
     taskli = [
-        {"id": 101, "must_end": datetime.datetime(2023, 10, 29, 23, 00), "need_time": datetime.timedelta(hours=10)},
-        {"id": 102, "must_end": datetime.datetime(2023, 10, 29, 23, 00), "need_time": datetime.timedelta(hours=2)},
-        {"id": 103, "must_end": datetime.datetime(2023, 10, 29, 23, 00), "need_time": datetime.timedelta(hours=2)},
-        {"id": 104, "must_end": datetime.datetime(2023, 10, 29, 23, 00), "need_time": datetime.timedelta(hours=2)},
-        {"id": 105, "must_end": datetime.datetime(2023, 10, 29, 23, 00), "need_time": datetime.timedelta(hours=2)},
-        {"id": 106, "must_end": datetime.datetime(2023, 10, 29, 23, 00), "need_time": datetime.timedelta(hours=2)},
-        {"id": 107, "must_end": datetime.datetime(2023, 10, 29, 23, 00), "need_time": datetime.timedelta(hours=2)},
-        {"id": 108, "must_end": datetime.datetime(2023, 10, 29, 23, 00), "need_time": datetime.timedelta(hours=2)},
-        {"id": 109, "must_end": datetime.datetime(2023, 10, 30, 23, 00), "need_time": datetime.timedelta(hours=2)},
+        {"uuid": 101, "deadline": datetime.datetime(2023, 10, 29, 23, 00), "est": datetime.timedelta(hours=10)},
+        {"uuid": 102, "deadline": datetime.datetime(2023, 10, 29, 23, 00), "est": datetime.timedelta(hours=2)},
+        {"uuid": 103, "deadline": datetime.datetime(2023, 10, 29, 23, 00), "est": datetime.timedelta(hours=2)},
+        {"uuid": 104, "deadline": datetime.datetime(2023, 10, 29, 23, 00), "est": datetime.timedelta(hours=2)},
+        {"uuid": 105, "deadline": datetime.datetime(2023, 10, 29, 23, 00), "est": datetime.timedelta(hours=2)},
+        {"uuid": 106, "deadline": datetime.datetime(2023, 10, 29, 23, 00), "est": datetime.timedelta(hours=2)},
+        {"uuid": 107, "deadline": datetime.datetime(2023, 10, 29, 23, 00), "est": datetime.timedelta(hours=2)},
+        {"uuid": 108, "deadline": datetime.datetime(2023, 10, 29, 23, 00), "est": datetime.timedelta(hours=2)},
+        {"uuid": 109, "deadline": datetime.datetime(2023, 10, 30, 23, 00), "est": datetime.timedelta(hours=2)},
     ]
     current_time = datetime.datetime(2023, 10, 28,  9, 00)
     interbal = datetime.timedelta(minutes=30)
