@@ -30,10 +30,12 @@ const GlobalContext = React.createContext({
   setActiveTab: () => { },
   loginToken: "",
   setLoginToken: () => { },
-
-  //sidebar
-  ShowSideBar: true,
-  setShowSideBar: () => { },
+  taskActualTime: null, 
+  setTaskActualTime: () => { },
+  taskDone: null, 
+  setTaskDone: () => { },
+  taskProgress: null, 
+  setTaskProgress: () => { },
 });
 
 export default GlobalContext;

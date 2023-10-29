@@ -6,10 +6,11 @@ import { Month } from "../components/Month";
 import { useState, useEffect, useContext } from "react";
 import GlobalContext from '../context/GlobalContext';
 import { ModalTabs } from '../components/ModalTabs';
+import { AfterTaskModal } from '../components/AfterTaskModal';
 
 function MonthPage() {
   const [currentMonth, setCurrentMonth] = useState(getMonth());
-  const { monthIndex, showModalTabs } = useContext(GlobalContext);
+  const { monthIndex, showModalTabs, ShowAfterTaskModal } = useContext(GlobalContext);
 
   useEffect(() => {
     setCurrentMonth(getMonth(monthIndex));
@@ -18,6 +19,7 @@ function MonthPage() {
   return (
     <>
       {showModalTabs && <ModalTabs />}
+      {ShowAfterTaskModal && <AfterTaskModal />}
       <div className='flex'>
         <Sidebar />
         <div className='flex-1 h-screen flex flex-col'>
