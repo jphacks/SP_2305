@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import dayjs from "dayjs";
 import GlobalContext from "../context/GlobalContext";
 
-export const Day = (props) => {
+export const Day2 = (props) => {
   const { day, rowIdx } = props;
   const [dayEvents, setDayEvents] = useState([]);
   const [dayTasks, setDayTasks] = useState([]);
@@ -40,15 +40,15 @@ export const Day = (props) => {
   }, [savedTasks, day]);
 
   return (
-    <div className="border border-gray-200 flex flex-col">
+    <div className="border border-white flex flex-col">
       <header className="flex flex-col items-center">
-        {/* 1行目に曜日を表示しない */}
-        {/* {rowIdx === 0 && <p className="text-sm mt-1">{day.format("ddd")}</p>} */}
-        <p className={`text-base p-1 my-1 text-center text-haiiro" ${getCurrentDayClass()}`}>
+        {/* 1行目に曜日を表示 */}
+        {rowIdx === 0 && <p className="text-sm mt-1 text-haiiro">{day.format("ddd")}</p>}
+        {/* <p className={`text-sm p-1 my-1 text-center" ${getCurrentDayClass()}`}>
           {day.format("DD")}
-        </p>
+        </p> */}
       </header>
-      <div
+      {/* <div
         className="flex-1 cursor-pointer"
         onClick={() => {
           setDaySelected(day);
@@ -59,7 +59,7 @@ export const Day = (props) => {
           <div
             key={idx}
             onClick={() => setSelectedEvent(evt)}
-            className={`${evt.color} p-1 mr-3 text-gray-600 text-sm rounded mb-1 truncate ml-3`}
+            className={`${evt.color} p-1 mr-3 text-gray-600 text-sm rounded mb-1 truncate`}
           >
             {evt.title}
           </div>
@@ -72,12 +72,12 @@ export const Day = (props) => {
               setShowModalTabs(true);
               setActiveTab("task");
             }}
-            className={`${tsk.color} p-1 mr-3 text-gray-600 text-sm mb-1 truncate ml-3`}
+            className={`${tsk.color} p-1 mr-3 text-gray-600 text-sm mb-1 truncate`}
           >
             {tsk.title}
           </div>
         ))}
-      </div>
+      </div> */}
     </div>
   );
 };
