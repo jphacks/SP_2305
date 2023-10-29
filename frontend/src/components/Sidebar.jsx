@@ -25,11 +25,11 @@ export const Sidebar = () => {
 
   return (
     <div className="px-4 py-2 items-center">
-      <p className="ml-4 text-xl text-gray-500 font-bold">
+      <p className="ml-4 text-base text-gray-500">
         Today
       </p>
       <div className="px-4 py-2 flex items-center">
-        <h1 className="w-118 h-48 ml-4 text-xl text-gray-500 font-bold">
+        <h1 className="ml-4 text-xl text-gray-500 font-bold">
           {dayjs().format("MM/DD")}
         </h1>
         <div className="px-4 py-2 items-center">
@@ -40,7 +40,7 @@ export const Sidebar = () => {
             {dayjs().format("dddd")}
           </h2>
         </div>
-      </div>
+      </div >
 
       <div>
         <p className="ml-4 text-xl text-gray-500 font-bold">
@@ -51,6 +51,6 @@ export const Sidebar = () => {
       </div>
       <p className="ml-4 text-xl text-gray-500 font-bold">shedule & task</p>
       <TodayTask day={today} />
-    </div>
+    </div >
   )
 }
