@@ -101,7 +101,9 @@ def search_fastest(_schelist, _tasklist, _current_time, _interbal):
     Returns
     -------
     list
-        条件を満たすスケジュールが見つからなかった場合、空のリストとなります
+        タスクをスケジュールに変換して挿入ずみのスケジュールのリストを返します。
+        _current_timeと同じかより前に終わるスケジュールは含まれません
+        条件を満たすスケジュールが見つからなかった場合、空のリストとなります。
         [
             {"id": any, "start": datetime.datetime, "end": datetime.datetime},
             ...
