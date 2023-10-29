@@ -1,5 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import { MdDeleteForever, MdClose } from "react-icons/md";
+import { CheckIcon } from '@chakra-ui/icons'
 import GlobalContext from "../context/GlobalContext";
 import EventForm from "./EventForm";
 import TaskForm from "./TaskForm";
@@ -60,6 +61,14 @@ export const ModalTabs = () => {
     selectedTask ? selectedTask.taskEst : "60"
   );
 
+  const [forNumber, setForNumber] = useState(
+    selectedTask ? selectedTask.forNumber : "1"
+  );
+
+  const [frequencyUnit, setFrequencyUnit] = useState(
+    selectedTask ? selectedTask.frequencyUnitr : "week"
+  );
+
   useEffect(() => {
     if (taskEstUnit === "minute") {
       setTaskEst(taskEstNumber);
@@ -68,7 +77,7 @@ export const ModalTabs = () => {
     } else if (taskEstUnit === "day") {
       setTaskEst(taskEstNumber * 3600);
     }
-  }, [taskEstNumber,taskEstUnit]);
+  }, [taskEstNumber, taskEstUnit]);
 
   const [taskDescription, setTaskDescription] = useState(
     selectedTask ? selectedTask.taskType : "");
@@ -123,6 +132,8 @@ export const ModalTabs = () => {
       taskEstNumber: taskEstNumber,
       taskEstUnit: taskEstUnit,
       taskEst: taskEst,
+      forNumber: forNumber,
+      frequencyUnit: frequencyUnit,
       repeat: taskRepeat,
       description: eventDescription,
       color: taskColor
@@ -169,7 +180,7 @@ export const ModalTabs = () => {
 
   return (
 
-    
+
     <form className="bg-white rounded-lg shadow-2xl w-1/4 fixed left-0 top-0" onSubmit={handleSubmit}>
       <header className="bg-gray-100 px-4 py-2 flex justify-end">
         <div className="text-gray-400">
@@ -179,9 +190,14 @@ export const ModalTabs = () => {
             </button>
           )}
           {selectedTask !== null && activeTab === "task" && (
-            <button onClick={handleDeleteTask}>
-              <MdDeleteForever />
-            </button>
+            <>
+              <button onClick={handleDeleteTask}>
+                <CheckIcon />
+              </button>
+              <button onClick={handleDeleteTask}>
+                <MdDeleteForever />
+              </button>
+            </>
           )}
           <button onClick={handleCloseModal}>
             <MdClose />
@@ -232,6 +248,8 @@ export const ModalTabs = () => {
             taskDeadline={taskDeadline}
             taskEstNumber={taskEstNumber}
             taskEstUnit={taskEstUnit}
+            forNumber={forNumber}
+            frequencyUnit={frequencyUnit}
             taskDescription={taskDescription}
             taskColor={taskColor}
             taskRepeat={taskRepeat}
@@ -243,21 +261,23 @@ export const ModalTabs = () => {
             setTaskDeadline={setTaskDeadline}
             setTaskEstNumber={setTaskEstNumber}
             setTaskEstUnit={setTaskEstUnit}
+            setForNumber={setForNumber}
+            setFrequencyUnit={setFrequencyUnit}
             setTaskDescription={setTaskDescription}
             setTaskColor={setTaskColor}
             setTaskRepeat={setTaskRepeat}
 
-            // daySelected={daySelected}
+          // daySelected={daySelected}
           />
         )}
       </div>
-      {/* <div>
-        <AfterTask
+      <div>
+        {/* <AfterTask
           taskActualTime={taskActualTime}
           taskDone={taskDone}
           taskProgress={taskProgress}
-        />
-      </div> */}
+        /> */}
+      </div>
       <footer className="flex justify-end border-t p-3 mt-5">
         <button
           type="submit"

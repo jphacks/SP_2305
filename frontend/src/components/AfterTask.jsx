@@ -3,6 +3,7 @@ import React from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import PropTypes from 'prop-types';
+import { Select, Switch, FormControl, FormLabel } from "@chakra-ui/react";
 
 
 const AfterTask = ({ taskActualTime, taskDone, taskProgress,
@@ -12,7 +13,7 @@ const AfterTask = ({ taskActualTime, taskDone, taskProgress,
       <input
         type="time"
         name="taskActualTime"
-        placeholder="How long did it take?"
+        placeholder="所要時間"
         value={taskActualTime}
         required
         className="pt-3 border-0 text-gray-600 text-xl font-semibold pb-2 w-full border-b-2 border-gray-200 focus:outline-none focus:ring-0 focus:border-blue-500"
