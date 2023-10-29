@@ -24,7 +24,7 @@ function MonthPage() {
           <CalendarHeader />
           <Month month={currentMonth} />
         </div>
-      </div>
+      </div >
     </ >
   );
 }

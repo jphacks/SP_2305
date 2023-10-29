@@ -28,6 +28,10 @@ const GlobalContext = React.createContext({
   setActiveTab: () => { },
   loginToken: "",
   setLoginToken: () => { },
+
+  //sidebar
+  ShowSideBar: true,
+  setShowSideBar: () => { },
 });
 
 export default GlobalContext;

@@ -6,7 +6,6 @@ import ContextWrapper from './context/ContextWrapper';
 import { ChakraProvider } from '@chakra-ui/react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-
 function App() {
   return (
     <BrowserRouter>
