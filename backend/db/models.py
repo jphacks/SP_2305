@@ -81,7 +81,7 @@ class DBSchedule(Base):
 
     def to_schedule(self):
         schedule = Schedule()
-        schedule.uuid =self.uuid
+        schedule.id =self.uuid
         schedule.user_id =self.userId
         schedule.title =self.title
         schedule.start_time =self.start
