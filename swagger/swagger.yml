@@ -344,7 +344,7 @@ components:
           type: number
         description:
           type: string
-        done:
+        taskDone:
           type: boolean
         color:
           type: string
