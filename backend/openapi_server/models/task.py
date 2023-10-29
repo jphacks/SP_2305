@@ -15,7 +15,7 @@ class Task(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, id=None, user_id=None, title=None, task_type=None, dead_line=None, task_est=None, task_est_unit=None, task_actual_time=None, description=None, done=None, color=None, repeat=None, task_progress=None, for_number=None, frequency_unit=None):  # noqa: E501
+    def __init__(self, id=None, user_id=None, title=None, task_type=None, dead_line=None, task_est=None, task_est_unit=None, task_actual_time=None, description=None, task_done=None, color=None, repeat=None, task_progress=None, for_number=None, frequency_unit=None):  # noqa: E501
         """Task - a model defined in OpenAPI
 
         :param id: The id of this Task.  # noqa: E501
@@ -36,8 +36,8 @@ class Task(Model):
         :type task_actual_time: float
         :param description: The description of this Task.  # noqa: E501
         :type description: str
-        :param done: The done of this Task.  # noqa: E501
-        :type done: bool
+        :param task_done: The task_done of this Task.  # noqa: E501
+        :type task_done: bool
         :param color: The color of this Task.  # noqa: E501
         :type color: str
         :param repeat: The repeat of this Task.  # noqa: E501
@@ -59,7 +59,7 @@ class Task(Model):
             'task_est_unit': str,
             'task_actual_time': float,
             'description': str,
-            'done': bool,
+            'task_done': bool,
             'color': str,
             'repeat': float,
             'task_progress': float,
@@ -77,7 +77,7 @@ class Task(Model):
             'task_est_unit': 'taskEstUnit',
             'task_actual_time': 'taskActualTime',
             'description': 'description',
-            'done': 'done',
+            'task_done': 'taskDone',
             'color': 'color',
             'repeat': 'repeat',
             'task_progress': 'taskProgress',
@@ -94,7 +94,7 @@ class Task(Model):
         self._task_est_unit = task_est_unit
         self._task_actual_time = task_actual_time
         self._description = description
-        self._done = done
+        self._task_done = task_done
         self._color = color
         self._repeat = repeat
         self._task_progress = task_progress
@@ -308,25 +308,25 @@ class Task(Model):
         self._description = description
 
     @property
-    def done(self):
-        """Gets the done of this Task.
+    def task_done(self):
+        """Gets the task_done of this Task.
 
 
-        :return: The done of this Task.
+        :return: The task_done of this Task.
         :rtype: bool
         """
-        return self._done
+        return self._task_done
 
-    @done.setter
-    def done(self, done):
-        """Sets the done of this Task.
+    @task_done.setter
+    def task_done(self, task_done):
+        """Sets the task_done of this Task.
 
 
-        :param done: The done of this Task.
-        :type done: bool
+        :param task_done: The task_done of this Task.
+        :type task_done: bool
         """
 
-        self._done = done
+        self._task_done = task_done
 
     @property
     def color(self):

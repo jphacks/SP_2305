@@ -401,6 +401,7 @@ components:
   schemas:
     Task:
       example:
+        taskDone: true
         frequencyUnit: week
         taskEstUnit: taskEstUnit
         color: color
@@ -408,7 +409,6 @@ components:
         description: description
         title: title
         userId: userId
-        done: true
         deadLine: 2000-01-23T04:56:07.000+00:00
         taskType: deadLineTrue
         repeat: 1.4658129805029452
@@ -450,8 +450,8 @@ components:
         description:
           title: description
           type: string
-        done:
-          title: done
+        taskDone:
+          title: taskDone
           type: boolean
         color:
           title: color
@@ -526,6 +526,7 @@ components:
       description: バックエンドからの一つTask割り当て情報
       example:
         Task:
+          taskDone: true
           frequencyUnit: week
           taskEstUnit: taskEstUnit
           color: color
@@ -533,7 +534,6 @@ components:
           description: description
           title: title
           userId: userId
-          done: true
           deadLine: 2000-01-23T04:56:07.000+00:00
           taskType: deadLineTrue
           repeat: 1.4658129805029452
@@ -577,6 +577,7 @@ components:
         uuid: uuid
         tasks:
         - Task:
+            taskDone: true
             frequencyUnit: week
             taskEstUnit: taskEstUnit
             color: color
@@ -584,7 +585,6 @@ components:
             description: description
             title: title
             userId: userId
-            done: true
             deadLine: 2000-01-23T04:56:07.000+00:00
             taskType: deadLineTrue
             repeat: 1.4658129805029452
@@ -595,6 +595,7 @@ components:
           start: 2000-01-23T04:56:07.000+00:00
           end: 2000-01-23T04:56:07.000+00:00
         - Task:
+            taskDone: true
             frequencyUnit: week
             taskEstUnit: taskEstUnit
             color: color
@@ -602,7 +603,6 @@ components:
             description: description
             title: title
             userId: userId
-            done: true
             deadLine: 2000-01-23T04:56:07.000+00:00
             taskType: deadLineTrue
             repeat: 1.4658129805029452
