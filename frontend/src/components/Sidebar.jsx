@@ -3,7 +3,7 @@ import { getMonth } from '../util';
 import React, { useState, useEffect, useContext } from "react";
 import GlobalContext from "../context/GlobalContext";
 import { ButtonGroup, Button, IconButton, TagLeftIcon } from "@chakra-ui/react";
-import { AddIcon } from "@chakra-ui/icons";
+import { AddIcon, HamburgerIcon } from "@chakra-ui/icons";
 import { MiniMonth } from "./MiniMonth";
 import { MiniCalendarHeader } from "./MiniCalenderHeader";
 import { TodayTask } from "./TodayTask";
@@ -11,7 +11,7 @@ import { TodayTask } from "./TodayTask";
 
 
 export const Sidebar = () => {
-  const [currentMonth, setCurrentMonth, showSideBar, setShowSideBar] = useState(getMonth());
+  const [currentMonth, setCurrentMonth, setShowSideBar] = useState(getMonth());
   const { miniMonthIndex, monthIndex, setMiniDaySelected, daySelected } = useContext(GlobalContext);
   const today = dayjs();
 
@@ -25,43 +25,46 @@ export const Sidebar = () => {
 
 
   return (
-    <div className="px-4 py-2 items-center">
-      <p className="ml-4 text-base text-gray-500">
-        Today
-      </p>
-      <ButtonGroup
-        size='sm'
-        isAttached
-        variant='outline'
-        marginLeft='auto'
-        onClick={() => {
-          setShowSideBar(false);
-        }}
-      >
-        <IconButton aria-label='Add to friends' icon={<AddIcon />} />
-      </ButtonGroup>
-      <div className="px-4 py-2 flex items-center">
-        <h1 className="ml-4 text-4xl text-gray-500 font-bold">
+    <div className="bg-regal-blue px-4 py-2 items-center">
+      <div className="flex items-center mt-5">
+        <p className="ml-4 text-base text-white">
+          today
+        </p>
+        {/* SideBar隠す未実装 */}
+        <ButtonGroup
+          size='sm'
+          isAttached
+          variant='outline'
+          marginLeft='auto'
+          onClick={() => {
+            setShowSideBar(false);
+          }}
+        >
+          <IconButton aria-label='Add to friends' icon={<HamburgerIcon />} />
+        </ButtonGroup>
+      </div>
+      <div className="px-4 py-2 flex items-center mt-10">
+        <h1 className="ml-2 text-5xl text-white">
           {dayjs().format("MM/DD")}
         </h1>
         <div className="px-4 py-2 items-center">
-          <h2 className="ml-4 text-xl text-gray-500 font-bold">
+          <h2 className="ml-4 text-xl text-white">
             {dayjs().format("YYYY")}
           </h2>
-          <h2 className="ml-4 text-xl text-gray-500 font-bold">
+          <h2 className="ml-4 text-xl text-white">
             {dayjs().format("dddd")}
           </h2>
         </div>
       </div >
 
       <div>
-        <p className="ml-4 text-xl text-gray-500 font-bold">
+        <p className="ml-4 text-xl text-text-color mt-5">
           Calender
         </p>
         <MiniCalendarHeader />
         <MiniMonth month={currentMonth} />
       </div>
-      <p className="ml-4 text-xl text-gray-500 font-bold">shedule & task</p>
+      <p className="ml-4 text-xl text-text-color mt-5">shedule & task</p>
       <TodayTask day={today} />
     </div >
   )
