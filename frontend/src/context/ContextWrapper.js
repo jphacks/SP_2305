@@ -24,7 +24,8 @@ const saveEventsReducer = async (state, { type, payload }) => {
       
     case "update":
       payload['userId'] = USER_INFO.uuid;
-      apiClient.schedule._scheduleId(payload["id"]).$patch({ body: payload, headers: constructAuthHeader(JWT_TOKEN)})
+      if(payload["id"])
+        apiClient.schedule._scheduleId(payload["id"]).$patch({ body: payload, headers: constructAuthHeader(JWT_TOKEN)})
         .catch(() => {
         throw new Error('Invalid credential')
         })

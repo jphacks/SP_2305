@@ -1,0 +1,660 @@
+openapi: 3.0.3
+info:
+  contact:
+    email: admin@example.com
+  description: ==(*^^*)==
+  license:
+    name: JPHacks 2023 SP2305 License
+    url: http://localhost/licenses
+  termsOfService: http://localhost/terms/
+  title: JPHacks 2023 SP2305
+  version: 1.0.0
+externalDocs:
+  description: Find out more about Kattakke
+  url: http://localhost/
+servers:
+- url: http://localhost/api/v0
+tags:
+- description: User API
+  name: User
+- description: Schedule API
+  name: Schedule
+- description: Task API
+  name: Task
+paths:
+  /auth:
+    post:
+      description: authUser
+      operationId: auth_user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/authUser_request'
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                type: string
+          description: successful operation
+      summary: authUser
+      tags:
+      - User
+      x-openapi-router-controller: openapi_server.controllers.user_controller
+  /schedule:
+    post:
+      description: create new schedule
+      operationId: new_scheudle
+      parameters:
+      - description: bearer token
+        explode: false
+        in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Schedule'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Schedule'
+          description: successful operation
+      security:
+      - bearerAuth: []
+      summary: create new schedule
+      tags:
+      - Schedule
+      x-openapi-router-controller: openapi_server.controllers.schedule_controller
+  /schedule/{scheduleId}:
+    get:
+      description: get users schedules
+      operationId: get_schedule
+      parameters:
+      - description: bearer token
+        explode: false
+        in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: ID of user
+        explode: false
+        in: path
+        name: scheduleId
+        required: true
+        schema:
+          format: UUID
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Schedule'
+                type: array
+          description: successful operation
+      security:
+      - bearerAuth: []
+      summary: get user schedules
+      tags:
+      - Schedule
+      x-openapi-router-controller: openapi_server.controllers.schedule_controller
+    patch:
+      description: get users schedules
+      operationId: patch_schedule
+      parameters:
+      - description: bearer token
+        explode: false
+        in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: ID of user
+        explode: false
+        in: path
+        name: scheduleId
+        required: true
+        schema:
+          format: UUID
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Schedule'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Schedule'
+                type: array
+          description: successful operation
+      security:
+      - bearerAuth: []
+      summary: get user schedules
+      tags:
+      - Schedule
+      x-openapi-router-controller: openapi_server.controllers.schedule_controller
+  /task:
+    post:
+      description: create new task
+      operationId: new_task
+      parameters:
+      - description: bearer token
+        explode: false
+        in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Task'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+          description: successful operation
+      security:
+      - bearerAuth: []
+      summary: create new task
+      tags:
+      - Task
+      x-openapi-router-controller: openapi_server.controllers.task_controller
+  /task/{taskId}:
+    get:
+      description: get specific task
+      operationId: get_task
+      parameters:
+      - description: bearer token
+        explode: false
+        in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: ID of Task
+        explode: false
+        in: path
+        name: taskId
+        required: true
+        schema:
+          format: UUID
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+          description: successful operation
+      security:
+      - bearerAuth: []
+      summary: get specific task
+      tags:
+      - Task
+      x-openapi-router-controller: openapi_server.controllers.task_controller
+    patch:
+      description: get specific task
+      operationId: patch_task
+      parameters:
+      - description: bearer token
+        explode: false
+        in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: ID of Task
+        explode: false
+        in: path
+        name: taskId
+        required: true
+        schema:
+          format: UUID
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Task'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+          description: successful operation
+      security:
+      - bearerAuth: []
+      summary: get specific task
+      tags:
+      - Task
+      x-openapi-router-controller: openapi_server.controllers.task_controller
+  /user:
+    post:
+      description: Register new user
+      operationId: new_user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/newUser_request'
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                type: string
+          description: successful operation
+      summary: Register new user
+      tags:
+      - User
+      x-openapi-router-controller: openapi_server.controllers.user_controller
+  /user/{userId}/schedules:
+    get:
+      description: get users schedules
+      operationId: get_user_schedules
+      parameters:
+      - description: bearer token
+        explode: false
+        in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: ID of user
+        explode: false
+        in: path
+        name: userId
+        required: true
+        schema:
+          format: UUID
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Schedule'
+                type: array
+          description: successful operation
+      security:
+      - bearerAuth: []
+      summary: get user schedules
+      tags:
+      - User
+      x-openapi-router-controller: openapi_server.controllers.user_controller
+  /user/{userId}/tasks:
+    get:
+      description: get users tasks
+      operationId: get_user_tasks
+      parameters:
+      - description: bearer token
+        explode: false
+        in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: ID of user
+        explode: false
+        in: path
+        name: userId
+        required: true
+        schema:
+          format: UUID
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Task'
+                type: array
+          description: successful operation
+      security:
+      - bearerAuth: []
+      summary: get user tasks
+      tags:
+      - User
+      x-openapi-router-controller: openapi_server.controllers.user_controller
+  /user{userId}/todo:
+    get:
+      description: get specific user's todo
+      operationId: get_user_todo
+      parameters:
+      - description: bearer token
+        explode: false
+        in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: ID of user
+        explode: false
+        in: path
+        name: userId
+        required: true
+        schema:
+          format: UUID
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Todo'
+                type: array
+          description: successful operation
+      security:
+      - bearerAuth: []
+      summary: get user's todo
+      tags:
+      - User
+      x-openapi-router-controller: openapi_server.controllers.user_controller
+components:
+  parameters:
+    bearerToken:
+      description: bearer token
+      explode: false
+      in: header
+      name: Authorization
+      required: true
+      schema:
+        type: string
+      style: simple
+  schemas:
+    Task:
+      example:
+        frequencyUnit: week
+        taskEstUnit: taskEstUnit
+        color: color
+        taskActualTime: 6.027456183070403
+        description: description
+        title: title
+        userId: userId
+        done: true
+        deadLine: 2000-01-23T04:56:07.000+00:00
+        taskType: deadLineTrue
+        repeat: 1.4658129805029452
+        forNumber: 5.637376656633329
+        id: id
+        taskProgress: 5.962133916683182
+        taskEst: 0.8008281904610115
+      properties:
+        id:
+          format: UUID
+          title: id
+          type: string
+        userId:
+          format: UUID
+          title: userId
+          type: string
+        title:
+          title: title
+          type: string
+        taskType:
+          enum:
+          - deadLineTrue
+          - deadLineFalse
+          title: taskType
+          type: string
+        deadLine:
+          format: date-time
+          title: deadLine
+          type: string
+        taskEst:
+          title: taskEst
+          type: number
+        taskEstUnit:
+          title: taskEstUnit
+          type: string
+        taskActualTime:
+          title: taskActualTime
+          type: number
+        description:
+          title: description
+          type: string
+        done:
+          title: done
+          type: boolean
+        color:
+          title: color
+          type: string
+        repeat:
+          title: repeat
+          type: number
+        taskProgress:
+          title: taskProgress
+          type: number
+        forNumber:
+          description: 頻度の場合何回やるか？
+          title: forNumber
+          type: number
+        frequencyUnit:
+          enum:
+          - week
+          - month
+          - year
+          title: frequencyUnit
+          type: string
+      title: Task
+      type: object
+    Schedule:
+      example:
+        color: color
+        description: description
+        startTime: 2000-01-23T04:56:07.000+00:00
+        id: id
+        endTime: 2000-01-23T04:56:07.000+00:00
+        title: title
+        userId: userId
+      properties:
+        id:
+          format: UUID
+          title: id
+          type: string
+        userId:
+          format: UUID
+          title: userId
+          type: string
+        title:
+          title: title
+          type: string
+        startTime:
+          format: date-time
+          title: startTime
+          type: string
+        endTime:
+          format: date-time
+          title: endTime
+          type: string
+        description:
+          title: description
+          type: string
+        color:
+          title: color
+          type: string
+      title: Schedule
+      type: object
+    User:
+      properties:
+        uuid:
+          format: UUID
+          type: string
+        id:
+          type: string
+        nickname:
+          type: string
+      type: object
+    AITask:
+      description: バックエンドからの一つTask割り当て情報
+      example:
+        Task:
+          frequencyUnit: week
+          taskEstUnit: taskEstUnit
+          color: color
+          taskActualTime: 6.027456183070403
+          description: description
+          title: title
+          userId: userId
+          done: true
+          deadLine: 2000-01-23T04:56:07.000+00:00
+          taskType: deadLineTrue
+          repeat: 1.4658129805029452
+          forNumber: 5.637376656633329
+          id: id
+          taskProgress: 5.962133916683182
+          taskEst: 0.8008281904610115
+        start: 2000-01-23T04:56:07.000+00:00
+        end: 2000-01-23T04:56:07.000+00:00
+      properties:
+        Task:
+          $ref: '#/components/schemas/Task'
+        start:
+          format: date-time
+          title: start
+          type: string
+        end:
+          format: date-time
+          title: end
+          type: string
+      title: AITask
+      type: object
+    Todo:
+      description: Today's todo
+      example:
+        schedules:
+        - color: color
+          description: description
+          startTime: 2000-01-23T04:56:07.000+00:00
+          id: id
+          endTime: 2000-01-23T04:56:07.000+00:00
+          title: title
+          userId: userId
+        - color: color
+          description: description
+          startTime: 2000-01-23T04:56:07.000+00:00
+          id: id
+          endTime: 2000-01-23T04:56:07.000+00:00
+          title: title
+          userId: userId
+        uuid: uuid
+        tasks:
+        - Task:
+            frequencyUnit: week
+            taskEstUnit: taskEstUnit
+            color: color
+            taskActualTime: 6.027456183070403
+            description: description
+            title: title
+            userId: userId
+            done: true
+            deadLine: 2000-01-23T04:56:07.000+00:00
+            taskType: deadLineTrue
+            repeat: 1.4658129805029452
+            forNumber: 5.637376656633329
+            id: id
+            taskProgress: 5.962133916683182
+            taskEst: 0.8008281904610115
+          start: 2000-01-23T04:56:07.000+00:00
+          end: 2000-01-23T04:56:07.000+00:00
+        - Task:
+            frequencyUnit: week
+            taskEstUnit: taskEstUnit
+            color: color
+            taskActualTime: 6.027456183070403
+            description: description
+            title: title
+            userId: userId
+            done: true
+            deadLine: 2000-01-23T04:56:07.000+00:00
+            taskType: deadLineTrue
+            repeat: 1.4658129805029452
+            forNumber: 5.637376656633329
+            id: id
+            taskProgress: 5.962133916683182
+            taskEst: 0.8008281904610115
+          start: 2000-01-23T04:56:07.000+00:00
+          end: 2000-01-23T04:56:07.000+00:00
+      properties:
+        uuid:
+          format: UUID
+          title: uuid
+          type: string
+        tasks:
+          items:
+            $ref: '#/components/schemas/AITask'
+          title: tasks
+          type: array
+        schedules:
+          items:
+            $ref: '#/components/schemas/Schedule'
+          title: schedules
+          type: array
+      title: Todo
+      type: object
+    newUser_request:
+      properties:
+        nickname:
+          title: nickname
+          type: string
+        id:
+          title: id
+          type: string
+        password:
+          title: password
+          type: string
+      title: newUser_request
+      type: object
+    authUser_request:
+      properties:
+        id:
+          title: id
+          type: string
+        password:
+          title: password
+          type: string
+      title: authUser_request
+      type: object
+  securitySchemes:
+    bearerAuth:
+      bearerFormat: JWT
+      scheme: bearer
+      type: http
+      x-bearerInfoFunc: openapi_server.controllers.security_controller_.info_from_bearerAuth
