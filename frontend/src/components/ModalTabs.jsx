@@ -85,7 +85,7 @@ export const ModalTabs = () => {
     selectedTask ? selectedTask.color : "");
 
   const [taskRepeat, setTaskRepeat] = useState(
-    selectedTask ? selectedTask.repeat : daySelected.toDate()
+    selectedTask ? selectedTask.repeat : 1
   );
 
   const handleSubmit = (e) => {

@@ -4,22 +4,29 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import PropTypes from 'prop-types';
 import GlobalContext from "../context/GlobalContext";
+import { Select } from "@chakra-ui/react";
 
 
 const AfterTask = () => {
     const {taskActualTime, setTaskActualTime } = useContext(GlobalContext);
+    const numberOptions = Array.from({ length: 300 }, (_, index) => index + 1);
+
   return (
     <div>
-      <input
-        type="number"
-        name="taskActualTime"
-        placeholder="所要時間"
+     <p>タスク完了おつかれさまです！ フィードバック調節のために所要時間を登録しましょう！</p>
+     <p>所要時間</p>
+      <Select
         value={taskActualTime}
-        required
-        className="pt-3 border-0 text-gray-600 text-xl font-semibold pb-2 w-full border-b-2 border-gray-200 focus:outline-none focus:ring-0 focus:border-blue-500"
         onChange={(e) => setTaskActualTime(e.target.value)}
-      />
-      {/* <p>{daySelected.format("dddd, MMMM DD")}</p> */}
+        placeholder="1"
+      >
+        {numberOptions.map((option) => (
+          <option key={option} value={option}>
+            {option}
+          </option>
+        ))}
+      </Select>
+      <p>分</p>
     </div >
   );
 };
