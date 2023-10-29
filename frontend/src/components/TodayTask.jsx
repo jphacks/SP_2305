@@ -42,7 +42,7 @@ export const TodayTask = (props) => {
             setShowModalTabs(true);
             setActiveTab("event");
           }}
-          className={`${evt.color} p-1 mr-3 text-gray-600 text-sm rounded mb-1 truncate ml-3`}
+          className={`${evt.color} p-1 mr-3 text-gray-600 text-sm rounded mb-1 truncate`}
         >
           {evt.title}
         </div>
@@ -55,7 +55,7 @@ export const TodayTask = (props) => {
             setShowModalTabs(true);
             setActiveTab("task");
           }}
-          className={`${tsk.color} p-1 mr-3 text-gray-600 text-sm mb-1 truncate ml-3`}
+          className={`${tsk.color} p-1 mr-3 text-gray-600 text-sm mb-1 truncate border-l-8`}
         >
           {tsk.title}
         </div>

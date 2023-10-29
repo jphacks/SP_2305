@@ -72,7 +72,7 @@ export const Day = (props) => {
               setShowModalTabs(true);
               setActiveTab("task");
             }}
-            className={`${tsk.color} p-1 mr-3 text-gray-600 text-sm mb-1 truncate ml-3`}
+            className={`${tsk.color} p-1 mr-3 text-gray-600 text-sm mb-1 truncate ml-3 border-l-8`}
           >
             {tsk.title}
           </div>
