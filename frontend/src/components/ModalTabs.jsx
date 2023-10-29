@@ -4,6 +4,7 @@ import GlobalContext from "../context/GlobalContext";
 import EventForm from "./EventForm";
 import TaskForm from "./TaskForm";
 import AfterTask from "./AfterTask";
+import dayjs from "dayjs";
 
 
 
@@ -12,62 +13,83 @@ export const ModalTabs = () => {
     useContext(GlobalContext);
 
   const [eventTitle, setEventTitle] = useState(
-    selectedEvent ? selectedEvent.eventTitle : "");
+    selectedEvent ? selectedEvent.title : "");
 
   const [eventStartTime, setEventStartTime] = useState(
-    selectedEvent ? new Date(selectedEvent.eventStartTime) : daySelected.toDate()
+    selectedEvent ? dayjs(selectedEvent.startTime).toDate() : (daySelected ? daySelected.toDate() : dayjs().toDate())
   );
 
   const [eventEndTime, setEventEndTime] = useState(
-    selectedEvent ? new Date(selectedEvent.eventEndTime) : daySelected.toDate()
+    selectedEvent ? dayjs(selectedEvent.endTime).toDate() : (daySelected ? daySelected.toDate() : dayjs().toDate())
   );
 
   const [eventDescription, setEventDescription] = useState(
-    selectedEvent ? selectedEvent.eventDescription : "");
+    selectedEvent ? selectedEvent.description : "");
 
   const [eventColor, setEventColor] = useState(
-    selectedEvent ? selectedEvent.eventColor : "");
+    selectedEvent ? selectedEvent.color : "bg-neutral-200");
 
+  // task関連
   const [taskTitle, setTaskTitle] = useState(
-    selectedTask ? selectedTask.taskTitle : "");
+    selectedTask ? selectedTask.title : "");
 
   const [taskType, setTaskType] = useState(
-    selectedTask ? selectedTask.taskType : "");
+    selectedTask ? selectedTask.taskType : "deadLineTrue");
 
   const [taskStartTime, setTaskStartTime] = useState(
-    selectedTask ? new Date(selectedTask.taskStartTime) : daySelected.toDate()
+    selectedTask ? dayjs(selectedTask.taskStartTime).toDate() : daySelected.toDate()
   );
 
   const [taskEndTime, setTaskEndTime] = useState(
-    selectedTask ? new Date(selectedTask.taskEndTime) : daySelected.toDate()
+    selectedTask ? dayjs(selectedTask.taskEndTime).toDate() : daySelected.toDate()
   );
 
   const [taskDeadline, setTaskDeadline] = useState(
-    selectedTask ? new Date(selectedTask.taskDeadline) : daySelected.toDate()
+    selectedTask ? dayjs(selectedTask.deadline).toDate() : daySelected.toDate()
+  );
+
+  const [taskEstNumber, setTaskEstNumber] = useState(
+    selectedTask ? selectedTask.taskEstNumber : 1
+  );
+
+  const [taskEstUnit, setTaskEstUnit] = useState(
+    selectedTask ? selectedTask.taskEstUnit : "hour"
   );
 
   const [taskEst, setTaskEst] = useState(
-    selectedTask ? new Date(selectedTask.taskEst) : daySelected.toDate()
+    selectedTask ? selectedTask.taskEst : "60"
   );
+
+  useEffect(() => {
+    if (taskEstUnit === "minute") {
+      setTaskEst(taskEstNumber);
+    } else if (taskEstUnit === "hour") {
+      setTaskEst(taskEstNumber * 60);
+    } else if (taskEstUnit === "day") {
+      setTaskEst(taskEstNumber * 3600);
+    }
+  }, [taskEstNumber,taskEstUnit]);
 
   const [taskDescription, setTaskDescription] = useState(
     selectedTask ? selectedTask.taskType : "");
 
   const [taskColor, setTaskColor] = useState(
-    selectedTask ? selectedTask.taskType : "");
+    selectedTask ? selectedTask.color : "");
 
   const [taskRepeat, setTaskRepeat] = useState(
-    selectedTask ? new Date(selectedTask.taskRepeat) : daySelected.toDate()
+    selectedTask ? selectedTask.repeat : daySelected.toDate()
   );
 
-  const [taskActualTime, setTaskActualTime] = useState(
-    selectedTask ? selectedTask.taskType : "");
 
-  const [taskDone, setTaskDone] = useState(
-    selectedTask ? selectedTask.taskType : "");
 
-  const [taskProgress, setTaskProgress] = useState(
-    selectedTask ? selectedTask.taskType : "");
+  // const [taskActualTime, setTaskActualTime] = useState(
+  //   selectedTask ? selectedTask.taskType : "");
+
+  // const [taskDone, setTaskDone] = useState(
+  //   selectedTask ? selectedTask.taskType : "");
+
+  // const [taskProgress, setTaskProgress] = useState(
+  //   selectedTask ? selectedTask.taskType : "");
 
 
 
@@ -80,6 +102,8 @@ export const ModalTabs = () => {
       id: selectedEvent ? selectedEvent.id : Date.now(),
       startTime: eventStartTime,
       endTime: eventEndTime,
+      description: eventDescription,
+      color: eventColor
     };
     if (selectedEvent) {
       dispatchCalEvent({ type: "update", payload: calendarEvent });
@@ -92,8 +116,16 @@ export const ModalTabs = () => {
       title: taskTitle,
       day: daySelected.valueOf(),
       id: selectedTask ? selectedTask.id : Date.now(),
+      taskType: taskType,
       startTime: taskStartTime,
       endTime: taskEndTime,
+      deadLine: taskDeadline,
+      taskEstNumber: taskEstNumber,
+      taskEstUnit: taskEstUnit,
+      taskEst: taskEst,
+      repeat: taskRepeat,
+      description: eventDescription,
+      color: taskColor
     };
     if (selectedTask) {
       dispatchCalTask({ type: "update", payload: calendarTask });
@@ -136,7 +168,9 @@ export const ModalTabs = () => {
   }, [selectedTask]);
 
   return (
-    <div className="bg-white rounded-lg shadow-2xl w-1/4 fixed left-0 top-0">
+
+    
+    <form className="bg-white rounded-lg shadow-2xl w-1/4 fixed left-0 top-0" onSubmit={handleSubmit}>
       <header className="bg-gray-100 px-4 py-2 flex justify-end">
         <div className="text-gray-400">
           {selectedEvent !== null && activeTab === "event" && (
@@ -162,7 +196,7 @@ export const ModalTabs = () => {
                 }`}
               onClick={() => handleTabChange("event")}
             >
-              Event
+              予定
             </button>
           }
           {selectedEvent === null &&
@@ -171,13 +205,13 @@ export const ModalTabs = () => {
                 }`}
               onClick={() => handleTabChange("task")}
             >
-              Task
+              タスク
             </button>
           }
         </div>
         {activeTab === "event" ? (
           <EventForm
-            daySelected={daySelected}
+            // daySelected={daySelected}
             eventTitle={eventTitle}
             eventStartTime={eventStartTime}
             eventEndTime={eventEndTime}
@@ -196,7 +230,8 @@ export const ModalTabs = () => {
             taskStartTime={taskStartTime}
             taskEndTime={taskEndTime}
             taskDeadline={taskDeadline}
-            taskEst={taskEst}
+            taskEstNumber={taskEstNumber}
+            taskEstUnit={taskEstUnit}
             taskDescription={taskDescription}
             taskColor={taskColor}
             taskRepeat={taskRepeat}
@@ -206,31 +241,31 @@ export const ModalTabs = () => {
             setTaskStartTime={setTaskStartTime}
             setTaskEndTime={setTaskEndTime}
             setTaskDeadline={setTaskDeadline}
-            setTaskEst={setTaskEst}
+            setTaskEstNumber={setTaskEstNumber}
+            setTaskEstUnit={setTaskEstUnit}
             setTaskDescription={setTaskDescription}
             setTaskColor={setTaskColor}
             setTaskRepeat={setTaskRepeat}
 
-            daySelected={daySelected}
+            // daySelected={daySelected}
           />
         )}
       </div>
-      <div>
+      {/* <div>
         <AfterTask
           taskActualTime={taskActualTime}
           taskDone={taskDone}
           taskProgress={taskProgress}
         />
-      </div>
+      </div> */}
       <footer className="flex justify-end border-t p-3 mt-5">
         <button
-          type="button"
-          onClick={handleSubmit}
+          type="submit"
           className="bg-blue-500 hover:bg-blue-600 px-6 py-2 rounded text-white"
         >
-          Save
+          決定
         </button>
       </footer>
-    </div>
+    </form>
   );
 };
