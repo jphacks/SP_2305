@@ -16,26 +16,35 @@ export const TimeTable = (props) => {
 
   // 登録データを日付が一致する日に表示
   useEffect(() => {
-    const events = savedEvents.filter((evt) => {
-      const eventStartTime = dayjs(evt.startTime);
-      const eventEndTime = dayjs(evt.endTime);
+    const a = async ()=>{
+      const waitedEvents = await savedEvents
+      const events = waitedEvents.filter((evt) => {
+        const eventStartTime = dayjs(evt.startTime);
+        const eventEndTime = dayjs(evt.endTime);
 
-      // イベントが日にまたがるかどうかをチェック
-      return (
-        (eventStartTime.isBefore(day.endOf('hour')) ||
-          eventStartTime.isSame(day.endOf('hour'))) && // イベントの開始日時が日の終了前
-        (eventEndTime.isAfter(day.startOf('hour')) ||
-          eventEndTime.isSame(day.startOf('hour')))  // イベントの終了日時が日の開始後
-      );
-    });
-    setDayEvents(events);
+          // イベントが日にまたがるかどうかをチェック
+        return (
+          (eventStartTime.isBefore(day.endOf('hour')) ||
+            eventStartTime.isSame(day.endOf('hour'))) && // イベントの開始日時が日の終了前
+          (eventEndTime.isAfter(day.startOf('hour')) ||
+            eventEndTime.isSame(day.startOf('hour')))  // イベントの終了日時が日の開始後
+        );
+      });
+      setDayEvents(events);
+    }
+    a().catch(console.error);;
   }, [savedEvents, day]);
 
   useEffect(() => {
-    const tasks = savedTasks.filter(
-      (tsk) => dayjs(tsk.day).format("HH-DD-MM-YY") === day.format("HH-DD-MM-YY")
-    );
-    setDayTasks(tasks);
+    const a = async ()=> {
+      const waitedTasks = await savedTasks 
+      const tasks = waitedTasks.filter(
+        (tsk) => dayjs(tsk.day).format("DD-MM-YY") === day.format("DD-MM-YY")
+      );
+      setDayTasks(tasks);
+    }
+    a().catch(console.error);
+    
   }, [savedTasks, day]);
 
   return (
