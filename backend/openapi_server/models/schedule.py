@@ -15,49 +15,49 @@ class Schedule(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, uuid=None, user_id=None, title=None, start=None, end=None, description=None, color=None):  # noqa: E501
+    def __init__(self, id=None, user_id=None, title=None, start_time=None, end_time=None, description=None, color=None):  # noqa: E501
         """Schedule - a model defined in OpenAPI
 
-        :param uuid: The uuid of this Schedule.  # noqa: E501
-        :type uuid: str
+        :param id: The id of this Schedule.  # noqa: E501
+        :type id: str
         :param user_id: The user_id of this Schedule.  # noqa: E501
         :type user_id: str
         :param title: The title of this Schedule.  # noqa: E501
         :type title: str
-        :param start: The start of this Schedule.  # noqa: E501
-        :type start: datetime
-        :param end: The end of this Schedule.  # noqa: E501
-        :type end: datetime
+        :param start_time: The start_time of this Schedule.  # noqa: E501
+        :type start_time: datetime
+        :param end_time: The end_time of this Schedule.  # noqa: E501
+        :type end_time: datetime
         :param description: The description of this Schedule.  # noqa: E501
         :type description: str
         :param color: The color of this Schedule.  # noqa: E501
         :type color: str
         """
         self.openapi_types = {
-            'uuid': str,
+            'id': str,
             'user_id': str,
             'title': str,
-            'start': datetime,
-            'end': datetime,
+            'start_time': datetime,
+            'end_time': datetime,
             'description': str,
             'color': str
         }
 
         self.attribute_map = {
-            'uuid': 'uuid',
+            'id': 'id',
             'user_id': 'userId',
             'title': 'title',
-            'start': 'start',
-            'end': 'end',
+            'start_time': 'startTime',
+            'end_time': 'endTime',
             'description': 'description',
             'color': 'color'
         }
 
-        self._uuid = uuid
+        self._id = id
         self._user_id = user_id
         self._title = title
-        self._start = start
-        self._end = end
+        self._start_time = start_time
+        self._end_time = end_time
         self._description = description
         self._color = color
 
@@ -73,25 +73,25 @@ class Schedule(Model):
         return util.deserialize_model(dikt, cls)
 
     @property
-    def uuid(self):
-        """Gets the uuid of this Schedule.
+    def id(self):
+        """Gets the id of this Schedule.
 
 
-        :return: The uuid of this Schedule.
+        :return: The id of this Schedule.
         :rtype: str
         """
-        return self._uuid
+        return self._id
 
-    @uuid.setter
-    def uuid(self, uuid):
-        """Sets the uuid of this Schedule.
+    @id.setter
+    def id(self, id):
+        """Sets the id of this Schedule.
 
 
-        :param uuid: The uuid of this Schedule.
-        :type uuid: str
+        :param id: The id of this Schedule.
+        :type id: str
         """
 
-        self._uuid = uuid
+        self._id = id
 
     @property
     def user_id(self):
@@ -136,46 +136,46 @@ class Schedule(Model):
         self._title = title
 
     @property
-    def start(self):
-        """Gets the start of this Schedule.
+    def start_time(self):
+        """Gets the start_time of this Schedule.
 
 
-        :return: The start of this Schedule.
+        :return: The start_time of this Schedule.
         :rtype: datetime
         """
-        return self._start
+        return self._start_time
 
-    @start.setter
-    def start(self, start):
-        """Sets the start of this Schedule.
+    @start_time.setter
+    def start_time(self, start_time):
+        """Sets the start_time of this Schedule.
 
 
-        :param start: The start of this Schedule.
-        :type start: datetime
+        :param start_time: The start_time of this Schedule.
+        :type start_time: datetime
         """
 
-        self._start = start
+        self._start_time = start_time
 
     @property
-    def end(self):
-        """Gets the end of this Schedule.
+    def end_time(self):
+        """Gets the end_time of this Schedule.
 
 
-        :return: The end of this Schedule.
+        :return: The end_time of this Schedule.
         :rtype: datetime
         """
-        return self._end
+        return self._end_time
 
-    @end.setter
-    def end(self, end):
-        """Sets the end of this Schedule.
+    @end_time.setter
+    def end_time(self, end_time):
+        """Sets the end_time of this Schedule.
 
 
-        :param end: The end of this Schedule.
-        :type end: datetime
+        :param end_time: The end_time of this Schedule.
+        :type end_time: datetime
         """
 
-        self._end = end
+        self._end_time = end_time
 
     @property
     def description(self):

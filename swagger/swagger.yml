@@ -322,7 +322,7 @@ components:
     Task:
       type: object
       properties:
-        uuid:
+        id:
           type: string
           format: UUID
         userId:
@@ -332,13 +332,7 @@ components:
           type: string
         type:
           type: string
-          enum: [startend, deadline]
-        start:
-          type: string
-          format: date-time
-        end:
-          type: string
-          format: date-time
+          enum: [deadLineTrue, deadLineFalse]
         deadline:
           type: string
           format: date-time
@@ -365,7 +359,7 @@ components:
     Schedule:
       type: object
       properties:
-        uuid:
+        id:
           type: string
           format: UUID
         userId:
@@ -373,10 +367,10 @@ components:
           format: UUID
         title:
           type: string
-        start:
+        startTime:
           type: string
           format: date-time
-        end:
+        endTime:
           type: string
           format: date-time
         description:

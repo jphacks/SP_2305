@@ -15,21 +15,17 @@ class Task(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, uuid=None, user_id=None, title=None, type=None, start=None, end=None, deadline=None, est=None, actual_time=None, description=None, done=None, color=None, repeat=None, progress=None, _for=None, frequency=None):  # noqa: E501
+    def __init__(self, id=None, user_id=None, title=None, type=None, deadline=None, est=None, actual_time=None, description=None, done=None, color=None, repeat=None, progress=None, _for=None, frequency=None):  # noqa: E501
         """Task - a model defined in OpenAPI
 
-        :param uuid: The uuid of this Task.  # noqa: E501
-        :type uuid: str
+        :param id: The id of this Task.  # noqa: E501
+        :type id: str
         :param user_id: The user_id of this Task.  # noqa: E501
         :type user_id: str
         :param title: The title of this Task.  # noqa: E501
         :type title: str
         :param type: The type of this Task.  # noqa: E501
         :type type: str
-        :param start: The start of this Task.  # noqa: E501
-        :type start: datetime
-        :param end: The end of this Task.  # noqa: E501
-        :type end: datetime
         :param deadline: The deadline of this Task.  # noqa: E501
         :type deadline: datetime
         :param est: The est of this Task.  # noqa: E501
@@ -52,12 +48,10 @@ class Task(Model):
         :type frequency: str
         """
         self.openapi_types = {
-            'uuid': str,
+            'id': str,
             'user_id': str,
             'title': str,
             'type': str,
-            'start': datetime,
-            'end': datetime,
             'deadline': datetime,
             'est': float,
             'actual_time': float,
@@ -71,12 +65,10 @@ class Task(Model):
         }
 
         self.attribute_map = {
-            'uuid': 'uuid',
+            'id': 'id',
             'user_id': 'userId',
             'title': 'title',
             'type': 'type',
-            'start': 'start',
-            'end': 'end',
             'deadline': 'deadline',
             'est': 'est',
             'actual_time': 'actualTime',
@@ -89,12 +81,10 @@ class Task(Model):
             'frequency': 'frequency'
         }
 
-        self._uuid = uuid
+        self._id = id
         self._user_id = user_id
         self._title = title
         self._type = type
-        self._start = start
-        self._end = end
         self._deadline = deadline
         self._est = est
         self._actual_time = actual_time
@@ -118,25 +108,25 @@ class Task(Model):
         return util.deserialize_model(dikt, cls)
 
     @property
-    def uuid(self):
-        """Gets the uuid of this Task.
+    def id(self):
+        """Gets the id of this Task.
 
 
-        :return: The uuid of this Task.
+        :return: The id of this Task.
         :rtype: str
         """
-        return self._uuid
+        return self._id
 
-    @uuid.setter
-    def uuid(self, uuid):
-        """Sets the uuid of this Task.
+    @id.setter
+    def id(self, id):
+        """Sets the id of this Task.
 
 
-        :param uuid: The uuid of this Task.
-        :type uuid: str
+        :param id: The id of this Task.
+        :type id: str
         """
 
-        self._uuid = uuid
+        self._id = id
 
     @property
     def user_id(self):
@@ -198,7 +188,7 @@ class Task(Model):
         :param type: The type of this Task.
         :type type: str
         """
-        allowed_values = ["startend", "deadline"]  # noqa: E501
+        allowed_values = ["deadLineTrue", "deadLineFalse"]  # noqa: E501
         if type not in allowed_values:
             raise ValueError(
                 "Invalid value for `type` ({0}), must be one of {1}"
@@ -206,48 +196,6 @@ class Task(Model):
             )
 
         self._type = type
-
-    @property
-    def start(self):
-        """Gets the start of this Task.
-
-
-        :return: The start of this Task.
-        :rtype: datetime
-        """
-        return self._start
-
-    @start.setter
-    def start(self, start):
-        """Sets the start of this Task.
-
-
-        :param start: The start of this Task.
-        :type start: datetime
-        """
-
-        self._start = start
-
-    @property
-    def end(self):
-        """Gets the end of this Task.
-
-
-        :return: The end of this Task.
-        :rtype: datetime
-        """
-        return self._end
-
-    @end.setter
-    def end(self, end):
-        """Sets the end of this Task.
-
-
-        :param end: The end of this Task.
-        :type end: datetime
-        """
-
-        self._end = end
 
     @property
     def deadline(self):

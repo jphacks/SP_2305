@@ -403,24 +403,22 @@ components:
       example:
         color: color
         est: 0.8008281904610115
-        start: 2000-01-23T04:56:07.000+00:00
         for: 5.637376656633329
         description: description
         title: title
-        type: startend
-        uuid: uuid
+        type: deadLineTrue
         userId: userId
         done: true
         frequency: week
         actualTime: 6.027456183070403
         repeat: 1.4658129805029452
         progress: 5.962133916683182
-        end: 2000-01-23T04:56:07.000+00:00
+        id: id
         deadline: 2000-01-23T04:56:07.000+00:00
       properties:
-        uuid:
+        id:
           format: UUID
-          title: uuid
+          title: id
           type: string
         userId:
           format: UUID
@@ -431,17 +429,9 @@ components:
           type: string
         type:
           enum:
-          - startend
-          - deadline
+          - deadLineTrue
+          - deadLineFalse
           title: type
-          type: string
-        start:
-          format: date-time
-          title: start
-          type: string
-        end:
-          format: date-time
-          title: end
           type: string
         deadline:
           format: date-time
@@ -484,16 +474,16 @@ components:
     Schedule:
       example:
         color: color
-        start: 2000-01-23T04:56:07.000+00:00
         description: description
-        end: 2000-01-23T04:56:07.000+00:00
+        startTime: 2000-01-23T04:56:07.000+00:00
+        id: id
+        endTime: 2000-01-23T04:56:07.000+00:00
         title: title
-        uuid: uuid
         userId: userId
       properties:
-        uuid:
+        id:
           format: UUID
-          title: uuid
+          title: id
           type: string
         userId:
           format: UUID
@@ -502,13 +492,13 @@ components:
         title:
           title: title
           type: string
-        start:
+        startTime:
           format: date-time
-          title: start
+          title: startTime
           type: string
-        end:
+        endTime:
           format: date-time
-          title: end
+          title: endTime
           type: string
         description:
           title: description
@@ -534,19 +524,17 @@ components:
         Task:
           color: color
           est: 0.8008281904610115
-          start: 2000-01-23T04:56:07.000+00:00
           for: 5.637376656633329
           description: description
           title: title
-          type: startend
-          uuid: uuid
+          type: deadLineTrue
           userId: userId
           done: true
           frequency: week
           actualTime: 6.027456183070403
           repeat: 1.4658129805029452
           progress: 5.962133916683182
-          end: 2000-01-23T04:56:07.000+00:00
+          id: id
           deadline: 2000-01-23T04:56:07.000+00:00
         start: 2000-01-23T04:56:07.000+00:00
         end: 2000-01-23T04:56:07.000+00:00
@@ -568,56 +556,52 @@ components:
       example:
         schedules:
         - color: color
-          start: 2000-01-23T04:56:07.000+00:00
           description: description
-          end: 2000-01-23T04:56:07.000+00:00
+          startTime: 2000-01-23T04:56:07.000+00:00
+          id: id
+          endTime: 2000-01-23T04:56:07.000+00:00
           title: title
-          uuid: uuid
           userId: userId
         - color: color
-          start: 2000-01-23T04:56:07.000+00:00
           description: description
-          end: 2000-01-23T04:56:07.000+00:00
+          startTime: 2000-01-23T04:56:07.000+00:00
+          id: id
+          endTime: 2000-01-23T04:56:07.000+00:00
           title: title
-          uuid: uuid
           userId: userId
         uuid: uuid
         tasks:
         - Task:
             color: color
             est: 0.8008281904610115
-            start: 2000-01-23T04:56:07.000+00:00
             for: 5.637376656633329
             description: description
             title: title
-            type: startend
-            uuid: uuid
+            type: deadLineTrue
             userId: userId
             done: true
             frequency: week
             actualTime: 6.027456183070403
             repeat: 1.4658129805029452
             progress: 5.962133916683182
-            end: 2000-01-23T04:56:07.000+00:00
+            id: id
             deadline: 2000-01-23T04:56:07.000+00:00
           start: 2000-01-23T04:56:07.000+00:00
           end: 2000-01-23T04:56:07.000+00:00
         - Task:
             color: color
             est: 0.8008281904610115
-            start: 2000-01-23T04:56:07.000+00:00
             for: 5.637376656633329
             description: description
             title: title
-            type: startend
-            uuid: uuid
+            type: deadLineTrue
             userId: userId
             done: true
             frequency: week
             actualTime: 6.027456183070403
             repeat: 1.4658129805029452
             progress: 5.962133916683182
-            end: 2000-01-23T04:56:07.000+00:00
+            id: id
             deadline: 2000-01-23T04:56:07.000+00:00
           start: 2000-01-23T04:56:07.000+00:00
           end: 2000-01-23T04:56:07.000+00:00
