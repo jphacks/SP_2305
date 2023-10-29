@@ -28,8 +28,8 @@ export const MiniDay2 = (props) => {
         }}
       >
         {/* 1行目に曜日を表示 , 日曜日を赤*/}
-        {rowIdx === 0 && day === 0 && <p className="text-sm mt-1 text-red-600">{day.format("ddd")}</p>}
-        {rowIdx === 0 && day === 6 && <p className="text-sm mt-1 text-blue-600">{day.format("ddd")}</p>}
+        {rowIdx === 0 && day == 0 && <p className="text-sm mt-1 text-red-600">{day.format("ddd")}</p>}
+        {rowIdx === 0 && day == 6 && <p className="text-sm mt-1 text-blue-600">{day.format("ddd")}</p>}
         {rowIdx === 0 && day != 0 && <p className="text-sm mt-1 text-white">{day.format("ddd")}</p>}
       </header>
       <div
