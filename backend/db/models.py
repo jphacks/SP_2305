@@ -16,10 +16,6 @@ class DBTask(Base):
     userId = Column(VARCHAR, nullable=False)
     title = Column(VARCHAR, nullable=False)
     type = Column(VARCHAR, nullable=False)
-    start = Column(TIMESTAMP, nullable=False, server_default=text(
-        'CURRENT_TIMESTAMP'))
-    end = Column(TIMESTAMP, nullable=False, server_default=text(
-        'CURRENT_TIMESTAMP'))
     deadline = Column(TIMESTAMP, nullable=False, server_default=text(
         'CURRENT_TIMESTAMP'))
     est = Column(INTEGER, nullable=False)
@@ -37,8 +33,6 @@ class DBTask(Base):
         self.userId = task.user_id
         self.title = task.title
         self.type = task.type
-        self.start = task.start
-        self.end = task.end
         self.deadline = task.deadline
         self.est = task.est
         self.actualTime = task.actual_time
@@ -48,11 +42,9 @@ class DBTask(Base):
     def to_task(self):
         task = Task()
         task.user_id = self.userId 
-        task.uuid = self.uuid
+        task.id = self.uuid
         task.title = self.title 
         task.type = self.type 
-        task.start = self.start 
-        task.end = self.end 
         task.deadline = self.deadline
         task.est = self.est
         task.actual_time = self.actualTime
@@ -82,8 +74,8 @@ class DBSchedule(Base):
     def from_schedule(self, schedule: Schedule):
         self.userId = schedule.user_id
         self.title = schedule.title
-        self.start = schedule.start
-        self.end = schedule.end
+        self.start = schedule.start_time
+        self.end = schedule.end_time
         self.description = schedule.description
         self.color = schedule.color
 
@@ -92,8 +84,8 @@ class DBSchedule(Base):
         schedule.uuid =self.uuid
         schedule.user_id =self.userId
         schedule.title =self.title
-        schedule.start =self.start
-        schedule.end =self.end
+        schedule.start_time =self.start
+        schedule.end_time =self.end
         schedule.description =self.description
         schedule.color = self.color
         return schedule
