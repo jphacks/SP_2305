@@ -15,7 +15,7 @@ class Task(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, uuid=None, user_id=None, title=None, type=None, start=None, end=None, deadline=None, est=None, actual_time=None, description=None, done=None, color=None, repeat=None, progress=None):  # noqa: E501
+    def __init__(self, uuid=None, user_id=None, title=None, type=None, start=None, end=None, deadline=None, est=None, actual_time=None, description=None, done=None, color=None, repeat=None, progress=None, _for=None, frequency=None):  # noqa: E501
         """Task - a model defined in OpenAPI
 
         :param uuid: The uuid of this Task.  # noqa: E501
@@ -46,6 +46,10 @@ class Task(Model):
         :type repeat: float
         :param progress: The progress of this Task.  # noqa: E501
         :type progress: float
+        :param _for: The _for of this Task.  # noqa: E501
+        :type _for: float
+        :param frequency: The frequency of this Task.  # noqa: E501
+        :type frequency: str
         """
         self.openapi_types = {
             'uuid': str,
@@ -61,7 +65,9 @@ class Task(Model):
             'done': bool,
             'color': str,
             'repeat': float,
-            'progress': float
+            'progress': float,
+            '_for': float,
+            'frequency': str
         }
 
         self.attribute_map = {
@@ -78,7 +84,9 @@ class Task(Model):
             'done': 'done',
             'color': 'color',
             'repeat': 'repeat',
-            'progress': 'progress'
+            'progress': 'progress',
+            '_for': 'for',
+            'frequency': 'frequency'
         }
 
         self._uuid = uuid
@@ -95,6 +103,8 @@ class Task(Model):
         self._color = color
         self._repeat = repeat
         self._progress = progress
+        self.__for = _for
+        self._frequency = frequency
 
     @classmethod
     def from_dict(cls, dikt) -> 'Task':
@@ -406,3 +416,53 @@ class Task(Model):
         """
 
         self._progress = progress
+
+    @property
+    def _for(self):
+        """Gets the _for of this Task.
+
+        頻度の場合何回やるか？  # noqa: E501
+
+        :return: The _for of this Task.
+        :rtype: float
+        """
+        return self.__for
+
+    @_for.setter
+    def _for(self, _for):
+        """Sets the _for of this Task.
+
+        頻度の場合何回やるか？  # noqa: E501
+
+        :param _for: The _for of this Task.
+        :type _for: float
+        """
+
+        self.__for = _for
+
+    @property
+    def frequency(self):
+        """Gets the frequency of this Task.
+
+
+        :return: The frequency of this Task.
+        :rtype: str
+        """
+        return self._frequency
+
+    @frequency.setter
+    def frequency(self, frequency):
+        """Sets the frequency of this Task.
+
+
+        :param frequency: The frequency of this Task.
+        :type frequency: str
+        """
+        allowed_values = ["week", "month", "year"]  # noqa: E501
+        if frequency not in allowed_values:
+            raise ValueError(
+                "Invalid value for `frequency` ({0}), must be one of {1}"
+                .format(frequency, allowed_values)
+            )
+
+        self._frequency = frequency
