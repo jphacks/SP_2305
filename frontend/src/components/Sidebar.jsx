@@ -31,7 +31,7 @@ export const Sidebar = () => {
           today
         </p>
         {/* SideBar隠す未実装 */}
-        <ButtonGroup
+        {/* <ButtonGroup
           size='sm'
           isAttached
           variant='outline'
@@ -41,10 +41,10 @@ export const Sidebar = () => {
           }}
         >
           <IconButton aria-label='Add to friends' icon={<HamburgerIcon />} />
-        </ButtonGroup>
+        </ButtonGroup> */}
       </div>
       <div className="px-4 py-2 flex items-center mt-10">
-        <h1 className="ml-2 text-5xl text-white">
+        <h1 className="text-5xl text-white">
           {dayjs().format("MM/DD")}
         </h1>
         <div className="px-4 py-2 items-center">
@@ -64,7 +64,7 @@ export const Sidebar = () => {
         <MiniCalendarHeader />
         <MiniMonth month={currentMonth} />
       </div>
-      <p className="ml-4 text-xl text-text-color mt-5">shedule & task</p>
+      <p className="ml-4 text-xl text-text-color mt-5 mb-5">shedule & task</p>
       <TodayTask day={today} />
     </div >
   )
